@@ -1,0 +1,27 @@
+extends Node2D
+
+const BACK_COLOR_CHANGE_SPEED = 20
+
+onready var player = $Player
+
+var default_bg = Color8(25, 25, 25)
+var current_bg = default_bg
+var old_bg = default_bg
+var new_bg = default_bg
+
+func change_background_color(new_color):
+	$BackgroundTween.remove_all()
+	old_bg = current_bg
+	if new_color == null:
+		new_bg = default_bg
+	else:
+		new_bg = new_color
+	$BackgroundTween.interpolate_method(self, "_set_background_color", 0, 1.0, 6)
+	$BackgroundTween.start()
+	
+func _set_background_color(progress):
+	current_bg = Color.from_hsv(lerp(old_bg.h, new_bg.h, progress),
+			lerp(old_bg.s, new_bg.s, progress),
+			lerp(old_bg.v, new_bg.v, progress))
+	VisualServer.set_default_clear_color(current_bg)
+	

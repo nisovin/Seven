@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://guns/parabola.png" type="Texture" id=1]
+[ext_resource path="res://guns/Parabola.gd" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 16.9714
+
+[node name="Parabola" type="Area2D" groups=[
+"parabola",
+]]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+offset = Vector2( 0, 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_Parabola_body_entered"]

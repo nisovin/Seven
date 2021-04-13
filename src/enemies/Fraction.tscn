@@ -1,0 +1,264 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://enemies/Fraction.gd" type="Script" id=1]
+[ext_resource path="res://font/alphbeta.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 24.0916
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+outline_size = 1
+outline_color = Color( 0.207843, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -11 ), Vector2( 10, -33 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Top:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Bottom:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 11 ), Vector2( -10, 33 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Bottom:rotation_degrees")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.25, 0.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "step_left"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Rotator:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -180.0, -180.0, -360.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "move_left"
+}, {
+"args": [  ],
+"method": "stop"
+}, {
+"args": [  ],
+"method": "move_left"
+}, {
+"args": [  ],
+"method": "stop"
+} ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "step_right"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Rotator:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0, 180.0, 360.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "move_right"
+}, {
+"args": [  ],
+"method": "stop"
+}, {
+"args": [  ],
+"method": "move_right"
+}, {
+"args": [  ],
+"method": "stop"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 320, 180 )
+
+[node name="Fraction" type="KinematicBody2D" groups=[
+"damageable",
+]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="Rotator" type="Node2D" parent="."]
+
+[node name="Top" type="RemoteTransform2D" parent="Rotator"]
+position = Vector2( 0, -11 )
+remote_path = NodePath("../../Top")
+update_rotation = false
+update_scale = false
+
+[node name="Bottom" type="RemoteTransform2D" parent="Rotator"]
+position = Vector2( 0, 11 )
+remote_path = NodePath("../../Bottom")
+update_rotation = false
+update_scale = false
+
+[node name="DivideLineBack" type="Line2D" parent="."]
+points = PoolVector2Array( -20, 0, 20, 0 )
+width = 4.0
+default_color = Color( 0.337255, 0, 0.180392, 1 )
+
+[node name="DivideLineFore" type="Line2D" parent="."]
+points = PoolVector2Array( -20, 0, 20, 0 )
+width = 2.0
+default_color = Color( 0.847059, 0, 0.458824, 1 )
+
+[node name="Top" type="Node2D" parent="."]
+position = Vector2( 0, -11 )
+
+[node name="Top2" type="RichTextLabel" parent="Top"]
+margin_left = -30.0
+margin_top = -11.0
+margin_right = 30.0
+margin_bottom = 19.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 1, 0.709804, 0.596078, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]10[/center]"
+text = "10"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bottom" type="Node2D" parent="."]
+position = Vector2( 0, 11 )
+
+[node name="Bottom2" type="RichTextLabel" parent="Bottom"]
+margin_left = -30.0
+margin_top = -11.0
+margin_right = 30.0
+margin_bottom = 19.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 1, 0.709804, 0.596078, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]10[color=red]7[/color][/center]"
+text = "107"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/die = SubResource( 5 )
+anims/step_left = SubResource( 4 )
+anims/step_right = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+drag_margin_left = 1.0
+drag_margin_right = 1.0
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Grounder" type="RayCast2D" parent="."]
+position = Vector2( 0, 24 )
+cast_to = Vector2( 0, 50 )
+
+[node name="DetectionZone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+shape = SubResource( 6 )
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
+[connection signal="body_exited" from="DetectionZone" to="." method="_on_DetectionZone_body_exited"]

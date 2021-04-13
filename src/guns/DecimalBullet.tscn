@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://font/romulus.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://guns/Bullet.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+outline_size = 2
+extra_spacing_space = -2
+font_data = ExtResource( 1 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 6.0
+
+[node name="DecimalBullet" type="Area2D"]
+collision_layer = 8
+collision_mask = 36
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -1.50779
+margin_top = -20.0019
+margin_right = 38.4922
+margin_bottom = 7.99805
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.368627, 0.901961, 0.00392157, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = -6
+text = "."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_hit"]

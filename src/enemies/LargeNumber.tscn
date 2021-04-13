@@ -1,0 +1,227 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://font/alagard.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://enemies/LargeNumber.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 14.9328
+height = 78.1991
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_space = -5
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Left:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Right:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/Left:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -48, -18 ), Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Right:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 48, -18 ), Vector2( 0, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Body:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.3, 0.3 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 1.0, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Body:rotation_degrees")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 270.0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "fly"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Left:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 45.0, -45.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Right:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -45.0, 45.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 3.0, -3.0, 0.0 ]
+}
+
+[node name="LargeNumber" type="KinematicBody2D" groups=[
+"damageable",
+]]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -3 )
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="Health" type="Label" parent="Body"]
+margin_left = -68.2038
+margin_top = -16.0543
+margin_right = -10.2038
+margin_bottom = 13.9457
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.847059, 0, 0.458824, 1 )
+text = "99"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="X" type="Label" parent="Body"]
+margin_left = -7.2569
+margin_top = -17.2435
+margin_right = 50.7431
+margin_bottom = 12.7565
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.709804, 0.596078, 1 )
+text = "x 10"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="Node2D" parent="Body"]
+position = Vector2( -48, -18 )
+
+[node name="Wing" type="RichTextLabel" parent="Body/Left"]
+margin_left = -33.595
+margin_top = -8.0
+margin_right = 6.405
+margin_bottom = 6.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "[right]22[color=red]7[/color]+[/right]"
+text = "227+"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="Node2D" parent="Body"]
+position = Vector2( 48, -18 )
+
+[node name="Wing" type="RichTextLabel" parent="Body/Right"]
+margin_left = -4.608
+margin_top = -8.0
+margin_right = 35.392
+margin_bottom = 6.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "+21[color=red]7[/color]"
+text = "+217"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/die = SubResource( 6 )
+anims/fly = SubResource( 5 )
