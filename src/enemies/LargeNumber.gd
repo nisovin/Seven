@@ -14,8 +14,8 @@ func _ready():
 		second[i] = "7"
 	first = first.replace("7", "[color=red]7[/color]")
 	second = second.replace("7", "[color=red]7[/color]")
-	$Body/Left/Wing.bbcode_text = "[right]" + first + "[/right]"
-	$Body/Right/Wing.bbcode_text = second
+	$Body/Left/Wing.bbcode_text = "[right]" + first + "+[/right]"
+	$Body/Right/Wing.bbcode_text = "+" + second
 	
 	$AnimationPlayer.play("fly")
 

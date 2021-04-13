@@ -4,11 +4,11 @@ onready var explosion_radius_sq = $DamageArea/CollisionShape2D.shape.radius * $D
 
 func _on_hit(body_direct_hit):
 	for body in $DamageArea.get_overlapping_bodies():
-		if damage > 0 and body.is_in_group("damagable"):
+		if damage > 0 and body.is_in_group("damageable"):
 			var dist_sq = $DamageArea.global_position.distance_squared_to(body.global_position)
 			var mult = 1 + (1 - (dist_sq / explosion_radius_sq))
 			if body == body_direct_hit:
-				mult += 1
+				mult += 0.5
 			body.apply_damage(damage * mult)
 			emit_signal("hit", body)
 	dead = true

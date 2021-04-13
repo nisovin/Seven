@@ -9,6 +9,8 @@ const MAX_GUN_ROT = PI / 4
 var walk_anim_legs = ["/ \\", "/\\", "/|", "||", "|\\", "/\\"]
 var walk_anim_body_offset = [0, -1, -3, -4, -3, -1]
 var walk_anim_frame = 0
+var fly_anim_legs = ["/|", "|\\"]
+var fly_anim_frame = 0
 
 var number = 800
 
@@ -20,9 +22,10 @@ var up = Vector2.UP
 var near_ground = false
 var jumps = 1
 var jump_cd = 0
-
 var speed_multiplier = 1.0
 var freeze_aiming = false
+
+var health = 100
 
 var stats = {
 	"addition": 0,
@@ -41,10 +44,21 @@ func _ready():
 	camera.global_position = global_position
 
 func modify_damage(damage):
-	return (damage + stats.addition) * (1 + stats.multiplication / 100.0)
+	var dam = damage + stats.addition
+	var crit = stats.multiplication / 100.0 * 2
+	if crit > 1:
+		dam *= 1.5
+		crit -= 1
+	if N.randf() < crit:
+		dam *= 1.5
+	return dam
 	
 func apply_damage(damage, from):
-	pass
+	var dam = max(damage - stats.subtraction, 0)
+	var crit = stats.division / 100.0 * 2
+	if N.randf() < crit:
+		dam *= 0.5
+	health -= dam
 
 func knockback(vec, dur):
 	knockback_vector = vec
@@ -135,12 +149,16 @@ func _unhandled_input(event):
 			current_gun.visible = true
 
 func _on_WalkAnimTimer_timeout():
-	if abs(velocity.x) > 5:
-		print(velocity)
-		var dir = -1 if velocity.x < 0 else 1
-		walk_anim_frame = wrapi(walk_anim_frame + dir, 0, walk_anim_legs.size())
+	if is_on_floor():
+		if abs(velocity.x) > 5:
+			var dir = -1 if velocity.x < 0 else 1
+			walk_anim_frame = wrapi(walk_anim_frame + dir, 0, walk_anim_legs.size())
+		else:
+			walk_anim_frame = 0
+		$Legs/Label.text = walk_anim_legs[walk_anim_frame]
+		$Body.position.y = walk_anim_body_offset[walk_anim_frame]
 	else:
-		walk_anim_frame = 0
-	$Legs/Label.text = walk_anim_legs[walk_anim_frame]
-	$Body.position.y = walk_anim_body_offset[walk_anim_frame]
+		fly_anim_frame = wrapi(fly_anim_frame + 1, 0, fly_anim_legs.size())
+		$Legs/Label.text = fly_anim_legs[fly_anim_frame]
+		$Body.position.y = 0
 

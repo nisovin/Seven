@@ -11,6 +11,15 @@ var projectiles_available = 3
 var shooting = false
 var on_cooldown = false
 
+func generate(lvl):
+	.generate(lvl)
+	if lvl >= 5:
+		projectiles_available = 5
+		update_text()
+	elif lvl >= 3:
+		projectiles_available = 4
+		update_text()
+
 func fire():
 	if projectiles_available > 0 and not on_cooldown:
 		launch_projectile()

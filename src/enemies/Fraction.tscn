@@ -3,7 +3,7 @@
 [ext_resource path="res://enemies/Fraction.gd" type="Script" id=1]
 [ext_resource path="res://font/alphbeta.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=1]
 radius = 24.0916
 
 [sub_resource type="DynamicFont" id=2]
@@ -12,7 +12,7 @@ outline_size = 1
 outline_color = Color( 0.207843, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "die"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Top:position")
@@ -115,8 +115,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "step_right"
+[sub_resource type="Animation" id=5]
 length = 0.8
 step = 0.05
 tracks/0/type = "value"
@@ -166,7 +165,7 @@ collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Rotator" type="Node2D" parent="."]
 
@@ -231,9 +230,9 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = SubResource( 5 )
+anims/die = SubResource( 3 )
 anims/step_left = SubResource( 4 )
-anims/step_right = SubResource( 1 )
+anims/step_right = SubResource( 5 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 drag_margin_h_enabled = true
@@ -249,7 +248,6 @@ wait_time = 3.0
 
 [node name="Grounder" type="RayCast2D" parent="."]
 position = Vector2( 0, 24 )
-cast_to = Vector2( 0, 50 )
 
 [node name="DetectionZone" type="Area2D" parent="."]
 collision_layer = 0

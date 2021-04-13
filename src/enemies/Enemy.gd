@@ -5,6 +5,9 @@ export(float) var damage = 10.0
 export(int) var subtraction = 0
 export(int) var division = 0
 
+export(float) var drop_chance = 0.25
+export(bool) var guarantee_weapon_drop = false
+
 var health: float = 0
 var dead = false
 
@@ -21,7 +24,7 @@ func _ready():
 
 func apply_damage(dam, imag = 0):
 	if dead: return
-	var damage = _modify_damage(max(dam - subtraction, 0) + imag)
+	var damage = _modify_damage(max(dam - subtraction, 0) * (1 - (division / 100.0)), imag)
 	health -= damage
 	if health < 0: health = 0
 	_on_hit()
@@ -32,8 +35,8 @@ func die():
 	dead = true
 	_on_die()
 
-func _modify_damage(dam):
-	return dam
+func _modify_damage(dam, imag):
+	return dam + imag
 
 func _on_hit():
 	pass
