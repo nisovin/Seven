@@ -20,7 +20,6 @@ func _ready():
 	$AnimationPlayer.play("fly")
 
 func _on_hit():
-	print("hit")
 	var h = ceil(health / max_health * 99)
 	if h < 10:
 		h = "0" + str(h)

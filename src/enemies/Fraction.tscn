@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://enemies/Fraction.gd" type="Script" id=1]
 [ext_resource path="res://font/alphbeta.ttf" type="DynamicFontData" id=2]
@@ -155,7 +155,10 @@ tracks/1/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 320, 180 )
+extents = Vector2( 400, 200 )
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 99.9913
 
 [node name="Fraction" type="KinematicBody2D" groups=[
 "damageable",
@@ -249,14 +252,32 @@ wait_time = 3.0
 [node name="Grounder" type="RayCast2D" parent="."]
 position = Vector2( 0, 24 )
 
-[node name="DetectionZone" type="Area2D" parent="."]
+[node name="ShootZone" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootZone"]
 shape = SubResource( 6 )
+disabled = true
+
+[node name="DefensiveZone" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DefensiveZone"]
+shape = SubResource( 7 )
+disabled = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
+rect = Rect2( -100, -100, 200, 200 )
 
 [connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
-[connection signal="body_entered" from="DetectionZone" to="." method="_on_DetectionZone_body_entered"]
-[connection signal="body_exited" from="DetectionZone" to="." method="_on_DetectionZone_body_exited"]
+[connection signal="body_entered" from="ShootZone" to="." method="_on_DetectionZone_body_entered"]
+[connection signal="body_exited" from="ShootZone" to="." method="_on_DetectionZone_body_exited"]
+[connection signal="body_entered" from="DefensiveZone" to="." method="_on_DefensiveZone_body_entered"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

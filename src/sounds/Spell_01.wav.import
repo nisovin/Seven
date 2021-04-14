@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Spell_01.wav-7cfe7d660c7d7cbd0ba3738c45a05f9c.sample"
+
+[deps]
+
+source_file="res://sounds/Spell_01.wav"
+dest_files=[ "res://.import/Spell_01.wav-7cfe7d660c7d7cbd0ba3738c45a05f9c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

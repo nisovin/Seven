@@ -6,6 +6,7 @@ export(int) var subtraction = 0
 export(int) var division = 0
 
 export(float) var drop_chance = 0.25
+export(int) var loot_level = 1
 export(bool) var guarantee_weapon_drop = false
 
 var health: float = 0
@@ -24,15 +25,18 @@ func _ready():
 
 func apply_damage(dam, imag = 0):
 	if dead: return
-	var damage = _modify_damage(max(dam - subtraction, 0) * (1 - (division / 100.0)), imag)
-	health -= damage
+	var d = _modify_damage(max(dam - subtraction, 0) * (1 - (division / 100.0)), imag)
+	health -= d
 	if health < 0: health = 0
+	R.play_sound("enemy_hit", "Enemies")
 	_on_hit()
 	if health <= 0:
 		die()
 
 func die():
 	dead = true
+	if N.randf() < drop_chance:
+		owner.call_deferred("spawn_loot", global_position, loot_level)
 	_on_die()
 
 func _modify_damage(dam, imag):

@@ -5,6 +5,7 @@ signal hit
 const ROTATION_SPEED = PI * 4
 
 var damage = 1
+var damage_pct = 1.0
 var dir = Vector2.ZERO
 var speed = 0
 var start_pos
@@ -22,7 +23,6 @@ func init(dam, vel, pos, time, ret_to):
 	start_pos = pos
 	accel = speed / time
 	return_to = ret_to
-	print(accel)
 
 func _physics_process(delta):
 	if not returning:
@@ -37,6 +37,12 @@ func _physics_process(delta):
 	$Sprite.rotation += ROTATION_SPEED * delta
 	
 func _on_Parabola_body_entered(body):
-	if damage > 0 and body.is_in_group("damagable"):
-		body.apply_damage(damage)
+	if body.is_in_group("damageable"):
+		if damage > 0:
+			body.apply_damage(damage * damage_pct)
+		damage_pct *= 0.66
+	else:
+		damage_pct *= 0.33
+		
+	$Sprite.modulate = Color(0, damage_pct * 0.6 + 0.4, 1)
 	emit_signal("hit", body)

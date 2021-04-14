@@ -1,13 +1,15 @@
 extends "Gun.gd"
 
-const Bullet = preload("RepeaterBullet.tscn")
-
 const BULLET_SPEED = 350
 
 onready var muzzle = $Muzzle
 
 var shooting = false
 var on_cooldown = false
+var heat = 0
+
+func _init():
+	gun_name = "Third Repeater"
 
 func fire():
 	shooting = true
@@ -28,23 +30,24 @@ func fire_spray():
 	on_cooldown = true
 	$CooldownTimer.start()
 	is_actively_firing = true
-	var damage = owner.modify_damage(base_damage)
+	var damage = owner.modify_damage(base_damage) / 3.0
 	launch_bullet(damage)
 	update_text(2)
-	yield(get_tree().create_timer(0.05, false), "timeout")
+	yield(get_tree().create_timer(0.08, false), "timeout")
 	launch_bullet(damage)
 	update_text(1)
-	yield(get_tree().create_timer(0.05, false), "timeout")
+	yield(get_tree().create_timer(0.08, false), "timeout")
 	launch_bullet(damage)
 	update_text(0)
 	is_actively_firing = false
 
 func launch_bullet(dam):
-	var bullet = Bullet.instance()
+	var bullet = R.RepeaterBullet.instance()
 	add_child(bullet)
 	var v = global_transform.x * BULLET_SPEED
 	v = v.rotated(N.randf_range(-0.1, 0.1))
 	bullet.init(dam, muzzle.global_position, v)
+	R.play_sound("repeater_fire", "Player")
 
 func update_text(n):
 	var u = ""

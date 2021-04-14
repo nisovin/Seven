@@ -1,9 +1,7 @@
 extends "Gun.gd"
 
-const Bullet = preload("DecimalBullet.tscn")
-
 const BULLET_SPEED = 600
-const RELOAD_TIME = 1.5
+const RELOAD_TIME = 1.25
 
 var max_ammo = 4
 var ammo = max_ammo
@@ -11,9 +9,13 @@ var shooting = false
 var on_cooldown = false
 var reload_progress = 0
 
+func _init():
+	gun_name = "Leading Decimal"
+
 func generate(lvl):
 	.generate(lvl)
-	max_ammo = 4 + lvl
+	if lvl > 0:
+		max_ammo = 5 + lvl
 	ammo = max_ammo
 	update_text()
 
@@ -27,12 +29,13 @@ func stop():
 	
 func shoot():
 	var dam = owner.modify_damage(base_damage)
-	var bullet = Bullet.instance()
+	var bullet = R.DecimalBullet.instance()
 	add_child(bullet)
 	var v = global_transform.x * BULLET_SPEED
 	#v = v.rotated(N.randf_range(-0.1, 0.1))
 	bullet.init(dam, $Muzzle.global_position, v)
 	on_cooldown = true
+	R.play_sound("decimal_fire", "Player")
 	$CooldownTimer.start()
 	ammo -= 1
 	if ammo == 0:
@@ -63,7 +66,7 @@ func update_text():
 		for i in reload_progress:
 			t += "."
 	else:
-		t += "0."
+		t += "= 0."
 	t += str(ammo) + " >"
 	$Label.text = t
 

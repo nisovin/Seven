@@ -83,7 +83,7 @@ margin_top = -10.7798
 margin_right = 5.68503
 margin_bottom = 10.2202
 custom_fonts/font = SubResource( 7 )
-custom_colors/font_color = Color( 0.368627, 0.901961, 0.00392157, 1 )
+custom_colors/font_color = Color( 0, 0.858824, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_constants/line_spacing = -6
 text = "==UND=>"

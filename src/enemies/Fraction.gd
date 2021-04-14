@@ -1,6 +1,10 @@
 extends "Enemy.gd"
 
 const SPEED = 100
+const BULLET_SPEED = 250
+const LANCE_SPEED = 400
+const LANCE_DISTANCE = 150.0
+const LANCE_MULTIPLIER = 1.5
 
 export var move_range = 5
 
@@ -10,7 +14,7 @@ var stepping = 0
 var target = null
 
 func _ready():
-	var top = N.randi_range(3, 99)
+	var top = N.randi_range(10, 99) if max_health <= 100 else N.randi_range(100, 299)
 	var bottom = N.randi_range(top + 1, 999)
 	top = str(top)
 	bottom = str(bottom)
@@ -25,8 +29,6 @@ func _ready():
 	bottom = bottom.replace("7", "[color=red]7[/color]")
 	$Top/Top2.bbcode_text = "[center]" + top + "[/center]"
 	$Bottom/Bottom2.bbcode_text = "[center]" + bottom + "[/center]"
-	yield(get_tree().create_timer(N.randf_range(0, $MoveTimer.wait_time)), "timeout")
-	$MoveTimer.start()
 
 func move_left():
 	stepping = -1
@@ -51,6 +53,7 @@ func _on_hit():
 func _on_die():
 	$CollisionShape2D.set_deferred("disabled", true)
 	$AnimationPlayer.play("die")
+	R.play_sound("fraction_death", "Enemies")
 	yield(get_tree().create_timer(1.1, false), "timeout")
 	queue_free()
 
@@ -88,15 +91,50 @@ func _on_MoveTimer_timeout():
 	elif dir < 0:
 		$AnimationPlayer.play("step_left")
 		
-	if target != null and N.randf() < 0.5:
-		pass
+	if target != null:
+		shoot_long(position.direction_to(target.target_position))
 
+func shoot_long(dir):
+	var bullet = R.FractionBullet.instance()
+	add_child(bullet)
+	bullet.init(damage, global_position, dir * BULLET_SPEED)
+	bullet.set_spin(N.randf_range(-2 * PI, 2 * PI))
+	
+func shoot_short(dir):
+	var bullet
+	dir = dir.rotated(-deg2rad(30))
+	for i in 3:
+		bullet = R.FractionLance.instance()
+		add_child(bullet)
+		bullet.init(damage * LANCE_MULTIPLIER, global_position + dir * 10, dir * LANCE_SPEED)
+		bullet.set_max_time(LANCE_DISTANCE / LANCE_SPEED)
+		bullet = R.FractionLance.instance()
+		add_child(bullet)
+		bullet.init(damage * LANCE_MULTIPLIER, global_position - dir * 10, -dir * LANCE_SPEED)
+		bullet.set_max_time(LANCE_DISTANCE / LANCE_SPEED)
+		dir = dir.rotated(deg2rad(30))
 
 func _on_DetectionZone_body_entered(body):
 	target = body
 
 func _on_DetectionZone_body_exited(body):
 	target = null
+	
+func _on_DefensiveZone_body_entered(body):
+	if not dead:
+		call_deferred("shoot_short", position.direction_to(body.position))
 
 func _on_AttackTimer_timeout():
 	pass # Replace with function body.
+
+
+func _on_VisibilityNotifier2D_screen_entered():
+	$MoveTimer.start()
+	$ShootZone/CollisionShape2D.disabled = false
+	$DefensiveZone/CollisionShape2D.disabled = false
+
+func _on_VisibilityNotifier2D_screen_exited():
+	$MoveTimer.stop()
+	$ShootZone/CollisionShape2D.disabled = true
+	$DefensiveZone/CollisionShape2D.disabled = true
+

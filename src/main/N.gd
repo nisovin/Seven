@@ -5,10 +5,6 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	randomize()
 	rng.randomize()
-	
-	print("".split(" ")[0].length())
-	print([""])
-	print("".hash())
 
 func randf():
 	return rng.randf()

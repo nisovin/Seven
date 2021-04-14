@@ -1,8 +1,6 @@
 extends "Gun.gd"
 
-const ImaginaryBullet = preload("ComplexBullet.tscn")
-
-const BULLET_COUNT = 15
+const BULLET_COUNT = 8
 const BULLET_SPEED = 300
 const BULLET_DISTANCE = 150
 const BULLET_SPREAD = PI / 16
@@ -10,6 +8,9 @@ const BULLET_SPREAD = PI / 16
 var bullets = BULLET_COUNT
 var on_cooldown = false
 var shooting = false
+
+func _init():
+	gun_name = "Complexity"
 
 func fire():
 	if not on_cooldown:
@@ -22,10 +23,10 @@ func stop():
 	
 func launch():
 	var dam = owner.modify_damage(base_damage) / float(BULLET_COUNT)
-	var imag = dam * 0.5
-	dam -= imag
+	var imag = dam * 0.33
+	#dam -= imag
 	for i in bullets:
-		var bullet = ImaginaryBullet.instance()
+		var bullet = R.ComplexBullet.instance()
 		add_child(bullet)
 		var v = global_transform.x.rotated(N.randf_range(-BULLET_SPREAD, BULLET_SPREAD)) * BULLET_SPEED
 		var p = $Muzzle.global_position + Vector2(N.randf_range(-5, 5), N.randf_range(-5, 5))
@@ -47,7 +48,7 @@ func update_text():
 
 func _on_CooldownTimer_timeout():
 	on_cooldown = false
-	bullets = 5
+	bullets = 3
 	$ReloadTimer.start()
 	update_text()
 	if shooting:

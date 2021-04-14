@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/weapswitch.ogg-1641819c23a1a8a4f2159f03cad218fd.oggstr"
+
+[deps]
+
+source_file="res://sounds/weapswitch.ogg"
+dest_files=[ "res://.import/weapswitch.ogg-1641819c23a1a8a4f2159f03cad218fd.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

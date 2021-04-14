@@ -9,6 +9,13 @@ var current_bg = default_bg
 var old_bg = default_bg
 var new_bg = default_bg
 
+func spawn_loot(pos, level, options = []):
+	var loot = R.LootDrop.instance()
+	loot.generate(level)
+	$Loot.add_child(loot)
+	loot.global_position = pos
+	R.play_sound("loot_drop", "Level")
+
 func change_background_color(new_color):
 	$BackgroundTween.remove_all()
 	old_bg = current_bg

@@ -7,6 +7,9 @@ const EXTEND_SPEED = 400
 var extending = false
 var damage = 0
 
+func _init():
+	gun_name = "Finite Ray"
+
 func fire():
 	extending = true
 	damage = owner.modify_damage(base_damage)
@@ -27,7 +30,10 @@ func _physics_process(delta):
 			stop()
 
 func _on_HitBox_body_entered(body):
-	if damage > 0 and body.is_in_group("damagable"):
-		body.apply_damage(damage)
-		if not owner.is_on_floor() and owner.jumps == 0:
-			owner.jumps = 1
+	if active:
+		if damage > 0 and body.is_in_group("damageable"):
+			body.apply_damage(damage)
+			if not owner.is_on_floor() and owner.jumps == 0:
+				owner.jumps = 1
+		if body is StaticBody2D:
+			damage *= 0.5

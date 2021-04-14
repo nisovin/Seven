@@ -3,8 +3,10 @@ extends KinematicBody2D
 const JUMP_POWER = 750
 const GRAVITY = 1800
 const SPEED = 250
-const MAX_FALL_SPEED = 1000
+const MAX_FALL_SPEED = 900
 const MAX_GUN_ROT = PI / 4
+
+var target_position setget , get_target_position
 
 var walk_anim_legs = ["/ \\", "/\\", "/|", "||", "|\\", "/\\"]
 var walk_anim_body_offset = [0, -1, -3, -4, -3, -1]
@@ -23,9 +25,12 @@ var near_ground = false
 var jumps = 1
 var jump_cd = 0
 var speed_multiplier = 1.0
-var freeze_aiming = false
 
-var health = 100
+var freeze_aiming = false
+var in_menu = false
+
+var max_health = 100.0
+var health = max_health
 
 var stats = {
 	"addition": 0,
@@ -34,7 +39,7 @@ var stats = {
 	"division": 0,
 }
 
-onready var current_gun = $GunAttach/Decimal
+var current_gun = null
 
 onready var camera = $Camera2D
 onready var ground_finders = $GroundFinder.get_children()
@@ -42,6 +47,13 @@ onready var ground_finders = $GroundFinder.get_children()
 func _ready():
 	camera.set_as_toplevel(true)
 	camera.global_position = global_position
+	switch_weapon(0)
+	current_gun.generate(0)
+	$GUI/PlayerGUI.player = self
+	update_stats()
+
+func get_target_position():
+	return $Position2D.global_position
 
 func modify_damage(damage):
 	var dam = damage + stats.addition
@@ -53,16 +65,89 @@ func modify_damage(damage):
 		dam *= 1.5
 	return dam
 	
-func apply_damage(damage, from):
+func apply_damage(damage, from = null):
 	var dam = max(damage - stats.subtraction, 0)
 	var crit = stats.division / 100.0 * 2
 	if N.randf() < crit:
 		dam *= 0.5
 	health -= dam
+	var pct = health / max_health
+	if pct < .25:
+		$Body/NumberFore.update_width(.2)
+	elif pct < .50:
+		$Body/NumberFore.update_width(.5)
+	elif pct < .75:
+		$Body/NumberFore.update_width(.7)
+	else:
+		$Body/NumberFore.update_width(1)
+	
+	R.play_sound("player_hit", "Player")
+		
+		
+	print(health)
 
 func knockback(vec, dur):
 	knockback_vector = vec
 	knockback_change = knockback_vector.length() / dur
+
+func reset_down():
+	if is_on_floor():
+		global_position += up * 30
+	global_rotation = 0
+	up = Vector2.UP
+	
+func loot(item):
+	$GUI/PlayerGUI.open_loot_screen(item)
+
+func get_guns():
+	var array = [null, null, null]
+	for i in array.size():
+		var n = $GunAttach.get_child(i)
+		if n.get_child_count() == 1:
+			array[i] = n.get_child(0)
+	return array
+
+func equip_gun(gun, slot):
+	var switch = false
+	var slot_node = $GunAttach.get_child(slot)
+	if slot_node.get_child_count() > 0:
+		var old_gun = slot_node.get_child(0)
+		if old_gun == current_gun:
+			switch = true
+		slot_node.remove_child(old_gun)
+		$OldGuns.add_child(old_gun)
+		old_gun.owner = self
+		old_gun.equipped = false
+	slot_node.add_child(gun)
+	gun.owner = self
+	gun.equipped = true
+	if switch:
+		switch_weapon(slot)
+	update_stats()
+	
+func switch_weapon(slot):
+	var slot_node = $GunAttach.get_child(slot)
+	if slot_node.get_child_count() > 0:
+		for child in $GunAttach.get_children():
+			child.hide()
+		if current_gun != null:
+			current_gun.active = false
+			current_gun.stop()
+		slot_node.show()
+		current_gun = slot_node.get_child(0)
+		current_gun.active = true
+		R.play_sound("gun_switch", "Player")
+	
+
+func update_stats():
+	for stat in stats:
+		stats[stat] = 0
+	for n in $GunAttach.get_children():
+		if n.get_child_count() == 1:
+			var g = n.get_child(0)
+			for stat in stats:
+				if stat in g.stats:
+					stats[stat] += g.stats[stat]
 
 func _process(delta):
 	camera_target = global_position + (get_global_mouse_position() - global_position) * 0.35
@@ -126,27 +211,18 @@ func _unhandled_input(event):
 	elif event.is_action_released("fire"):
 		current_gun.stop()
 	elif event.is_action_pressed("down") and not is_on_floor():
-		global_rotation = 0
+		reset_down()
 	
-	if event is InputEventKey and event.pressed:
-		var g = -1
-		if event.scancode == KEY_1:
-			g = 0
-		if event.scancode == KEY_2:
-			g = 1
-		if event.scancode == KEY_3:
-			g = 2
-		if event.scancode == KEY_4:
-			g = 3
-		if event.scancode == KEY_5:
-			g = 4
-		if event.scancode == KEY_6:
-			g = 5
-		if g >= 0:
-			for n in $GunAttach.get_children():
-				n.visible = false
-			current_gun = $GunAttach.get_child(g)
-			current_gun.visible = true
+	elif event.is_action_pressed("weapon_1"):
+		switch_weapon(0)
+	elif event.is_action_pressed("weapon_2"):
+		switch_weapon(1)
+	elif event.is_action_pressed("weapon_3"):
+		switch_weapon(2)
+		
+	elif event.is_action_pressed("open_char_sheet"):
+		$GUI/PlayerGUI.open_character_sheet()
+		
 
 func _on_WalkAnimTimer_timeout():
 	if is_on_floor():

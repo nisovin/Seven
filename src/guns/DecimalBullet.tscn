@@ -14,7 +14,7 @@ radius = 6.0
 
 [node name="DecimalBullet" type="Area2D"]
 collision_layer = 8
-collision_mask = 36
+collision_mask = 37
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
