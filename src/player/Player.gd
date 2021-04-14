@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal died
+
 const JUMP_POWER = 750
 const GRAVITY = 1800
 const SPEED = 250
@@ -26,11 +28,13 @@ var jumps = 1
 var jump_cd = 0
 var speed_multiplier = 1.0
 
+var freeze_camera_target = false
 var freeze_aiming = false
 var in_menu = false
 
 var max_health = 100.0
 var health = max_health
+var dead = false
 
 var stats = {
 	"addition": 0,
@@ -82,16 +86,22 @@ func apply_damage(damage, from = null):
 		$Body/NumberFore.update_width(1)
 	
 	R.play_sound("player_hit", "Player")
-		
-		
-	print(health)
+	
+	if health <= 0:
+		health = 0
+		die()
+
+func die():
+	dead = true
+	emit_signal("died")
+	pass
 
 func knockback(vec, dur):
 	knockback_vector = vec
 	knockback_change = knockback_vector.length() / dur
 
 func reset_down():
-	if is_on_floor():
+	if is_on_floor() and abs(global_rotation) > 0.01:
 		global_position += up * 30
 	global_rotation = 0
 	up = Vector2.UP
@@ -150,7 +160,11 @@ func update_stats():
 					stats[stat] += g.stats[stat]
 
 func _process(delta):
-	camera_target = global_position + (get_global_mouse_position() - global_position) * 0.35
+	if not freeze_camera_target:
+		if dead:
+			camera_target = global_position
+		else:
+			camera_target = global_position + (get_global_mouse_position() - global_position) * 0.35
 	camera.global_position = lerp(camera.global_position, camera_target, delta * 4)
 
 func _physics_process(delta):

@@ -1,0 +1,335 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://enemies/PrimeDenominator.gd" type="Script" id=1]
+[ext_resource path="res://font/alphbeta.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 49.8245
+height = 117.916
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 1
+outline_color = Color( 0.207843, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -26 ), Vector2( 20, -50 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Top:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Bottom:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 30 ), Vector2( -20, 50 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Bottom:rotation_degrees")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.25, 0.0 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "spawn"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("DivideLineBack:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.01, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("DivideLineFore:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.01, 0.01, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Top:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Bottom:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.4, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "step_left"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Rotator:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -180.0, -180.0, -360.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "move_left"
+}, {
+"args": [  ],
+"method": "stop"
+}, {
+"args": [  ],
+"method": "move_left"
+}, {
+"args": [  ],
+"method": "stop"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Rotator:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0, 180.0, 360.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "move_right"
+}, {
+"args": [  ],
+"method": "stop"
+}, {
+"args": [  ],
+"method": "move_right"
+}, {
+"args": [  ],
+"method": "stop"
+} ]
+}
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 141, 49.5 )
+
+[node name="PrimeDenominator" type="KinematicBody2D" groups=[
+"damageable",
+]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 9 )
+
+[node name="Rotator" type="Node2D" parent="."]
+
+[node name="Top" type="RemoteTransform2D" parent="Rotator"]
+position = Vector2( 0, -26 )
+remote_path = NodePath("../../Top")
+update_rotation = false
+update_scale = false
+
+[node name="Bottom" type="RemoteTransform2D" parent="Rotator"]
+position = Vector2( 0, 30 )
+remote_path = NodePath("../../Bottom")
+update_rotation = false
+update_scale = false
+
+[node name="DivideLineBack" type="Line2D" parent="."]
+points = PoolVector2Array( -105, 0, 105, 0 )
+default_color = Color( 0.337255, 0, 0.180392, 1 )
+
+[node name="DivideLineFore" type="Line2D" parent="."]
+points = PoolVector2Array( -105, 0, 105, 0 )
+width = 6.0
+default_color = Color( 0.847059, 0, 0.458824, 1 )
+
+[node name="Top" type="Node2D" parent="."]
+position = Vector2( 0, -26 )
+
+[node name="TopText" type="RichTextLabel" parent="Top"]
+margin_left = -79.0
+margin_top = -23.0
+margin_right = 83.0
+margin_bottom = 22.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 1, 0.709804, 0.596078, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]10[color=red]7[/color][/center]"
+text = "107"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bottom" type="Node2D" parent="."]
+position = Vector2( 0, 30 )
+
+[node name="BottomText" type="RichTextLabel" parent="Bottom"]
+margin_left = -120.0
+margin_top = -23.0
+margin_right = 123.0
+margin_bottom = 22.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 2 )
+custom_colors/default_color = Color( 1, 0.709804, 0.596078, 1 )
+bbcode_enabled = true
+bbcode_text = "[center][color=red]777[/color]8[color=red]777[/color][/center]"
+text = "7778777"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/die = SubResource( 8 )
+anims/spawn = SubResource( 10 )
+anims/step_left = SubResource( 4 )
+anims/step_right = SubResource( 5 )
+
+[node name="ModeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="CycleTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="FountainTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="AimedTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="Grounder" type="RayCast2D" parent="."]
+position = Vector2( 0, 50 )
+cast_to = Vector2( 0, 60 )
+
+[node name="TooCloseArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TooCloseArea"]
+shape = SubResource( 11 )
+
+[connection signal="timeout" from="ModeTimer" to="." method="_on_ModeTimer_timeout"]
+[connection signal="timeout" from="CycleTimer" to="." method="_on_CycleTimer_timeout"]
+[connection signal="timeout" from="FountainTimer" to="." method="_on_FountainTimer_timeout"]
+[connection signal="timeout" from="AimedTimer" to="." method="_on_AimedTimer_timeout"]
+[connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
+[connection signal="body_entered" from="TooCloseArea" to="." method="_on_TooCloseArea_body_entered"]

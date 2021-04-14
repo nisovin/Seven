@@ -19,6 +19,7 @@ const LootDrop = preload("res://level/LootDrop.tscn")
 # enemies
 const FractionBullet = preload("res://enemies/FractionBullet.tscn")
 const FractionLance = preload("res://enemies/FractionLance.tscn")
+const PrimeDenominator = preload("res://enemies/PrimeDenominator.tscn")
 
 # sounds
 const Sounds = {

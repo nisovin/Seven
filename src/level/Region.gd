@@ -3,6 +3,7 @@ extends Area2D
 export(bool) var change_background = true
 export(Color) var color = Color.black
 export(bool) var down_reset = false
+export(bool) var checkpoint = false
 export(String, FILE) var music = ""
 
 func _init():
