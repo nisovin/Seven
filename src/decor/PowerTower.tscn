@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://font/Kenney Mini.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://decor/PowerTower.gd" type="Script" id=2]
@@ -7,9 +7,6 @@
 size = 64
 outline_size = 5
 font_data = ExtResource( 1 )
-
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 20.333
 
 [node name="PowerTower" type="Node2D"]
 script = ExtResource( 2 )
@@ -20,15 +17,9 @@ margin_top = -70.0322
 margin_right = 24.4701
 margin_bottom = 9.96776
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 1, 0.109804, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0.196078, 0.0392157, 1 )
+custom_colors/font_color = Color( 0.345098, 0, 0.4, 1 )
+custom_colors/font_outline_modulate = Color( 0.0862745, 0, 0.101961, 1 )
 text = "5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( -0.235962, -26.6645 )
-shape = SubResource( 2 )

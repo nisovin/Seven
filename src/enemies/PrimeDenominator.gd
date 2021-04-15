@@ -33,7 +33,7 @@ var step_pos = 0
 var stepping = 0
 
 func _init():
-	max_health = 50
+	max_health = 500
 	drop_chance = 1
 	loot_level = 2
 

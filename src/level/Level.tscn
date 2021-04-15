@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://level/graphpaper_transparent.png" type="Texture" id=1]
 [ext_resource path="res://font/font_help.tres" type="DynamicFont" id=2]
@@ -11,6 +11,10 @@
 [ext_resource path="res://decor/TreeGraph.tscn" type="PackedScene" id=9]
 [ext_resource path="res://level/Line.tscn" type="PackedScene" id=10]
 [ext_resource path="res://level/BossPrimeDenominator.gd" type="Script" id=11]
+[ext_resource path="res://enemies/LargeNumber.tscn" type="PackedScene" id=12]
+[ext_resource path="res://decor/Tree3.tscn" type="PackedScene" id=13]
+[ext_resource path="res://decor/PowerTower.tscn" type="PackedScene" id=14]
+[ext_resource path="res://enemies/Infinity.tscn" type="PackedScene" id=15]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -28,26 +32,76 @@ script = ExtResource( 5 )
 
 [node name="Regions" type="Node2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="Regions"]
+[node name="GraphForest" type="Area2D" parent="Regions"]
+visible = false
 collision_layer = 524288
 collision_mask = 2
 script = ExtResource( 6 )
 color = Color( 0.0862745, 0, 0.0980392, 1 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/Area2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/GraphForest"]
 polygon = PoolVector2Array( 1500, -60.472, 1500, -960.472, 2385, -1695.47, 4875, -1635.47, 4860, -90.472 )
 
-[node name="Area2D2" type="Area2D" parent="Regions"]
+[node name="CPForest1" type="Area2D" parent="Regions"]
+position = Vector2( 3780, -525.472 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 6 )
+change_background = false
+checkpoint = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/CPForest1"]
+position = Vector2( 225, 0 )
+polygon = PoolVector2Array( -105, 120, -105, -345, -345, -345, -345, 120 )
+
+[node name="CPPrePrime" type="Area2D" parent="Regions"]
 position = Vector2( 5130, -1170.47 )
 collision_layer = 0
 collision_mask = 2
 script = ExtResource( 6 )
 change_background = false
 down_reset = true
+checkpoint = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/Area2D2"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/CPPrePrime"]
 position = Vector2( 225, 0 )
-polygon = PoolVector2Array( 45, 90, 45, -105, -135, -270, -135, 90 )
+polygon = PoolVector2Array( 45, 90, 45, -105, -135, -255.002, -135, 90 )
+
+[node name="PrimeBoss" type="Area2D" parent="Regions"]
+position = Vector2( 5880, -1260.47 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 6 )
+color = Color( 0.176471, 0, 0, 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/PrimeBoss"]
+position = Vector2( 225, 0 )
+polygon = PoolVector2Array( -690, 180, 240, 180, 225, 0, 135, -285, -585, -285, -675, 0 )
+
+[node name="CPPostPrime" type="Area2D" parent="Regions"]
+position = Vector2( 6450, -1170.47 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 6 )
+change_background = false
+down_reset = true
+checkpoint = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/CPPostPrime"]
+position = Vector2( 45, 0 )
+polygon = PoolVector2Array( 45, 90, 45, -105, -135, -105, -135, 90 )
+
+[node name="CPPreInfinite" type="Area2D" parent="Regions"]
+position = Vector2( 4260, -2130.47 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 6 )
+change_background = false
+checkpoint = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/CPPreInfinite"]
+position = Vector2( 45, 0 )
+polygon = PoolVector2Array( 225, 225, 225, 30, -165, -120, -165, 75 )
 
 [node name="Text" type="Node2D" parent="."]
 
@@ -120,13 +174,13 @@ __meta__ = {
 }
 
 [node name="Drop" type="Label" parent="Text"]
-margin_left = 6015.0
-margin_top = -1950.47
-margin_right = 6354.0
-margin_bottom = -1854.47
+margin_left = 5835.0
+margin_top = -1935.47
+margin_right = 6174.0
+margin_bottom = -1839.47
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.760784, 0.501961, 0.941176, 1 )
-text = "Press D while mid-jump
+text = "Press S while mid-jump
 to drop down"
 align = 1
 __meta__ = {
@@ -174,89 +228,132 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Tree3_1" type="Label" parent="Text"]
+margin_left = 4020.0
+margin_top = -1965.47
+margin_right = 4522.0
+margin_bottom = -1894.47
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.933333, 0.654902, 0, 1 )
+text = "You are now approaching the
+Isles of the Infinite"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tree3_2" type="Label" parent="Text"]
+margin_left = 4395.0
+margin_top = -2370.47
+margin_right = 4897.0
+margin_bottom = -2299.47
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.933333, 0.654902, 0, 1 )
+text = "Watch out for the
+numbers of unusual size"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Decor" type="Node2D" parent="."]
 
-[node name="TreeGraph" parent="Decor" instance=ExtResource( 9 )]
+[node name="GraphForest" type="Node2D" parent="Decor"]
+
+[node name="TreeGraph" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 1920, -270.472 )
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph2" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph2" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 2100, -360.472 )
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph3" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph3" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 2340, -420.472 )
 
-[node name="TreeGraph4" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph4" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 3085, -555.472 )
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph5" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph5" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 3265, -555.472 )
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph7" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph7" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 3445, -660.472 )
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph6" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph6" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 3345, -420.472 )
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph9" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph9" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 3750, -420.472 )
 tree_size = 6
 trunk_height = 50
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph11" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph11" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 4140, -780.472 )
 rotation = -0.785398
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph10" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph10" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 4080, -540.472 )
 rotation = -0.785398
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph12" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph12" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 4320, -1140.47 )
 rotation = -0.785398
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph13" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph13" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 4620, -1260.47 )
 color_trunk = Color( 0.196078, 0.101961, 0.0941176, 1 )
 
-[node name="TreeGraph8" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph8" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 2790, -420.472 )
 
-[node name="TreeGraph14" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph14" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 5640, -1275.47 )
 
-[node name="TreeGraph15" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph15" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 5880, -1350.47 )
 
-[node name="TreeGraph16" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph16" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 6120, -1275.47 )
 
-[node name="TreeGraph17" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph17" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 5760, -1080.47 )
 
-[node name="TreeGraph18" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph18" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 6000, -1080.47 )
 
-[node name="TreeGraph19" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph19" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 4920, -1080.47 )
 
-[node name="TreeGraph20" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph20" parent="Decor/GraphForest" instance=ExtResource( 9 )]
 position = Vector2( 5100, -1080.47 )
+
+[node name="Infinite" type="Node2D" parent="Decor"]
+
+[node name="Tree3" parent="Decor/Infinite" instance=ExtResource( 13 )]
+position = Vector2( 5550, -2400.47 )
+
+[node name="Tree4" parent="Decor/Infinite" instance=ExtResource( 13 )]
+position = Vector2( 5355, -2400.47 )
+
+[node name="Tree5" parent="Decor/Infinite" instance=ExtResource( 13 )]
+position = Vector2( 5700, -2400.47 )
+
+[node name="PowerTower" parent="Decor" instance=ExtResource( 14 )]
+position = Vector2( 4170, -2085.47 )
 
 [node name="Lines" type="Node2D" parent="."]
 script = ExtResource( 4 )
 
 [node name="StartingArea" type="Node2D" parent="Lines"]
-visible = false
 
 [node name="Line" parent="Lines/StartingArea" instance=ExtResource( 10 )]
 position = Vector2( 75, -0.471954 )
@@ -290,12 +387,12 @@ default_color = Color( 0.121569, 0, 0.231373, 1 )
 
 [node name="Line" parent="Lines/ForestOfGraphs" instance=ExtResource( 10 )]
 position = Vector2( 3025, -555.472 )
-points = PoolVector2Array( -60, 6.10352e-05, 360, 6.10352e-05 )
+points = PoolVector2Array( -175, 6.10352e-05, 360, 6.10352e-05 )
 default_color = Color( 0.513726, 0.772549, 0, 1 )
 
 [node name="Line2" parent="Lines/ForestOfGraphs" instance=ExtResource( 10 )]
 position = Vector2( 3325, -675.472 )
-points = PoolVector2Array( 30, 15.0001, 330, 15.0001 )
+points = PoolVector2Array( -25, 15.0001, 395, 15.0001 )
 default_color = Color( 0.211765, 0.494118, 0, 1 )
 
 [node name="Line5" parent="Lines/ForestOfGraphs" instance=ExtResource( 10 )]
@@ -340,7 +437,7 @@ default_color = Color( 0.141176, 0.254902, 0.176471, 1 )
 
 [node name="Line11" parent="Lines/ForestOfGraphs" instance=ExtResource( 10 )]
 position = Vector2( 5220, -1260.47 )
-points = PoolVector2Array( -345, -480, 195, -0.00195313 )
+points = PoolVector2Array( -360, -480.002, 195, -0.00195313 )
 
 [node name="Line12" parent="Lines/ForestOfGraphs" instance=ExtResource( 10 )]
 position = Vector2( 4065, -1245.47 )
@@ -425,42 +522,81 @@ points = PoolVector2Array( -90, 0, 90, 0 )
 [node name="Line" parent="Lines/PostPrime" instance=ExtResource( 10 )]
 position = Vector2( 6585, -1080.47 )
 points = PoolVector2Array( -240, 0, 15, 0 )
+default_color = Color( 0.831373, 0.521569, 0.0392157, 1 )
 
 [node name="Line2" parent="Lines/PostPrime" instance=ExtResource( 10 )]
 position = Vector2( 6660, -1155.47 )
 points = PoolVector2Array( -60, 75, 60, 15 )
+default_color = Color( 0.831373, 0.521569, 0.0392157, 1 )
 
 [node name="Line3" parent="Lines/PostPrime" instance=ExtResource( 10 )]
 position = Vector2( 6825, -1215.47 )
 points = PoolVector2Array( -105, 75, -45, -45 )
+default_color = Color( 0.831373, 0.521569, 0.0392157, 1 )
 
 [node name="Line4" parent="Lines/PostPrime" instance=ExtResource( 10 )]
 position = Vector2( 6795, -1350.47 )
 points = PoolVector2Array( -15, 90, -15, -330 )
+default_color = Color( 0.831373, 0.521569, 0.0392157, 1 )
 
 [node name="Line5" parent="Lines/PostPrime" instance=ExtResource( 10 )]
 position = Vector2( 6705, -1740.47 )
 points = PoolVector2Array( 15, -60, 75, 60 )
+default_color = Color( 0.831373, 0.521569, 0.0392157, 1 )
 hide_range = true
 
 [node name="Line6" parent="Lines/PostPrime" instance=ExtResource( 10 )]
 position = Vector2( 6585, -1860.47 )
 points = PoolVector2Array( 15, 0, 135, 60 )
+default_color = Color( 0.831373, 0.521569, 0.0392157, 1 )
 hide_range = true
 
 [node name="Line7" parent="Lines/PostPrime" instance=ExtResource( 10 )]
 position = Vector2( 6405, -1860.47 )
-points = PoolVector2Array( -465, 0, 195, 0 )
+points = PoolVector2Array( -645, -0.00195313, 195, 0 )
+default_color = Color( 0.85098, 0.72549, 0.141176, 1 )
 text_offset = Vector2( 30, 0 )
 
 [node name="Line8" parent="Lines/PostPrime" instance=ExtResource( 10 )]
-position = Vector2( 5940, -1800.47 )
+position = Vector2( 5760, -1800.47 )
 points = PoolVector2Array( 0, -60, 60, 120 )
+default_color = Color( 0.905882, 0.301961, 0.0627451, 1 )
 
 [node name="Line9" parent="Lines/PostPrime" instance=ExtResource( 10 )]
 position = Vector2( 5340, -1620.47 )
-points = PoolVector2Array( -465, -120, 180, 60 )
+points = PoolVector2Array( -480, -120.002, 180, 60 )
+default_color = Color( 0.52549, 0.580392, 0.662745, 1 )
 text_offset = Vector2( 120, 0 )
+
+[node name="Line10" parent="Lines/PostPrime" instance=ExtResource( 10 )]
+position = Vector2( 4740, -1815.47 )
+points = PoolVector2Array( -1080, 75, 120, 75 )
+
+[node name="Line11" parent="Lines/PostPrime" instance=ExtResource( 10 )]
+position = Vector2( 4530, -2010.47 )
+points = PoolVector2Array( -390, -90, 0, 90 )
+
+[node name="Line12" parent="Lines/PostPrime" instance=ExtResource( 10 )]
+position = Vector2( 4605, -1905.47 )
+points = PoolVector2Array( -45, 75, 135, 75 )
+
+[node name="Line13" parent="Lines/PostPrime" instance=ExtResource( 10 )]
+position = Vector2( 4515, -2190.47 )
+points = PoolVector2Array( -105, 90, 105, 30 )
+
+[node name="Line14" parent="Lines/PostPrime" instance=ExtResource( 10 )]
+position = Vector2( 4785, -2220.47 )
+points = PoolVector2Array( -45, 0, 75, 0 )
+
+[node name="Line15" parent="Lines/PostPrime" instance=ExtResource( 10 )]
+position = Vector2( 4980, -2235.47 )
+points = PoolVector2Array( -60, -75, 120, -75 )
+
+[node name="Tree3" type="Node2D" parent="Lines"]
+
+[node name="Line" parent="Lines/Tree3" instance=ExtResource( 10 )]
+position = Vector2( 5235, -2385.47 )
+points = PoolVector2Array( -15, -15, 525, -15 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -472,14 +608,14 @@ drop_chance = 1.0
 guarantee_weapon_drop = true
 
 [node name="Fraction0" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 3175, -600.472 )
+position = Vector2( 3210, -600.472 )
 max_health = 70.0
 damage = 6.0
 drop_chance = 0.4
-move_range = 3
+move_range = 2
 
 [node name="Fraction3" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 3505, -705.472 )
+position = Vector2( 3570, -705.472 )
 max_health = 70.0
 damage = 6.0
 drop_chance = 0.4
@@ -493,57 +629,84 @@ drop_chance = 0.75
 move_range = 2
 
 [node name="Fraction6" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4260, -1140.47 )
+position = Vector2( 4320, -1185.47 )
 max_health = 70.0
 damage = 6.0
 drop_chance = 0.75
-move_range = 3
+move_range = 2
 
 [node name="Fraction4" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4200, -885.472 )
+position = Vector2( 4230, -930.472 )
 max_health = 70.0
 damage = 6.0
 drop_chance = 0.4
-move_range = 2
+move_range = 1
 
 [node name="Fraction5" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4290, -975.472 )
+position = Vector2( 4335, -1020.47 )
 max_health = 70.0
 damage = 6.0
 drop_chance = 0.4
-move_range = 2
+move_range = 1
 
 [node name="Fraction8" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 3690, -1425.47 )
+position = Vector2( 3630, -1425.47 )
 max_health = 80.0
 damage = 6.0
-move_range = 2
+move_range = 1
 
 [node name="Fraction2" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 3750, -1425.47 )
+position = Vector2( 3810, -1425.47 )
 max_health = 80.0
 damage = 6.0
-move_range = 2
+move_range = 1
 
 [node name="Fraction9" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 3210, -1485.47 )
 max_health = 80.0
 damage = 8.0
 drop_chance = 0.75
+move_range = 3
 
 [node name="Fraction10" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 6735, -1470.47 )
+position = Vector2( 6735, -1530.47 )
 rotation = -1.5708
+max_health = 100.0
+loot_level = 2
+move_range = 2
+
+[node name="Fraction11" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 6150, -1815.47 )
+rotation = 3.14159
 max_health = 100.0
 loot_level = 2
 move_range = 3
 
-[node name="Fraction11" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 6300, -1815.47 )
-rotation = 3.14159
+[node name="Fraction12" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 4650, -1875.47 )
 max_health = 100.0
 loot_level = 2
-move_range = 4
+move_range = 1
+
+[node name="Fraction14" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 5070, -1740.47 )
+max_health = 100.0
+loot_level = 2
+move_range = 2
+
+[node name="Fraction13" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 5010, -2355.47 )
+max_health = 100.0
+loot_level = 2
+move_range = 1
+
+[node name="LargeNumber" parent="Enemies" instance=ExtResource( 12 )]
+position = Vector2( 5400, -2580.47 )
+max_health = 200.0
+
+[node name="Infinity" parent="Enemies" instance=ExtResource( 15 )]
+position = Vector2( 5614.56, -2453.86 )
+max_health = 100.0
 
 [node name="Bosses" type="Node2D" parent="."]
 
@@ -568,7 +731,7 @@ position = Vector2( 0, 180 )
 [node name="Loot" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( 4905, -1125.47 )
+position = Vector2( 4485, -1995.47 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

@@ -32,6 +32,9 @@ func set_damage(dam, imag):
 	damage = dam
 	imaginary_damage = imag
 
+func set_text(text, node = "Label"):
+	get_node(node).text = text
+
 func _physics_process(delta):
 	if dead: return
 	time_left -= delta

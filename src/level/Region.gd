@@ -18,6 +18,8 @@ func _on_body_entered(body):
 		owner.change_background_color(color)
 	if down_reset:
 		body.call_deferred("reset_down")
+	if checkpoint:
+		body.respawn_point = global_position
 		
 	
 func _on_body_exited(body):

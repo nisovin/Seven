@@ -30,7 +30,6 @@ func _on_CharacterSheet_popup_hide():
 	player.in_menu = false
 
 func _unhandled_input(event):
-	print(event.is_action_pressed("open_char_sheet"))
 	if event.is_action_pressed("open_char_sheet") and char_screen.visible:
 		char_screen.call_deferred("hide")
 

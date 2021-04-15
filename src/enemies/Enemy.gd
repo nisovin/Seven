@@ -9,6 +9,7 @@ export(int) var division = 0
 
 export(float) var drop_chance = 0.25
 export(int) var loot_level = 1
+export(float) var random_upgrade_chance = 0
 export(bool) var guarantee_weapon_drop = false
 
 var invulnerable = false
@@ -39,6 +40,8 @@ func apply_damage(dam, imag = 0):
 func die():
 	dead = true
 	if N.randf() <= drop_chance:
+		if N.randf() < random_upgrade_chance:
+			loot_level += 1
 		owner.call_deferred("spawn_loot", global_position, loot_level)
 	_on_die()
 	emit_signal("died")

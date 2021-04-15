@@ -7,7 +7,11 @@ func _ready():
 	var scale = Vector2(1.0, 1.0)
 	var font = $Label.get("custom_fonts/font") as Font
 	var size = font.get_string_size($Label.text) + Vector2(5, 5)
-	
+	var color = $Label.get("custom_colors/font_color")
+	color.h = N.randf()
+	$Label.set("custom_colors/font_color", color)
+	color.v = 0.2
+	$Label.set("custom_colors/font_outline_modulate", color)
 	
 	for i in N.randi_range(4, 10):
 		scale *= 0.75
