@@ -51,6 +51,8 @@ onready var camera = $Camera2D
 onready var ground_finders = $GroundFinder.get_children()
 
 func _ready():
+	number = Game.number
+	$Body/Number.bbcode_text = "[center]" + number + "[/center]"
 	respawn_point = global_position
 	camera.set_as_toplevel(true)
 	camera.global_position = global_position
@@ -87,9 +89,9 @@ func apply_damage(damage, from = null):
 	if pct < .25 and oldpct >= .25:
 		$Body/Number.bbcode_text = "[center][color=#008080]" + number + "[/color][/center]"
 	elif pct < .50 and oldpct >= .50:
-		$Body/Number.bbcode_text = "[center]8[color=#008080]" + number[1] + number[2] + "[/color][/center]"
+		$Body/Number.bbcode_text = "[center]" + number[0] + "[color=#008080]" + number[1] + number[2] + "[/color][/center]"
 	elif pct < .75 and oldpct >= .75:
-		$Body/Number.bbcode_text = "[center]80[color=#008080]" + number[2] + "[/color][/center]"
+		$Body/Number.bbcode_text = "[center]" + number[0] + number[1] + "[color=#008080]" + number[2] + "[/color][/center]"
 	$GUI/Health.text = str(round(health))
 	
 	R.play_sound("player_hit", "Player")
