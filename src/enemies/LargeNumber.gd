@@ -80,7 +80,8 @@ func shoot_bullet():
 	bullets_shot += 1
 	var bullet = R.LargeNumberBullet.instance()
 	add_child(bullet)
-	bullet.init(damage / float(BULLET_COUNT), global_position, target_dir * BULLET_SPEED)
+	bullet.init(1, global_position, target_dir * BULLET_SPEED)
+	bullet.set_damage(damage / float(BULLET_COUNT), 0, 1 / float(BULLET_COUNT))
 	if bullets_shot == 1 or bullets_shot == BULLET_COUNT:
 		bullet.set_text(str(N.randi_range(1, 9)))
 	else:

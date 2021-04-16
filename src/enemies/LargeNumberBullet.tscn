@@ -12,7 +12,7 @@ font_data = ExtResource( 2 )
 [sub_resource type="CircleShape2D" id=2]
 
 [node name="LargeNumberBullet" type="Area2D"]
-collision_layer = 0
+collision_layer = 16
 collision_mask = 3
 script = ExtResource( 1 )
 

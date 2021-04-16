@@ -1,8 +1,10 @@
 extends Node2D
 
+export(float) var scale_y = 0.0
+
 func _ready():
 	$Base.scale.x = rand_range(0.8, 1.2)
-	$Base.scale.y = rand_range(0.8, 1.5)
+	$Base.scale.y = scale_y if scale_y > 0 else rand_range(0.8, 1.5)
 	#var orig = $ProjectileBlocker/CollisionShape2D.shape.extents
 	#var new = orig * $Base.scale
 	#$ProjectileBlocker/CollisionShape2D.shape.extents = new

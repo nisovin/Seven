@@ -5,8 +5,12 @@ onready var number_box = $Menu/VBoxContainer/Number
 onready var intro = $Intro
 onready var story_text = $Intro/VBoxContainer2/StoryText
 onready var continue_label = $Intro/VBoxContainer2/ContinueLabel
+onready var tween = $Tween
+onready var timer = $Intro/Timer
 
 var regex = RegEx.new()
+var doing_story = false
+var next_para = 0
 
 func _ready():
 	var n = N.randi_range(100, 999)
@@ -14,6 +18,7 @@ func _ready():
 	number_box.grab_focus()
 	number_box.caret_position = 3
 	regex.compile("[^123456890]")
+	R.play_music("menu", 0.25, true)
 
 func _on_Number_text_changed(new_text):
 	var t = regex.sub(new_text, "", true)
@@ -25,4 +30,46 @@ func _on_Number_text_changed(new_text):
 
 func play(t = ""):
 	Game.number = number_box.text
-	get_tree().change_scene("res://level/Level.tscn")
+	show_story()
+
+func show_story():
+	var s = story_text.get_child(0)
+	s.bbcode_text = s.bbcode_text.replace("NUMBER", Game.number)
+	for c in story_text.get_children():
+		c.percent_visible = 0
+		c.hide()
+	continue_label.modulate = Color.transparent
+	tween.interpolate_property(menu, "modulate", Color.white, Color.transparent, 1)
+	tween.start()
+	intro.show()
+	yield(get_tree().create_timer(1.3), "timeout")
+	doing_story = true
+	show_next_para()
+
+func show_next_para():
+	if next_para > 0:
+		story_text.get_child(next_para - 1).percent_visible = 1
+	tween.remove_all()
+	var p = story_text.get_child(next_para)
+	p.show()
+	continue_label.modulate = Color.transparent
+	tween.interpolate_property(p, "percent_visible", 0, 1, 2)
+	tween.interpolate_property(continue_label, "modulate", Color.transparent, Color.white, 1, Tween.TRANS_LINEAR, Tween.EASE_IN, 2.1)
+	tween.start()
+	next_para += 1
+
+func _on_Timer_timeout():
+	pass # Replace with function body.
+	
+func _input(event):
+	if doing_story:
+		if (event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton) and event.pressed:
+			if next_para >= story_text.get_child_count() or event.is_action_pressed("ui_cancel"):
+				tween.interpolate_property(intro, "modulate", Color.white, Color.transparent, 1)
+				tween.start()
+				yield(get_tree().create_timer(1), "timeout")
+				get_tree().change_scene("res://level/Level.tscn")
+			else:
+				show_next_para()
+
+

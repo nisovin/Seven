@@ -7,6 +7,7 @@ const GRAVITY = 1800
 const SPEED = 250
 const MAX_FALL_SPEED = 900
 const MAX_GUN_ROT = PI * 0.35
+const HEAL_COOLDOWN = 3
 
 var target_position setget , get_target_position
 
@@ -35,6 +36,8 @@ var in_menu = false
 
 var max_health = 100.0
 var health = max_health
+var time_since_damage = 0
+var no_heal = false
 var dead = false
 var respawn_point
 
@@ -52,14 +55,18 @@ onready var ground_finders = $GroundFinder.get_children()
 
 func _ready():
 	number = Game.number
-	$Body/Number.bbcode_text = "[center]" + number + "[/center]"
 	respawn_point = global_position
 	camera.set_as_toplevel(true)
 	camera.global_position = global_position
 	switch_weapon(0)
-	current_gun.generate(0)
-	$GUI/PlayerGUI.player = self
+	current_gun.generate(3)
 	update_stats()
+	prep_ui()
+
+func prep_ui():
+	$GUI/PlayerGUI.player = self
+	$Body/Number.bbcode_text = "[center]" + number + "[/center]"
+	$GUI/PlayerGUI/HealthBar.value = 100
 
 # ATTACK
 
@@ -78,43 +85,84 @@ func modify_damage(damage):
 	
 # TAKE DAMAGE
 	
-func apply_damage(damage, from = null):
-	var dam = max(damage - stats.subtraction, 0)
+func apply_damage(damage, imag = 0, percent = 1.0, from = null):
+	if dead: return
+	var dam = max(damage - stats.subtraction * percent, 0)
 	var crit = stats.division / 100.0 * 2
 	if N.randf() < crit:
 		dam *= 0.5
-	var oldpct = health / max_health
 	health -= dam
-	var pct = health / max_health
-	if pct < .25 and oldpct >= .25:
-		$Body/Number.bbcode_text = "[center][color=#008080]" + number + "[/color][/center]"
-	elif pct < .50 and oldpct >= .50:
-		$Body/Number.bbcode_text = "[center]" + number[0] + "[color=#008080]" + number[1] + number[2] + "[/color][/center]"
-	elif pct < .75 and oldpct >= .75:
-		$Body/Number.bbcode_text = "[center]" + number[0] + number[1] + "[color=#008080]" + number[2] + "[/color][/center]"
-	$GUI/Health.text = str(round(health))
+	time_since_damage = 0
+	update_health_displays()
 	
 	R.play_sound("player_hit", "Player")
 	
-	#if health <= 0:
-		#health = 0
-		#die()
+	if not dead and health <= 0:
+		health = 0
+		die()
 
+var numbers_lit = 3
+func update_health_displays():
+	var lit = 3
+	var pct = health / max_health
+	if pct < .25:
+		lit = 0
+	elif pct < .50:
+		lit = 1
+	elif pct < .75:
+		lit = 2
+	if lit != numbers_lit:
+		numbers_lit = lit
+		if lit == 3:
+			$Body/Number.bbcode_text = "[center]" + number + "[/center]"
+		elif lit == 2:
+			$Body/Number.bbcode_text = "[center]" + number[0] + number[1] + "[color=#008080]" + number[2] + "[/color][/center]"
+		elif lit == 1:
+			$Body/Number.bbcode_text = "[center]" + number[0] + "[color=#008080]" + number[1] + number[2] + "[/color][/center]"
+		elif lit == 0:
+			$Body/Number.bbcode_text = "[center][color=#008080]" + number + "[/color][/center]"
+	$GUI/Health.text = str(round(health))
+	$GUI/PlayerGUI/HealthBar.value = ceil(health)
+	
+func _on_HealTimer_timeout():
+	if dead or no_heal or health == max_health: return
+	time_since_damage += $HealTimer.wait_time
+	var heal = 0
+	if time_since_damage >= 15:
+		heal = 5
+	elif time_since_damage >= 10:
+		heal = 2
+	elif time_since_damage >= 5:
+		heal = 0.5
+	if heal > 0:
+		health = clamp(health + heal, 0, max_health)
+		update_health_displays()
+	
 # DEATH
 
 func die():
 	dead = true
+	velocity.x = 0
+	current_gun.stop()
 	emit_signal("died")
 	$AnimationPlayer.play("die")
+	R.play_sound("player_die", "Player")
 
 func set_death_text():
-	$Body/Number.bbcode_text = "[center]80[color=#008080]" + number[0] + number[1] + "[/color][color=red]7[/color][/center]"
-	# TODO: show respawn screen
+	$Body/Number.bbcode_text = "[center][color=#008080]" + number[0] + number[1] + "[/color][color=red]7[/color][/center]"
+
+func show_respawn_screen():
+	$GUI/PlayerGUI.open_respawn_screen()
 
 func respawn():
 	global_position = respawn_point
+	camera.global_position = respawn_point
+	reset_down()
+	$AnimationPlayer.play("reset")
 	health = max_health
-	$Body/Number.bbcode_text = "[center]" + number + "[/center]"
+	no_heal = false
+	prep_ui()
+	dead = false
 
 # EQUIPMENT
 	
@@ -155,10 +203,10 @@ func switch_weapon(slot):
 		if current_gun != null:
 			current_gun.active = false
 			current_gun.stop()
+			R.play_sound("gun_switch", "Player")
 		slot_node.show()
 		current_gun = slot_node.get_child(0)
 		current_gun.active = true
-		R.play_sound("gun_switch", "Player")
 	
 func update_stats():
 	for stat in stats:
@@ -209,17 +257,19 @@ func _physics_process(delta):
 			if jumps == 0:
 				jumps = 1
 		
-		if Input.is_action_pressed("jump") and jumps > 0 and is_on_floor():
-			velocity.y = -JUMP_POWER * speed_multiplier
-			jumps -= 1
-		elif Input.is_action_just_pressed("jump") and jumps > 0:
-			velocity.y = -JUMP_POWER * speed_multiplier
-			jumps -= 1
-		
-		var move = Input.get_action_strength("right") - Input.get_action_strength("left")
-		velocity.x = move * SPEED * speed_multiplier
-		#if not is_on_floor():
-		#	velocity.x *= 0.6
+		if not dead:
+			if Input.is_action_pressed("jump") and jumps > 0 and is_on_floor():
+				velocity.y = -JUMP_POWER * speed_multiplier
+				jumps -= 1
+			elif Input.is_action_just_pressed("jump") and jumps > 0:
+				velocity.y = -JUMP_POWER * speed_multiplier
+				jumps -= 1
+			
+			var move = Input.get_action_strength("right") - Input.get_action_strength("left")
+			velocity.x = move * SPEED * speed_multiplier
+			#if not is_on_floor():
+			#	velocity.x *= 0.6
+			
 		velocity.y = min(velocity.y + GRAVITY * delta, MAX_FALL_SPEED)
 		var v = velocity.rotated(global_rotation)
 		if knockback_vector != Vector2.ZERO:
@@ -265,6 +315,7 @@ func _on_WalkAnimTimer_timeout():
 # INPUT
 
 func _unhandled_input(event):
+	if dead: return
 	if event.is_action_pressed("fire"):
 		current_gun.fire()
 	elif event.is_action_released("fire"):
@@ -282,4 +333,6 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("open_char_sheet"):
 		$GUI/PlayerGUI.open_character_sheet()
 		
+
+
 

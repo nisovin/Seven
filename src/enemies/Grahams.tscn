@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://font/alphbeta.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://enemies/UpArrowBullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://enemies/Grahams.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 37.5575, 120.027 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
@@ -16,11 +18,11 @@ outline_size = 2
 outline_color = Color( 0.360784, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "circle_shot_charge"
+[sub_resource type="Animation" id=3]
+resource_name = "barrage_charge"
 length = 1.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("UpArrow1:rotation_degrees")
+tracks/0/path = NodePath("Body/UpArrow1:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -32,7 +34,7 @@ tracks/0/keys = {
 "values": [ 0.0, -30.0, 30.0, -30.0, 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("UpArrow2:rotation_degrees")
+tracks/1/path = NodePath("Body/UpArrow2:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -44,7 +46,7 @@ tracks/1/keys = {
 "values": [ 0.0, 30.0, -30.0, 30.0, 0.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("UpArrow3:rotation_degrees")
+tracks/2/path = NodePath("Body/UpArrow3:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -56,7 +58,7 @@ tracks/2/keys = {
 "values": [ 0.0, -30.0, 30.0, -30.0, 0.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("UpArrow4:rotation_degrees")
+tracks/3/path = NodePath("Body/UpArrow4:rotation_degrees")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -68,7 +70,7 @@ tracks/3/keys = {
 "values": [ 0.0, 30.0, -30.0, 30.0, 0.0 ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("UpArrow5:modulate")
+tracks/4/path = NodePath("Body/UpArrow5:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -80,156 +82,169 @@ tracks/4/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("UpArrow2:modulate")
+tracks/5/path = NodePath("Body/UpArrow2:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("UpArrow1:modulate")
+tracks/6/path = NodePath("Body/UpArrow1:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("UpArrow3:modulate")
+tracks/7/path = NodePath("Body/UpArrow3:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("UpArrow4:modulate")
+tracks/8/path = NodePath("Body/UpArrow4:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/9/type = "method"
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 1.4 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ {
+"args": [  ],
+"method": "attack_barrage"
+} ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "power_shot_charge"
-length = 1.5
-step = 0.01
+[sub_resource type="Animation" id=9]
+resource_name = "die"
+length = 1.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("UpArrow1:position:x")
+tracks/0/path = NodePath("Body/UpArrow1:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ -45.0, 0.0, 0.0, -45.0, -45.0, -45.0, 0.0, 0.0, -45.0, -45.0, -45.0, 0.0, 0.0, -45.0, -45.0, -45.0, 0.0, 0.0 ]
+"values": [ Vector2( -45, 0 ), Vector2( -60, -30 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("UpArrow2:position:x")
+tracks/1/path = NodePath("Body/UpArrow2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ -15.0, 0.0, 0.0, -15.0, -15.0, -15.0, 0.0, 0.0, -15.0, -15.0, -15.0, 0.0, 0.0, -15.0, -15.0, -15.0, 0.0, 0.0 ]
+"values": [ Vector2( -15, 0 ), Vector2( -30, 30 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("UpArrow1:modulate")
+tracks/2/path = NodePath("Body/UpArrow1:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("UpArrow2:modulate")
+tracks/3/path = NodePath("Body/UpArrow2:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("UpArrow3:position:x")
+tracks/4/path = NodePath("Body/UpArrow3:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 15.0, 0.0, 0.0, 15.0, 15.0, 15.0, 0.0, 0.0, 15.0, 15.0, 15.0, 0.0, 0.0, 15.0, 15.0, 15.0, 0.0, 0.0 ]
+"values": [ Vector2( 15, 0 ), Vector2( 30, -30 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("UpArrow3:modulate")
+tracks/5/path = NodePath("Body/UpArrow3:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("UpArrow4:position:x")
+tracks/6/path = NodePath("Body/UpArrow4:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 45.0, 0.0, 0.0, 45.0, 45.0, 45.0, 0.0, 0.0, 45.0, 45.0, 45.0, 0.0, 0.0, 45.0, 45.0, 45.0, 0.0, 0.0 ]
+"values": [ Vector2( 45, 0 ), Vector2( 60, 30 ) ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("UpArrow4:modulate")
+tracks/7/path = NodePath("Body/UpArrow4:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("UpArrow5:position:x")
+tracks/8/path = NodePath("Body/UpArrow5:position:x")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -241,7 +256,263 @@ tracks/8/keys = {
 "values": [  ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("UpArrow5:modulate")
+tracks/9/path = NodePath("Body/UpArrow5:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Body/UpArrow2:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 250.0 ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Body/UpArrow1:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -400.0 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Body/UpArrow3:rotation_degrees")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -370.0 ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Body/UpArrow4:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 350.0 ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Body/Left3:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -98, 0 ), Vector2( -130, 30 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Body/Left3:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -180.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("Body/Left3:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("Body/Right3:position")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 98, 0 ), Vector2( 130, 30 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("Body/Right3:rotation_degrees")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 180.0 ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("Body/Right3:modulate")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("Body/Bracket:modulate")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 1.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/UpArrow1:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -45.0, 0.0, 0.0, -45.0, -45.0, -45.0, 0.0, 0.0, -45.0, -45.0, -45.0, 0.0, 0.0, -45.0, -45.0, -45.0, 0.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/UpArrow2:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -15.0, 0.0, 0.0, -15.0, -15.0, -15.0, 0.0, 0.0, -15.0, -15.0, -15.0, 0.0, 0.0, -15.0, -15.0, -15.0, 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/UpArrow1:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/UpArrow2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Body/UpArrow3:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 15.0, 0.0, 0.0, 15.0, 15.0, 15.0, 0.0, 0.0, 15.0, 15.0, 15.0, 0.0, 0.0, 15.0, 15.0, 15.0, 0.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/UpArrow3:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Body/UpArrow4:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 45.0, 0.0, 0.0, 45.0, 45.0, 45.0, 0.0, 0.0, 45.0, 45.0, 45.0, 0.0, 0.0, 45.0, 45.0, 45.0, 0.0, 0.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Body/UpArrow4:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.2, 0.25, 0.3, 0.35, 0.4, 0.6, 0.65, 0.7, 0.75, 0.8, 1, 1.05, 1.1, 1.15, 1.2, 1.4, 1.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Body/UpArrow5:position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 0,
+"values": [  ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Body/UpArrow5:modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -263,144 +534,8 @@ tracks/10/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "spawn_aimed_arrow"
+"method": "attack_charged_shot"
 } ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "random_shot_charge"
-length = 1.5
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("UpArrow1:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ -45.0, -45.0, -45.0, 45.0, -45.0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("UpArrow2:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ -15.0, -45.0, -15.0, 45.0, -15.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("UpArrow1:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("UpArrow2:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("UpArrow3:position:x")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 15.0, -45.0, 15.0, 45.0, 15.0 ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("UpArrow3:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("UpArrow4:position:x")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 45.0, -45.0, 45.0, 45.0, 45.0 ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("UpArrow4:modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("UpArrow5:position:x")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"update": 0,
-"values": [  ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("UpArrow5:modulate")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-tracks/10/type = "method"
-tracks/10/path = NodePath(".")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -408,7 +543,7 @@ resource_name = "reset"
 length = 0.2
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("UpArrow1:position:x")
+tracks/0/path = NodePath("Body/UpArrow1:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -420,7 +555,7 @@ tracks/0/keys = {
 "values": [ -45.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("UpArrow2:position:x")
+tracks/1/path = NodePath("Body/UpArrow2:position:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -432,7 +567,7 @@ tracks/1/keys = {
 "values": [ -15.0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("UpArrow1:modulate")
+tracks/2/path = NodePath("Body/UpArrow1:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -444,7 +579,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("UpArrow2:modulate")
+tracks/3/path = NodePath("Body/UpArrow2:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -456,7 +591,7 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("UpArrow3:position:x")
+tracks/4/path = NodePath("Body/UpArrow3:position:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -468,7 +603,7 @@ tracks/4/keys = {
 "values": [ 15.0 ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("UpArrow3:modulate")
+tracks/5/path = NodePath("Body/UpArrow3:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
@@ -480,7 +615,7 @@ tracks/5/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("UpArrow4:position:x")
+tracks/6/path = NodePath("Body/UpArrow4:position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
@@ -492,19 +627,143 @@ tracks/6/keys = {
 "values": [ 45.0 ]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("UpArrow4:modulate")
+tracks/7/path = NodePath("Body/UpArrow4:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
 tracks/7/keys = {
-"times": PoolRealArray( 0, 0.11 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("UpArrow5:position:x")
+tracks/8/path = NodePath("Body/UpArrow5:position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Body/UpArrow5:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "seeking_charge"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/UpArrow1:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -45.0, -45.0, -45.0, 45.0, -45.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/UpArrow2:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -15.0, -45.0, -15.0, 45.0, -15.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/UpArrow1:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/UpArrow2:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Body/UpArrow3:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 15.0, -45.0, 15.0, 45.0, 15.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/UpArrow3:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Body/UpArrow4:position:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 45.0, -45.0, 45.0, 45.0, 45.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Body/UpArrow4:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Body/UpArrow5:position:x")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/imported = false
@@ -516,7 +775,7 @@ tracks/8/keys = {
 "values": [  ]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("UpArrow5:modulate")
+tracks/9/path = NodePath("Body/UpArrow5:modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/imported = false
@@ -534,18 +793,256 @@ tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
 tracks/10/keys = {
-"times": PoolRealArray(  ),
-"transitions": PoolRealArray(  ),
-"values": [  ]
+"times": PoolRealArray( 1.4, 1.6, 1.8, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 0 ],
+"method": "attack_seeking"
+}, {
+"args": [ 1 ],
+"method": "attack_seeking"
+}, {
+"args": [ 2 ],
+"method": "attack_seeking"
+}, {
+"args": [ 3 ],
+"method": "attack_seeking"
+} ]
 }
 
-[node name="Grahams" type="KinematicBody2D"]
+[sub_resource type="Animation" id=7]
+resource_name = "spawn"
+length = 3.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Left3:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( -98, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/Left3:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/Right3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 98, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Right3:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Body/UpArrow1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -45, 0 ), Vector2( -45, 50 ), Vector2( -45, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/UpArrow1:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.7, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Body/UpArrow2:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -15, 0 ), Vector2( -15, 50 ), Vector2( -15, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Body/UpArrow2:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Body/UpArrow3:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 1.3, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 15, 0 ), Vector2( 15, 50 ), Vector2( 15, 0 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Body/UpArrow3:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 1.3, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Body/UpArrow4:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 1.6, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 45, 0 ), Vector2( 45, 50 ), Vector2( 45, 0 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Body/UpArrow4:modulate")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 1.6, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Body/Bracket:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 1.9, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 41 ), Vector2( 0, 80 ), Vector2( 0, 42 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Body/Bracket:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 1.9, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Body/Bracket/Health:scale:x")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 1.9, 2.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.01, 0.01, 1.0 ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath(".:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0.01 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/16/type = "method"
+tracks/16/path = NodePath(".")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 2.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "done_spawning"
+} ]
+}
+
+[node name="Grahams" type="KinematicBody2D" groups=[
+"damageable",
+]]
+collision_layer = 4
+collision_mask = 8
 script = ExtResource( 3 )
 
-[node name="Left3" type="Label" parent="."]
-margin_left = -170.0
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -55 )
+rotation = 1.5708
+shape = SubResource( 8 )
+
+[node name="Body" type="Node2D" parent="."]
+position = Vector2( 0, -67 )
+
+[node name="Left3" type="Node2D" parent="Body"]
+position = Vector2( -98, 0 )
+
+[node name="Left3Text" type="Label" parent="Body/Left3"]
+margin_left = -72.0
 margin_top = -40.0
-margin_right = -70.0
+margin_right = 28.0
 margin_bottom = 47.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 0.709804, 0.596078, 1 )
@@ -555,10 +1052,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Right3" type="Label" parent="."]
-margin_left = 75.0
+[node name="Right3" type="Node2D" parent="Body"]
+position = Vector2( 98, 0 )
+
+[node name="Right3Text" type="Label" parent="Body/Right3"]
+margin_left = -23.0
 margin_top = -40.0
-margin_right = 175.0
+margin_right = 77.0
 margin_bottom = 47.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 1, 0.709804, 0.596078, 1 )
@@ -567,39 +1067,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Arrow1" type="Position2D" parent="."]
-position = Vector2( -45, 0 )
+[node name="Arrow1" type="Position2D" parent="Body"]
+position = Vector2( -45, 5 )
 
-[node name="Arrow2" type="Position2D" parent="."]
-position = Vector2( -15, 0 )
+[node name="Arrow2" type="Position2D" parent="Body"]
+position = Vector2( -15, 5 )
 
-[node name="Arrow3" type="Position2D" parent="."]
-position = Vector2( 15, 0 )
+[node name="Arrow3" type="Position2D" parent="Body"]
+position = Vector2( 15, 5 )
 
-[node name="Arrow4" type="Position2D" parent="."]
-position = Vector2( 45, 0 )
+[node name="Arrow4" type="Position2D" parent="Body"]
+position = Vector2( 45, 5 )
 
-[node name="Bracket" type="Node2D" parent="."]
-position = Vector2( 0, 40 )
+[node name="Arrow5" type="Position2D" parent="Body"]
+position = Vector2( 0, 5 )
 
-[node name="Line2D" type="Line2D" parent="Bracket"]
-points = PoolVector2Array( 0, 0, 0, 12 )
+[node name="Bracket" type="Node2D" parent="Body"]
+position = Vector2( 0, 42 )
+z_index = 1
+
+[node name="Line2D" type="Line2D" parent="Body/Bracket"]
+points = PoolVector2Array( 0, 0, 0, 18 )
 default_color = Color( 0.337255, 0, 0.180392, 1 )
 
-[node name="Back" type="Line2D" parent="Bracket"]
-points = PoolVector2Array( -60, -15, -60, 0, 60, 0, 60, -15 )
+[node name="Back" type="Line2D" parent="Body/Bracket"]
+points = PoolVector2Array( -65, -15, -65, 0, 65, 0, 65, -15 )
+width = 12.0
 default_color = Color( 0.337255, 0, 0.180392, 1 )
 
-[node name="Health" type="Line2D" parent="Bracket"]
-points = PoolVector2Array( -62, 0, 62, 0 )
-width = 6.0
+[node name="Health" type="Line2D" parent="Body/Bracket"]
+points = PoolVector2Array( -70, 0, 70, 0 )
+width = 8.0
 default_color = Color( 0.847059, 0, 0.458824, 1 )
 
-[node name="Title" type="Label" parent="Bracket"]
+[node name="Title" type="Label" parent="Body/Bracket"]
 margin_left = -75.0
-margin_top = 12.0
+margin_top = 7.0
 margin_right = 75.0
-margin_bottom = 41.0
+margin_bottom = 36.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.709804, 0.596078, 1 )
 text = "g63"
@@ -608,136 +1113,150 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UpArrow2" type="Node2D" parent="."]
+[node name="UpArrow2" type="Node2D" parent="Body"]
 position = Vector2( -15, 0 )
 
-[node name="Line2D3" type="Line2D" parent="UpArrow2"]
+[node name="Line2D3" type="Line2D" parent="Body/UpArrow2"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( 0, 0, 0, 52 )
 default_color = Color( 0.298039, 0, 0, 1 )
 
-[node name="Line2D4" type="Line2D" parent="UpArrow2"]
+[node name="Line2D4" type="Line2D" parent="Body/UpArrow2"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( -11, 11, 0, 0, 11, 11 )
 default_color = Color( 0.298039, 0, 0, 1 )
 
-[node name="Line2D" type="Line2D" parent="UpArrow2"]
+[node name="Line2D" type="Line2D" parent="Body/UpArrow2"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( 0, 0, 0, 50 )
 width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
-[node name="Line2D2" type="Line2D" parent="UpArrow2"]
+[node name="Line2D2" type="Line2D" parent="Body/UpArrow2"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( -10, 10, 0, 0, 10, 10 )
 width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
-[node name="UpArrow1" type="Node2D" parent="."]
+[node name="UpArrow1" type="Node2D" parent="Body"]
 position = Vector2( -45, 0 )
 
-[node name="Line2D3" type="Line2D" parent="UpArrow1"]
+[node name="Line2D3" type="Line2D" parent="Body/UpArrow1"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( 0, 0, 0, 52 )
 default_color = Color( 0.298039, 0, 0, 1 )
 
-[node name="Line2D4" type="Line2D" parent="UpArrow1"]
+[node name="Line2D4" type="Line2D" parent="Body/UpArrow1"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( -11, 11, 0, 0, 11, 11 )
 default_color = Color( 0.298039, 0, 0, 1 )
 
-[node name="Line2D" type="Line2D" parent="UpArrow1"]
+[node name="Line2D" type="Line2D" parent="Body/UpArrow1"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( 0, 0, 0, 50 )
 width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
-[node name="Line2D2" type="Line2D" parent="UpArrow1"]
+[node name="Line2D2" type="Line2D" parent="Body/UpArrow1"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( -10, 10, 0, 0, 10, 10 )
 width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
-[node name="UpArrow3" type="Node2D" parent="."]
+[node name="UpArrow3" type="Node2D" parent="Body"]
 position = Vector2( 15, 0 )
 
-[node name="Line2D3" type="Line2D" parent="UpArrow3"]
+[node name="Line2D3" type="Line2D" parent="Body/UpArrow3"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( 0, 0, 0, 52 )
 default_color = Color( 0.298039, 0, 0, 1 )
 
-[node name="Line2D4" type="Line2D" parent="UpArrow3"]
+[node name="Line2D4" type="Line2D" parent="Body/UpArrow3"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( -11, 11, 0, 0, 11, 11 )
 default_color = Color( 0.298039, 0, 0, 1 )
 
-[node name="Line2D" type="Line2D" parent="UpArrow3"]
+[node name="Line2D" type="Line2D" parent="Body/UpArrow3"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( 0, 0, 0, 50 )
 width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
-[node name="Line2D2" type="Line2D" parent="UpArrow3"]
+[node name="Line2D2" type="Line2D" parent="Body/UpArrow3"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( -10, 10, 0, 0, 10, 10 )
 width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
-[node name="UpArrow4" type="Node2D" parent="."]
+[node name="UpArrow4" type="Node2D" parent="Body"]
 position = Vector2( 45, 0 )
 
-[node name="Line2D3" type="Line2D" parent="UpArrow4"]
+[node name="Line2D3" type="Line2D" parent="Body/UpArrow4"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( 0, 0, 0, 52 )
 default_color = Color( 0.298039, 0, 0, 1 )
 
-[node name="Line2D4" type="Line2D" parent="UpArrow4"]
+[node name="Line2D4" type="Line2D" parent="Body/UpArrow4"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( -11, 11, 0, 0, 11, 11 )
 default_color = Color( 0.298039, 0, 0, 1 )
 
-[node name="Line2D" type="Line2D" parent="UpArrow4"]
+[node name="Line2D" type="Line2D" parent="Body/UpArrow4"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( 0, 0, 0, 50 )
 width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
-[node name="Line2D2" type="Line2D" parent="UpArrow4"]
+[node name="Line2D2" type="Line2D" parent="Body/UpArrow4"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( -10, 10, 0, 0, 10, 10 )
 width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
-[node name="UpArrow5" type="Node2D" parent="."]
+[node name="UpArrow5" type="Node2D" parent="Body"]
 modulate = Color( 1, 1, 1, 0 )
 
-[node name="Line2D3" type="Line2D" parent="UpArrow5"]
+[node name="Line2D3" type="Line2D" parent="Body/UpArrow5"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( 0, 0, 0, 52 )
 default_color = Color( 0.298039, 0, 0, 1 )
 
-[node name="Line2D4" type="Line2D" parent="UpArrow5"]
+[node name="Line2D4" type="Line2D" parent="Body/UpArrow5"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( -11, 11, 0, 0, 11, 11 )
 default_color = Color( 0.298039, 0, 0, 1 )
 
-[node name="Line2D" type="Line2D" parent="UpArrow5"]
+[node name="Line2D" type="Line2D" parent="Body/UpArrow5"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( 0, 0, 0, 50 )
 width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
-[node name="Line2D2" type="Line2D" parent="UpArrow5"]
+[node name="Line2D2" type="Line2D" parent="Body/UpArrow5"]
 position = Vector2( 0, -19 )
 points = PoolVector2Array( -10, 10, 0, 0, 10, 10 )
 width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
-[node name="UpArrowBullet" parent="." instance=ExtResource( 2 )]
-visible = false
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/circle_shot_charge = SubResource( 4 )
-anims/power_shot_charge = SubResource( 3 )
-anims/random_shot_charge = SubResource( 5 )
+anims/barrage_charge = SubResource( 3 )
+anims/die = SubResource( 9 )
+anims/power_shot_charge = SubResource( 4 )
 anims/reset = SubResource( 6 )
+anims/seeking_charge = SubResource( 5 )
+anims/spawn = SubResource( 7 )
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="ModeTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BarrageTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="Timer4" type="Timer" parent="."]
+
+[connection signal="timeout" from="MoveTimer" to="." method="_on_MoveTimer_timeout"]
+[connection signal="timeout" from="ModeTimer" to="." method="_on_ModeTimer_timeout"]
+[connection signal="timeout" from="BarrageTimer" to="." method="_on_BarrageTimer_timeout"]

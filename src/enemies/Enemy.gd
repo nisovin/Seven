@@ -27,9 +27,9 @@ func _ready():
 			if $Grounder.is_colliding():
 				global_position += $Grounder.get_collision_point() - $Grounder.global_position
 
-func apply_damage(dam, imag = 0):
+func apply_damage(dam, imag = 0, pct = 1.0):
 	if dead or invulnerable: return
-	var d = _modify_damage(max(dam - subtraction, 0) * (1 - (division / 100.0)), imag)
+	var d = _modify_damage(max(dam - subtraction * pct, 0) * (1 - (division / 100.0)), imag)
 	health -= d
 	if health < 0: health = 0
 	R.play_sound("enemy_hit", "Enemies")

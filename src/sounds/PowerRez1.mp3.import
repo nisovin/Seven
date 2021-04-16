@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PowerRez1.mp3-072822555382d61d4a638ba3a03b4f15.mp3str"
+
+[deps]
+
+source_file="res://sounds/PowerRez1.mp3"
+dest_files=[ "res://.import/PowerRez1.mp3-072822555382d61d4a638ba3a03b4f15.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

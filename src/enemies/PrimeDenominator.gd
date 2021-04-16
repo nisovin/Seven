@@ -43,6 +43,7 @@ func spawn(plr):
 	invulnerable = true
 	$AnimationPlayer.play("spawn")
 	$ModeTimer.start(3)
+	R.play_sound("prime_spawn", "Enemies")
 
 func move_left():
 	stepping = -1
@@ -69,7 +70,7 @@ func attack():
 		$FountainTimer.start()
 		shoot_fountain_bullets()
 	elif chosen_attack == Attack.LANCES:
-		shoot_lances()
+		shoot_lances(20)
 	elif chosen_attack == Attack.AIMED:
 		$AimedTimer.start()
 		shoot_aimed_bullet()
@@ -83,6 +84,7 @@ func shoot_fountain_bullets():
 		bullet.set_max_time(2.5)
 		bullet.set_accel(Vector2.DOWN * 500, 200)
 		bullet.set_spin(N.randf_range(-4 * PI, 4 * PI))
+		R.play_sound("prime_shoot1", "Enemies")
 	
 func shoot_aimed_bullet():
 	var dir = global_position.direction_to(player.target_position)
@@ -90,16 +92,18 @@ func shoot_aimed_bullet():
 	add_child(bullet)
 	bullet.init(15, global_position + dir * 20, dir * 500)
 	bullet.set_max_time(5)
+	R.play_sound("prime_shoot2", "Enemies")
 	
-func shoot_lances():
+func shoot_lances(dam):
 	var bullet
 	for i in 5:
 		bullet = R.FractionLance.instance()
 		add_child(bullet)
-		bullet.init(20, global_position + Vector2(60, -40 + 20 * i), Vector2.RIGHT * 500)
+		bullet.init(dam, global_position + Vector2(60, -40 + 20 * i), Vector2.RIGHT * 500)
 		bullet = R.FractionLance.instance()
 		add_child(bullet)
-		bullet.init(20, global_position + Vector2(-60, -40 + 20 * i), Vector2.LEFT * 500)
+		bullet.init(dam, global_position + Vector2(-60, -40 + 20 * i), Vector2.LEFT * 500)
+	R.play_sound("prime_shoot3", "Enemies")
 
 func _on_ModeTimer_timeout():
 	if dead: return
@@ -117,6 +121,7 @@ func _on_ModeTimer_timeout():
 	elif mode == Mode.CHOOSING:
 		$ModeTimer.start(1.5)
 		$CycleTimer.start()
+		R.play_sound("prime_choose", "Enemies")
 	elif mode == Mode.WAITING:
 		choose_attack()
 		$CycleTimer.stop()
@@ -159,7 +164,7 @@ func _on_AimedTimer_timeout():
 
 func _on_TooCloseArea_body_entered(body):
 	if dead: return
-	call_deferred("shoot_lances")
+	call_deferred("shoot_lances", 10)
 
 func _on_hit():
 	if health <= 0:
@@ -174,6 +179,7 @@ func _on_die():
 	$AimedTimer.stop()
 	$MoveTimer.stop()
 	$AnimationPlayer.play("die")
+	R.play_sound("prime_die", "Enemies")
 
 
 

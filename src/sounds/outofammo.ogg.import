@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/outofammo.ogg-3539e5ce334397071dfcf3de5f3f7c4b.oggstr"
+
+[deps]
+
+source_file="res://sounds/outofammo.ogg"
+dest_files=[ "res://.import/outofammo.ogg-3539e5ce334397071dfcf3de5f3f7c4b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

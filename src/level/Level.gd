@@ -9,6 +9,9 @@ var current_bg = default_bg
 var old_bg = default_bg
 var new_bg = default_bg
 
+func _ready():
+	R.play_music("game")
+
 func spawn_loot(pos, level, options = []):
 	var loot = R.LootDrop.instance()
 	loot.generate(level)

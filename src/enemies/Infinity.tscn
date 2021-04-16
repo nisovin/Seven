@@ -3,16 +3,16 @@
 [ext_resource path="res://font/alagard.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://enemies/Infinity.gd" type="Script" id=2]
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 30.1766
 height = 47.6809
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="Curve2D" id=2]
 _data = {
 "points": PoolVector2Array( -4.76463, 7.13202, 4.76463, -7.13202, -0.25, 0.25, -12.75, 0.125, 12.75, -0.125, 24.9453, -24.8685, -0.0787451, -13.0151, 0.0787451, 13.0151, 50.065, -0.378771, 14.3514, 0.0140314, -14.3514, -0.0140314, 25.024, 24.9772, 13.018, 0, -13.018, 0, -25.0578, -24.7897, 0, -13.6862, 0, 13.6862, -49.9413, 0.093699, -13.0159, -0.393992, 13.0159, 0.393992, -25.1366, 24.7409, -4.25634, 5.66008, 4.25634, -5.66008, -0.25, 0.125 )
 }
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
@@ -30,12 +30,12 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Mover" type="Node2D" parent="."]
 
 [node name="Path2D" type="Path2D" parent="Mover"]
-curve = SubResource( 1 )
+curve = SubResource( 2 )
 
 [node name="NumberFollower" type="PathFollow2D" parent="Mover/Path2D"]
 position = Vector2( -0.25, 0.25 )
@@ -46,7 +46,7 @@ margin_left = -20.0117
 margin_top = -5.53422
 margin_right = 19.9883
 margin_bottom = 8.46578
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 0.709804, 0.596078, 1 )
 text = "2"
 align = 1
@@ -61,7 +61,6 @@ playback_process_mode = 0
 position = Vector2( 0, 33 )
 
 [node name="ChargeArea" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChargeArea"]
 shape = SubResource( 4 )

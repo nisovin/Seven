@@ -1,7 +1,40 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://player/GunLabel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/PlayerGUI.gd" type="Script" id=2]
+[ext_resource path="res://font/Lato-Bold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://font/alphbeta.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://font/alagard.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0, 0, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.8, 0.8, 0.8, 0 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.196078, 0.0509804, 0, 0.537255 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.113725, 0, 0, 1 )
+border_blend = true
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 24
+font_data = ExtResource( 4 )
 
 [node name="PlayerGUI" type="Control"]
 pause_mode = 2
@@ -378,6 +411,69 @@ margin_right = 394.0
 margin_bottom = 20.0
 text = "Discard Weapon"
 
+[node name="HealthBar" type="ProgressBar" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = -28.0
+margin_right = 125.0
+margin_bottom = -6.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+value = 50.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RespawnScreen" type="ColorRect" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -180.0
+margin_top = -90.0
+margin_right = 180.0
+margin_bottom = 90.0
+color = Color( 0.176471, 0, 0, 0.764706 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RespawnScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RespawnScreen/VBoxContainer"]
+margin_top = 35.0
+margin_right = 360.0
+margin_bottom = 97.0
+custom_fonts/normal_font = SubResource( 4 )
+bbcode_enabled = true
+bbcode_text = "[center]You have fallen 
+under [color=red]7[/color]'s influence[/center]"
+text = "You have fallen 
+under 7's influence"
+fit_content_height = true
+
+[node name="CenterContainer" type="CenterContainer" parent="RespawnScreen/VBoxContainer"]
+margin_top = 117.0
+margin_right = 360.0
+margin_bottom = 145.0
+
+[node name="RespawnButton" type="Button" parent="RespawnScreen/VBoxContainer/CenterContainer"]
+margin_left = 125.0
+margin_right = 235.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 5 )
+text = "Respawn"
+
+[node name="Tween" type="Tween" parent="."]
+
 [connection signal="popup_hide" from="CharacterSheet" to="." method="_on_CharacterSheet_popup_hide"]
 [connection signal="pressed" from="CharacterSheet/MarginContainer/VBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="popup_hide" from="LootScreen" to="." method="_on_LootScreen_popup_hide"]
@@ -385,3 +481,4 @@ text = "Discard Weapon"
 [connection signal="pressed" from="LootScreen/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/EquipButton2" to="." method="_on_EquipButton_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="LootScreen/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer3/VBoxContainer/EquipButton3" to="." method="_on_EquipButton_pressed" binds= [ 2 ]]
 [connection signal="pressed" from="LootScreen/MarginContainer/VBoxContainer/HBoxContainer2/DiscardButton" to="." method="_on_DiscardButton_pressed"]
+[connection signal="pressed" from="RespawnScreen/VBoxContainer/CenterContainer/RespawnButton" to="." method="_on_RespawnButton_pressed"]

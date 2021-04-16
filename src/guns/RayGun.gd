@@ -24,10 +24,13 @@ func stop():
 
 func _physics_process(delta):
 	if extending:
-		var x = $Ray.rect_size.x + EXTEND_SPEED * delta
-		$Ray.rect_size.x = x
-		if x > MAX_LENGTH:
+		if active and owner.dead:
 			stop()
+		else:
+			var x = $Ray.rect_size.x + EXTEND_SPEED * delta
+			$Ray.rect_size.x = x
+			if x > MAX_LENGTH:
+				stop()
 
 func _on_HitBox_body_entered(body):
 	if active:

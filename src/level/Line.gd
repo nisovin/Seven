@@ -9,7 +9,7 @@ export var one_way = false
 
 func _ready():
 	update_line(true)
-	if start_hidden:
+	if start_hidden and not Engine.editor_hint:
 		hide()
 
 func hide():

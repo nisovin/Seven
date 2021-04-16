@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Cyber-Chime2.mp3-cb78f5072202c56585a0f6285ef5a17a.mp3str"
+
+[deps]
+
+source_file="res://sounds/Cyber-Chime2.mp3"
+dest_files=[ "res://.import/Cyber-Chime2.mp3-cb78f5072202c56585a0f6285ef5a17a.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

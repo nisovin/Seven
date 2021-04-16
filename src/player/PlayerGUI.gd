@@ -60,6 +60,16 @@ func _on_EquipButton_pressed(slot):
 	player.equip_gun(pending_new_gun, slot)
 	loot_screen.hide()
 
+func open_respawn_screen():
+	$RespawnScreen.modulate = Color.transparent
+	$RespawnScreen.show()
+	$Tween.interpolate_property($RespawnScreen, "modulate:a", 0, 1, 1)
+	$Tween.start()
+
+func _on_RespawnButton_pressed():
+	player.respawn()
+	$RespawnScreen.hide()
+	
 func tooltip_stat_addition(s):
 	return "Adds %s damage to attacks" % s
 func tooltip_stat_multiplication(s):
@@ -68,3 +78,5 @@ func tooltip_stat_subtraction(s):
 	return "Reduces incoming damage by %s" % s
 func tooltip_stat_division(s):
 	return "Gives %s%% percent chance to cut incoming damage by half" % (s * 2)
+
+

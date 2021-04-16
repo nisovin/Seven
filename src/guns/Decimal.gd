@@ -23,6 +23,8 @@ func fire():
 	shooting = true
 	if not on_cooldown and ammo > 0:
 		shoot()
+	else:
+		R.play_sound("out_of_ammo", "Player")
 	
 func stop():
 	shooting = false

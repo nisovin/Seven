@@ -99,6 +99,7 @@ func shoot_long(dir):
 	add_child(bullet)
 	bullet.init(damage, global_position, dir * BULLET_SPEED)
 	bullet.set_spin(N.randf_range(-2 * PI, 2 * PI))
+	R.play_sound("fraction_shoot", "Enemies")
 	
 func shoot_short(dir):
 	var bullet
@@ -113,6 +114,7 @@ func shoot_short(dir):
 		bullet.init(damage * LANCE_MULTIPLIER, global_position - dir * 10, -dir * LANCE_SPEED)
 		bullet.set_max_time(LANCE_DISTANCE / LANCE_SPEED)
 		dir = dir.rotated(deg2rad(30))
+	R.play_sound("fraction_shoot2", "Enemies")
 
 func _on_DetectionZone_body_entered(body):
 	target = body

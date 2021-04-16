@@ -16,6 +16,8 @@ func _init():
 func fire():
 	if not on_cooldown:
 		launch()
+	else:
+		R.play_sound("out_of_ammo", "Player")
 	shooting = true
 	
 func stop():

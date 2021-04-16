@@ -2,5 +2,9 @@ https://opengameart.org/content/q009s-weapon-sounds
 https://opengameart.org/content/4-projectile-launches
 
 50 CC0 retro synth
+80 CC0 RPG SFX
 Kenney UI
 little robot
+Q009 weapons
+soundimage
+Thwack sounds

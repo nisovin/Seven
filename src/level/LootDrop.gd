@@ -13,12 +13,12 @@ func generate(lvl, options = []):
 	var drop_table = {}
 	if not "devices_only" in options:
 		if not "no_decimal" in options:
-			drop_table[R.Decimal] = 4
+			drop_table[R.Decimal] = 10
 		drop_table[R.Repeater] = 10
-		drop_table[R.Quadratic] = 8
-		drop_table[R.Complex] = 10
+		drop_table[R.Quadratic] = 10
+		#drop_table[R.Complex] = 10
 		drop_table[R.RayGun] = 10
-		drop_table[R.DivideZero] = 5
+		drop_table[R.DivideZero] = 8
 	var choice = N.rand_weighted(drop_table)
 	var item = choice.instance()
 	item.generate(lvl)

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/PowerUp30.mp3-82ff0c2e59f3732c4f535bdfe2c681ea.mp3str"
+
+[deps]
+
+source_file="res://sounds/PowerUp30.mp3"
+dest_files=[ "res://.import/PowerUp30.mp3-82ff0c2e59f3732c4f535bdfe2c681ea.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
