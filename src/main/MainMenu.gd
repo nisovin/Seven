@@ -33,9 +33,8 @@ func play(t = ""):
 	show_story()
 
 func show_story():
-	var s = story_text.get_child(0)
-	s.bbcode_text = s.bbcode_text.replace("NUMBER", Game.number)
 	for c in story_text.get_children():
+		c.bbcode_text = c.bbcode_text.replace("NUMBER", Game.number)
 		c.percent_visible = 0
 		c.hide()
 	continue_label.modulate = Color.transparent

@@ -1359,7 +1359,7 @@ position = Vector2( 0, -0.000488281 )
 [node name="Loot" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( 6525, -1905.47 )
+position = Vector2( 180, -60.472 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

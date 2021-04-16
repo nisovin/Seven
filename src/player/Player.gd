@@ -277,7 +277,7 @@ func _physics_process(delta):
 		if knockback_vector != Vector2.ZERO:
 			v += knockback_vector
 			knockback_vector = knockback_vector.move_toward(Vector2.ZERO, knockback_change * delta)
-		var was_on_floor = is_on_floor()
+		#var was_on_floor = is_on_floor()
 		v = move_and_slide_with_snap(v, -up * 3 if velocity.y >= 0 else Vector2.ZERO, up)
 		velocity.y = v.rotated(-global_rotation).y
 		if not is_on_floor():
