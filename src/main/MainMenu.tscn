@@ -351,4 +351,7 @@ wait_time = 1.3
 [connection signal="text_changed" from="Menu/VBoxContainer/Number" to="." method="_on_Number_text_changed"]
 [connection signal="text_entered" from="Menu/VBoxContainer/Number" to="." method="play"]
 [connection signal="pressed" from="Menu/VBoxContainer/PlayButton" to="." method="play"]
+[connection signal="pressed" from="Menu/VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="timeout" from="Intro/Timer" to="." method="_on_Timer_timeout"]

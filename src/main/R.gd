@@ -25,6 +25,7 @@ const PrimeDenominator = preload("res://enemies/PrimeDenominator.tscn")
 const LargeNumberBullet = preload("res://enemies/LargeNumberBullet.tscn")
 const UpArrowBullet = preload("res://enemies/UpArrowBullet.tscn")
 const SevenLance = preload("res://enemies/SevenLance.tscn")
+const SevenNine = preload("res://enemies/SevenNine.tscn")
 
 # sounds
 const Sounds = {

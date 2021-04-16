@@ -250,15 +250,5 @@ anims/reset = SubResource( 6 )
 
 [node name="PlayerGUI" parent="GUI" instance=ExtResource( 12 )]
 
-[node name="Health" type="Label" parent="GUI"]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 55.0
-margin_bottom = 29.0
-text = "100"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [connection signal="timeout" from="WalkAnimTimer" to="." method="_on_WalkAnimTimer_timeout"]
 [connection signal="timeout" from="HealTimer" to="." method="_on_HealTimer_timeout"]

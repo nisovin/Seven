@@ -74,4 +74,11 @@ func _input(event):
 			else:
 				show_next_para()
 
+func _on_SettingsButton_pressed():
+	pass # Replace with function body.
 
+func _on_CreditsButton_pressed():
+	pass # Replace with function body.
+
+func _on_QuitButton_pressed():
+	get_tree().quit()

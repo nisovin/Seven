@@ -122,7 +122,6 @@ func update_health_displays():
 			$Body/Number.bbcode_text = "[center]" + number[0] + "[color=#008080]" + number[1] + number[2] + "[/color][/center]"
 		elif lit == 0:
 			$Body/Number.bbcode_text = "[center][color=#008080]" + number + "[/color][/center]"
-	$GUI/Health.text = str(round(health))
 	$GUI/PlayerGUI/HealthBar.value = ceil(health)
 	
 func _on_HealTimer_timeout():

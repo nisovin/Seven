@@ -3,23 +3,22 @@
 [ext_resource path="res://font/alphbeta.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://enemies/Grahams.gd" type="Script" id=3]
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 37.5575, 120.027 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 96
 outline_size = 2
 outline_color = Color( 0.360784, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 outline_size = 2
 outline_color = Color( 0.360784, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "barrage_charge"
+[sub_resource type="Animation" id=4]
 length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/UpArrow1:rotation_degrees")
@@ -144,7 +143,7 @@ tracks/9/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=5]
 resource_name = "die"
 length = 1.1
 tracks/0/type = "value"
@@ -400,7 +399,7 @@ tracks/20/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 length = 1.5
 step = 0.01
 tracks/0/type = "value"
@@ -538,8 +537,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "reset"
+[sub_resource type="Animation" id=7]
 length = 0.2
 step = 0.01
 tracks/0/type = "value"
@@ -663,8 +661,7 @@ tracks/9/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "seeking_charge"
+[sub_resource type="Animation" id=8]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/UpArrow1:position:x")
@@ -810,8 +807,7 @@ tracks/10/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "spawn"
+[sub_resource type="Animation" id=9]
 length = 3.0
 step = 0.01
 tracks/0/type = "value"
@@ -1031,7 +1027,7 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -55 )
 rotation = 1.5708
-shape = SubResource( 8 )
+shape = SubResource( 1 )
 
 [node name="Body" type="Node2D" parent="."]
 position = Vector2( 0, -67 )
@@ -1044,7 +1040,7 @@ margin_left = -72.0
 margin_top = -40.0
 margin_right = 28.0
 margin_bottom = 47.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.709804, 0.596078, 1 )
 text = "3"
 align = 2
@@ -1060,7 +1056,7 @@ margin_left = -23.0
 margin_top = -40.0
 margin_right = 77.0
 margin_bottom = 47.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 1, 0.709804, 0.596078, 1 )
 text = "3"
 __meta__ = {
@@ -1105,7 +1101,7 @@ margin_left = -75.0
 margin_top = 7.0
 margin_right = 75.0
 margin_bottom = 36.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 1, 0.709804, 0.596078, 1 )
 text = "g63"
 align = 1
@@ -1239,12 +1235,12 @@ width = 6.0
 default_color = Color( 1, 0, 0, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/barrage_charge = SubResource( 3 )
-anims/die = SubResource( 9 )
-anims/power_shot_charge = SubResource( 4 )
-anims/reset = SubResource( 6 )
-anims/seeking_charge = SubResource( 5 )
-anims/spawn = SubResource( 7 )
+anims/barrage_charge = SubResource( 4 )
+anims/die = SubResource( 5 )
+anims/power_shot_charge = SubResource( 6 )
+anims/reset = SubResource( 7 )
+anims/seeking_charge = SubResource( 8 )
+anims/spawn = SubResource( 9 )
 
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 5.0

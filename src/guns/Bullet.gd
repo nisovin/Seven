@@ -21,6 +21,9 @@ func init(dam, pos, vel):
 	global_rotation = vel.angle()
 	velocity = vel
 
+func set_rotation(rot):
+	global_rotation = rot
+
 func set_accel(acc, max_speed):
 	accel = acc
 	max_speed_sq = max_speed * max_speed

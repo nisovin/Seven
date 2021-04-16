@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://enemies/Seven.gd" type="Script" id=1]
 
@@ -28,10 +28,122 @@ hue_variation = 0.08
 hue_variation_random = 1.0
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 30, 195 )
+extents = Vector2( 30, 165 )
 
 [sub_resource type="CircleShape2D" id=10]
 radius = 105.0
+
+[sub_resource type="ParticlesMaterial" id=14]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 120.0
+gravity = Vector3( 0, 250, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 3.0
+color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="Animation" id=13]
+resource_name = "die"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/MainLine:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/BackLine:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/HealthBar:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/TopBar:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -64.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Body/TopBar:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/BottomBar/BottomLine:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.01, 1 ), Vector2( 1, 1 ), Vector2( 0.01, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Body/BottomBar:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("DeathParticles:emitting")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 1.8 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "flip"
@@ -198,10 +310,25 @@ tracks/10/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/11/type = "method"
+tracks/11/path = NodePath(".")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 4.9 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_complete"
+} ]
+}
 
 [sub_resource type="Animation" id=11]
 resource_name = "spikes"
-length = 4.0
+length = 4.5
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/TopSpike:visible")
 tracks/0/interp = 1
@@ -209,7 +336,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3.5 ),
+"times": PoolRealArray( 0, 4.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -221,7 +348,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3.5 ),
+"times": PoolRealArray( 0, 4.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -233,7 +360,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1, 3, 3.5 ),
+"times": PoolRealArray( 0, 1.3, 3.7, 4.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 0.01 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 0.01 ) ]
@@ -245,7 +372,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1, 3, 3.5 ),
+"times": PoolRealArray( 0, 1.3, 3.7, 4.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 0.01 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 0.01 ) ]
@@ -257,7 +384,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1, 3 ),
+"times": PoolRealArray( 0, 2.5, 3.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ true, false, true ]
@@ -269,7 +396,7 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.2, 1, 2, 3, 3.1 ),
+"times": PoolRealArray( 0.2, 1.3, 2.5, 3.5, 3.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -295,24 +422,36 @@ tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0, 2, 2.5, 2.51, 3 ),
+"times": PoolRealArray( 0, 2.5, 3, 3.1, 3.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 1000.0, -1000.0, 0.0 ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Body:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 2.95, 3.15 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0.0, 1000.0, 0.0 ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "spin_heart"
-length = 0.5
+length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:rotation_degrees")
+tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 360.0 ]
@@ -320,16 +459,16 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=12]
 resource_name = "spin_nine"
-length = 1.5
+length = 3.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Body:rotation_degrees")
+tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
+"times": PoolRealArray( 0, 3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, -360.0 ]
@@ -341,6 +480,8 @@ tracks/0/keys = {
 collision_layer = 4
 collision_mask = 8
 script = ExtResource( 1 )
+drop_chance = 1.0
+loot_level = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -60 )
@@ -354,9 +495,10 @@ shape = SubResource( 2 )
 [node name="Body" type="Node2D" parent="."]
 
 [node name="TopBar" type="Node2D" parent="Body"]
+position = Vector2( 60, -60 )
 
 [node name="TopLine" type="Line2D" parent="Body/TopBar"]
-points = PoolVector2Array( -60, -60, 60, -60 )
+points = PoolVector2Array( -120, 0, 0, 0 )
 width = 12.0
 default_color = Color( 0.447059, 0, 0, 1 )
 
@@ -407,20 +549,20 @@ process_material = SubResource( 4 )
 
 [node name="TopSpike" type="Node2D" parent="Body"]
 visible = false
-position = Vector2( 0, -90 )
+position = Vector2( 0, -75 )
 scale = Vector2( 1, 0.01 )
 
 [node name="Line2D" type="Line2D" parent="Body/TopSpike"]
-points = PoolVector2Array( 0, 0, 0, -90 )
+points = PoolVector2Array( 0, 0, 0, -75 )
 default_color = Color( 1, 0, 0, 1 )
 
 [node name="BottomSpike" type="Node2D" parent="Body"]
 visible = false
-position = Vector2( 0, 120 )
+position = Vector2( 0, 105 )
 scale = Vector2( 1, 0.01 )
 
 [node name="Line2D" type="Line2D" parent="Body/BottomSpike"]
-points = PoolVector2Array( 0, 0, 0, 90 )
+points = PoolVector2Array( 0, 0, 0, 75 )
 default_color = Color( 1, 0, 0, 1 )
 
 [node name="LanceSpawn" type="Position2D" parent="Body"]
@@ -447,7 +589,18 @@ collision_mask = 2
 shape = SubResource( 10 )
 disabled = true
 
+[node name="DeathParticles" type="Particles2D" parent="."]
+position = Vector2( 60, -60 )
+emitting = false
+amount = 200
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.95
+local_coords = false
+process_material = SubResource( 14 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/die = SubResource( 13 )
 anims/flip = SubResource( 5 )
 anims/float = SubResource( 6 )
 anims/spawn = SubResource( 7 )
@@ -458,10 +611,13 @@ anims/spin_nine = SubResource( 12 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="ModeTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="LanceTimer" type="Timer" parent="."]
 
 [node name="NineTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.2
 
+[connection signal="timeout" from="ModeTimer" to="." method="_on_ModeTimer_timeout"]
 [connection signal="timeout" from="LanceTimer" to="." method="_on_LanceTimer_timeout"]
+[connection signal="timeout" from="NineTimer" to="." method="_on_NineTimer_timeout"]
