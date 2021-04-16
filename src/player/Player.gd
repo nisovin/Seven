@@ -29,6 +29,7 @@ var jumps = 1
 var jump_cd = 0
 var time_falling = 0
 var speed_multiplier = 1.0
+var falling_time = 0
 
 var freeze_camera_target = false
 var freeze_aiming = false
@@ -59,7 +60,7 @@ func _ready():
 	camera.set_as_toplevel(true)
 	camera.global_position = global_position
 	switch_weapon(0)
-	current_gun.generate(3)
+	current_gun.generate(0)
 	update_stats()
 	prep_ui()
 
@@ -162,6 +163,7 @@ func respawn():
 	health = max_health
 	no_heal = false
 	prep_ui()
+	time_falling = 0
 	dead = false
 
 # EQUIPMENT
@@ -278,11 +280,12 @@ func _physics_process(delta):
 		var was_on_floor = is_on_floor()
 		v = move_and_slide_with_snap(v, -up * 3 if velocity.y >= 0 else Vector2.ZERO, up)
 		velocity.y = v.rotated(-global_rotation).y
-		if jumps > 0 and not is_on_floor():
+		if not is_on_floor():
 			time_falling += delta
-			if time_falling > 0.1:
+			if jumps > 0 and time_falling > 0.1:
 				jumps = 0
-				time_falling = 0
+			if time_falling > 5 and not dead:
+				die()
 	
 	if not freeze_aiming:
 		$GunAttach.look_at(get_global_mouse_position())

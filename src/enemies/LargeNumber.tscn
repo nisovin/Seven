@@ -19,20 +19,19 @@ outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 150, 250 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 150, 250 )
+
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 150, 250 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 150, 250 )
-
-[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 100, 125 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 48.8106, 15.6947 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "die"
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/Left:rotation_degrees")
 tracks/0/interp = 1
@@ -158,8 +157,7 @@ tracks/2/keys = {
 "values": [ 0.0, 3.0 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "fly"
+[sub_resource type="Animation" id=10]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -281,12 +279,12 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShootZone"]
 position = Vector2( 250, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 disabled = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="ShootZone"]
 position = Vector2( -250, 0 )
-shape = SubResource( 7 )
+shape = SubResource( 5 )
 disabled = true
 
 [node name="DropZone" type="Area2D" parent="."]
@@ -296,7 +294,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DropZone"]
 position = Vector2( 0, 125 )
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 disabled = true
 
 [node name="DiveHitBox" type="Area2D" parent="."]
@@ -306,12 +304,12 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DiveHitBox"]
 position = Vector2( 0, -5 )
-shape = SubResource( 10 )
+shape = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = SubResource( 4 )
+anims/die = SubResource( 8 )
 anims/dive = SubResource( 9 )
-anims/fly = SubResource( 5 )
+anims/fly = SubResource( 10 )
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -324,6 +322,7 @@ wait_time = 0.08
 autostart = true
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
 rect = Rect2( -150, -100, 300, 200 )
 
 [connection signal="body_entered" from="DiveHitBox" to="." method="_on_DiveHitBox_body_entered"]

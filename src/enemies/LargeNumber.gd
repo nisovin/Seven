@@ -68,6 +68,7 @@ func _on_CooldownTimer_timeout():
 		diving = true
 		dive_distance = 0
 		$AnimationPlayer.play("dive")
+		R.play_sound("largenum_dive", "Enemies")
 	
 func _on_RepeatFireTimer_timeout():
 	if dead: return
@@ -88,6 +89,7 @@ func shoot_bullet():
 		bullet.set_text(str(N.randi_range(0, 9)))
 	if target_dir.x < 0:
 		bullet.global_rotation += PI
+	R.play_sound("largenum_shoot", "Enemies")
 
 func _on_DiveHitBox_body_entered(body):
 	if body.is_in_group("damageable"):
@@ -111,6 +113,7 @@ func _on_die():
 	$WanderTimer.stop()
 	$CollisionShape2D.set_deferred("disabled", true)
 	$AnimationPlayer.play("die")
+	R.play_sound("largenum_death", "Enemies")
 	yield(get_tree().create_timer(1.1, false), "timeout")
 	queue_free()
 

@@ -1,0 +1,267 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://enemies/Seven.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 67.3795, 10 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 105, 10 )
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -60, -60, 0, 0, 0, 0, 60, -60, 0, 0, 0, 0, -30, 120 )
+}
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 3.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+color = Color( 1, 0.494118, 0, 1 )
+hue_variation = 0.08
+hue_variation_random = 1.0
+
+[sub_resource type="Animation" id=8]
+resource_name = "flip"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( -1, 1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "float"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 20 ), Vector2( 0, -20 ), Vector2( 0, 20 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "spawn"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/TopBar/TopLine:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -500, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/BottomBar/BottomLine:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 500, 0 ), Vector2( 500, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/Path2D/PathFollow2D:unit_offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Body/Path2D/PathFollow2D/Particles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.9, 4.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Body/MainLine:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Body/BackLine:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Body/HealthBar:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 2.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Body/HealthBar/HealthLine:scale:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 2.6, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.1, 0.1, 1.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath(".:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "spin"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+
+[node name="Seven" type="KinematicBody2D" groups=[
+"damageable",
+]]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -60 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 11.4794, 37.1686 )
+rotation = -1.11273
+shape = SubResource( 7 )
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="TopBar" type="Node2D" parent="Body"]
+
+[node name="TopLine" type="Line2D" parent="Body/TopBar"]
+points = PoolVector2Array( -60, -60, 60, -60 )
+width = 12.0
+default_color = Color( 0.447059, 0, 0, 1 )
+
+[node name="BottomBar" type="Node2D" parent="Body"]
+position = Vector2( 60, -60 )
+rotation = -1.10764
+scale = Vector2( 1, 1 )
+
+[node name="BottomLine" type="Line2D" parent="Body/BottomBar"]
+points = PoolVector2Array( -201.246, 0, 0, 0 )
+width = 12.0
+default_color = Color( 0.447059, 0, 0, 1 )
+
+[node name="BackLine" type="Line2D" parent="Body"]
+points = PoolVector2Array( -60, -60, 60, -60, -30, 120 )
+width = 18.0
+default_color = Color( 0.345098, 0, 0, 1 )
+begin_cap_mode = 1
+end_cap_mode = 1
+
+[node name="MainLine" type="Line2D" parent="Body"]
+points = PoolVector2Array( -60, -60, 60, -60, -30, 120 )
+width = 12.0
+default_color = Color( 0.447059, 0, 0, 1 )
+
+[node name="HealthBar" type="Node2D" parent="Body"]
+position = Vector2( 60, -60 )
+rotation = -1.10764
+scale = Vector2( 1, 1 )
+
+[node name="HealthLine" type="Line2D" parent="Body/HealthBar"]
+points = PoolVector2Array( -201.246, 0, 0, 0 )
+width = 8.0
+default_color = Color( 0.847059, 0, 0.458824, 1 )
+
+[node name="Path2D" type="Path2D" parent="Body"]
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Body/Path2D"]
+position = Vector2( -30, 120 )
+rotation = 2.03444
+offset = 316.706
+
+[node name="Particles2D" type="Particles2D" parent="Body/Path2D/PathFollow2D"]
+emitting = false
+amount = 100
+lifetime = 0.6
+local_coords = false
+process_material = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/flip = SubResource( 8 )
+anims/float = SubResource( 4 )
+anims/spawn = SubResource( 1 )
+anims/spin = SubResource( 5 )

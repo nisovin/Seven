@@ -48,6 +48,13 @@ const Sounds = {
 	"fraction_shoot2": preload("res://sounds/synth_laser_07.ogg"),
 	"fraction_death": preload("res://sounds/Spell_01.wav"),
 	
+	"largenum_shoot": preload("res://sounds/click5.ogg"),
+	"largenum_dive": preload("res://sounds/swish-9.wav"),
+	"largenum_death": preload("res://sounds/Spell_01.wav"),
+	
+	"infinity_charge": preload("res://sounds/RezAlert1.mp3"),
+	"infinity_death": preload("res://sounds/Spell_01.wav"),
+	
 	"prime_spawn": preload("res://sounds/PowerUp26.ogg"),
 	"prime_choose": preload("res://sounds/prime_choose.ogg"),
 	"prime_shoot1": preload("res://sounds/click5.ogg"),

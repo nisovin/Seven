@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/RezAlert1.mp3-cf29ae6d7e5dcfee0937f7225f884674.mp3str"
+
+[deps]
+
+source_file="res://sounds/RezAlert1.mp3"
+dest_files=[ "res://.import/RezAlert1.mp3-cf29ae6d7e5dcfee0937f7225f884674.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

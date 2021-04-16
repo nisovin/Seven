@@ -1,8 +1,8 @@
 extends Position2D
 
 export(PackedScene) var boss_scene
-export(NodePath) var entrance_door
-export(NodePath) var exit_door
+export(NodePath) var entrance_door = null
+export(NodePath) var exit_door = null
 export(NodePath) var spawn_parent = null
 export(NodePath) var spawn_point = null
 
@@ -17,7 +17,8 @@ func _ready():
 func start_fight(p):
 	player = p
 	fight_active = true
-	get_node(entrance_door).show()
+	if entrance_door != null:
+		get_node(entrance_door).show()
 	player.no_heal = true
 	player.freeze_camera_target = true
 	player.camera_target = global_position
@@ -41,10 +42,12 @@ func end_fight(win):
 		fight_active = false
 		player.no_heal = false
 		player.freeze_camera_target = false
-		get_node(entrance_door).hide()
+		if entrance_door != null:
+			get_node(entrance_door).hide()
 		if win:
 			boss_dead = true
-			get_node(exit_door).hide()
+			if exit_door != null:
+				get_node(exit_door).hide()
 		yield(get_tree().create_timer(2), "timeout")
 		if boss != null:
 			boss.queue_free()

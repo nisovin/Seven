@@ -23,7 +23,6 @@ extents = Vector2( 300, 45 )
 [node name="Infinity" type="KinematicBody2D" groups=[
 "damageable",
 ]]
-position = Vector2( 109.556, 81.6093 )
 collision_layer = 4
 collision_mask = 8
 script = ExtResource( 2 )
@@ -54,13 +53,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tween" type="Tween" parent="."]
-playback_process_mode = 0
-
 [node name="Grounder" type="RayCast2D" parent="."]
 position = Vector2( 0, 33 )
 
 [node name="ChargeArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChargeArea"]
 shape = SubResource( 4 )
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageArea"]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="ChargeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="ChargeArea" to="." method="_on_ChargeArea_body_entered"]
+[connection signal="body_exited" from="ChargeArea" to="." method="_on_ChargeArea_body_exited"]
+[connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="timeout" from="ChargeTimer" to="." method="_on_ChargeTimer_timeout"]

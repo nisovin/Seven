@@ -5,7 +5,7 @@ export var rows = 0
 var widths = [5, 10, 20, 26, 34, 48, 60, 72, 88]
 
 
-func _ready():
+func ready():
 	var size = rows if rows > 0 else floor(N.randf_range(5, 9))
 	var text = "1\n1 1"
 	var prev_row = [1,1]

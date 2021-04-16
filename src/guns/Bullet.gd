@@ -67,7 +67,6 @@ func _physics_process(delta):
 
 func _on_hit(body):
 	if damage > 0 and body.is_in_group("damageable"):
-		print(damage)
 		body.apply_damage(damage, imaginary_damage, damage_percent)
 	dead = true
 	queue_free()
