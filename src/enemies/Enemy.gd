@@ -7,7 +7,7 @@ export(float) var damage = 10.0
 export(int) var subtraction = 0
 export(int) var division = 0
 
-export(float) var drop_chance = 0.25
+export(float) var drop_chance = 0.35
 export(int) var loot_level = 1
 export(float) var random_upgrade_chance = 0
 export(bool) var guarantee_weapon_drop = false
@@ -26,6 +26,9 @@ func _ready():
 			$Grounder.force_raycast_update()
 			if $Grounder.is_colliding():
 				global_position += $Grounder.get_collision_point() - $Grounder.global_position
+
+func set_invulnerable(inv: bool):
+	invulnerable = inv
 
 func apply_damage(dam, imag = 0, pct = 1.0):
 	if dead or invulnerable: return

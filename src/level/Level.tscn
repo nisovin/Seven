@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://level/graphpaper_transparent.png" type="Texture" id=1]
 [ext_resource path="res://font/font_help.tres" type="DynamicFont" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://decor/Googol.tscn" type="PackedScene" id=18]
 [ext_resource path="res://decor/PascalsTriangle.tscn" type="PackedScene" id=19]
 [ext_resource path="res://enemies/Seven.tscn" type="PackedScene" id=20]
+[ext_resource path="res://enemies/PiMult.tscn" type="PackedScene" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -39,11 +40,17 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 284.998, 0, 0, 0, 0, 300, 284.998, 0, 0, 0, 0, 465, 119.998, 0, 0, 0, 0, 465, -60.002, 0, 0, 0, 0, 300, -225.002, 0, 0, 0, 0, -300, -225.002, 0, 0, 0, 0, -465, -60.002, 0, 0, 0, 0, -465, 119.998, 0, 0, 0, 0, -300, 284.998, 0, 0, 0, 0, -144.731, 282.837, 0, 0, 0, 0, 0, 284.998 )
 }
 
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, -0.00195313, 52.3251, 11.2975, -52.3251, -11.2975, -45, -210.002, 41.9756, -39.9672, -41.9756, 39.9672, -180, -135.002, 0.184619, -74.527, -0.184619, 74.527, -270, 30, -22.5949, -19.6219, 22.5949, 19.6219, -150, 210, -77.6222, -1, 77.6222, 1, 0, 284.998, -22.0003, 20.4597, 22.0003, -20.4597, 150, 210, 0.502115, 68.1641, -0.502115, -68.1641, 270, 30, 35.8366, 39.2922, -35.8366, -39.2922, 180, -135.002, 44.0007, -10.1083, -44.0007, 10.1083, 45, -210.002, 0, 0, 0, 0, 0, -0.00195313 )
+}
+
 [node name="Level" type="Node2D"]
 position = Vector2( 0, 0.471954 )
 script = ExtResource( 5 )
 
 [node name="Regions" type="Node2D" parent="."]
+visible = false
 
 [node name="GraphForest" type="Area2D" parent="Regions"]
 collision_layer = 524288
@@ -172,18 +179,6 @@ checkpoint = true
 position = Vector2( -240, 135 )
 polygon = PoolVector2Array( 165, 15, 15, -120, -120, -15, 60, 165 )
 
-[node name="EndDrop" type="Area2D" parent="Regions"]
-position = Vector2( 9135, -3525.47 )
-collision_layer = 0
-collision_mask = 2
-script = ExtResource( 6 )
-change_background = false
-teleport = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/EndDrop"]
-position = Vector2( -585, 450 )
-polygon = PoolVector2Array( 2625, 195, 2625, 105, 315, 120, 315, 210 )
-
 [node name="CPFinalBoss" type="Area2D" parent="Regions"]
 position = Vector2( 9480, -4080.47 )
 collision_layer = 0
@@ -194,7 +189,7 @@ checkpoint = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/CPFinalBoss"]
 position = Vector2( -240, 135 )
-polygon = PoolVector2Array( 360, -195, -120, -195, -120, -15, 360, -15 )
+polygon = PoolVector2Array( 780, -195.002, -180, -195.002, -180, -15.002, 600, -15.002 )
 
 [node name="Text" type="Node2D" parent="."]
 
@@ -238,9 +233,9 @@ __meta__ = {
 }
 
 [node name="Switch" type="Label" parent="Text"]
-margin_left = 3135.0
+margin_left = 2895.0
 margin_top = -390.472
-margin_right = 3474.0
+margin_right = 3234.0
 margin_bottom = -327.472
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.760784, 0.501961, 0.941176, 1 )
@@ -541,48 +536,50 @@ position = Vector2( 5940, -3015.47 )
 [node name="PascalsTriangle" parent="Decor/Infinite" instance=ExtResource( 19 )]
 position = Vector2( 5610, -3015.47 )
 
-[node name="Node2D" type="Node2D" parent="Decor"]
+[node name="Equiv" type="Node2D" parent="Decor"]
 
-[node name="Tree3" parent="Decor" instance=ExtResource( 13 )]
+[node name="Tree3" parent="Decor/Equiv" instance=ExtResource( 13 )]
 position = Vector2( 9210, -3420.47 )
 scale_y = 1.0
 
-[node name="Tree4" parent="Decor" instance=ExtResource( 13 )]
-position = Vector2( 10425, -3675.47 )
-rotation = 0.785398
+[node name="Tree4" parent="Decor/Equiv" instance=ExtResource( 13 )]
+position = Vector2( 10410, -3630.47 )
 
-[node name="TreeGraph" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph" parent="Decor/Equiv" instance=ExtResource( 9 )]
 position = Vector2( 9780, -3540.47 )
-scale = Vector2( 1, 1 )
 color_branch = Color( 0.184314, 0, 0.301961, 1 )
 color_leaf = Color( 0.498039, 0, 0.501961, 1 )
 
-[node name="TreeGraph3" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph3" parent="Decor/Equiv" instance=ExtResource( 9 )]
 position = Vector2( 8940, -3870.47 )
-scale = Vector2( 1, 1 )
 color_branch = Color( 0.184314, 0, 0.301961, 1 )
 color_leaf = Color( 0.498039, 0, 0.501961, 1 )
 
-[node name="TreeGraph4" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph4" parent="Decor/Equiv" instance=ExtResource( 9 )]
 position = Vector2( 8160, -3690.47 )
-scale = Vector2( 1, 1 )
 color_branch = Color( 0.184314, 0, 0.301961, 1 )
 color_leaf = Color( 0.498039, 0, 0.501961, 1 )
 
-[node name="TreeGraph2" parent="Decor" instance=ExtResource( 9 )]
+[node name="TreeGraph2" parent="Decor/Equiv" instance=ExtResource( 9 )]
 position = Vector2( 10020, -3540.47 )
 rotation = 3.14159
 color_branch = Color( 0.184314, 0, 0.301961, 1 )
 color_leaf = Color( 0.498039, 0, 0.501961, 1 )
 
-[node name="PowerTower" parent="Decor" instance=ExtResource( 14 )]
+[node name="PowerTower" parent="Decor/Equiv" instance=ExtResource( 14 )]
 position = Vector2( 10050, -3720.47 )
 
-[node name="PowerTower2" parent="Decor" instance=ExtResource( 14 )]
+[node name="PowerTower2" parent="Decor/Equiv" instance=ExtResource( 14 )]
 position = Vector2( 9240, -3960.47 )
 
-[node name="PascalsTriangle" parent="Decor" instance=ExtResource( 19 )]
+[node name="PascalsTriangle" parent="Decor/Equiv" instance=ExtResource( 19 )]
 position = Vector2( 9030, -3600.47 )
+
+[node name="Tree5" parent="Decor/Equiv" instance=ExtResource( 13 )]
+position = Vector2( 9540, -3960.47 )
+
+[node name="Tree6" parent="Decor/Equiv" instance=ExtResource( 13 )]
+position = Vector2( 8640, -3780.47 )
 
 [node name="Lines" type="Node2D" parent="."]
 script = ExtResource( 4 )
@@ -981,50 +978,57 @@ points = PoolVector2Array( -90, -30, 90, 30 )
 [node name="Line" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 9660, -3360.47 )
 points = PoolVector2Array( -60, 0, 600, 0 )
+default_color = Color( 0.686275, 0.109804, 0.921569, 1 )
 
 [node name="Line2" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 9660, -3540.47 )
 points = PoolVector2Array( -60, 0, 600, 0 )
+default_color = Color( 0.686275, 0.109804, 0.921569, 1 )
 
 [node name="Line3" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 9660, -3720.47 )
 points = PoolVector2Array( -60, 0, 600, 0 )
+default_color = Color( 0.686275, 0.109804, 0.921569, 1 )
 
 [node name="Line4" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 10410, -3390.47 )
-points = PoolVector2Array( -90, 90, 90, -90 )
+points = PoolVector2Array( -60, -60.002, 90, -60.002 )
+default_color = Color( 0.682353, 0.0392157, 0.596078, 1 )
 
 [node name="Line5" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 10410, -3630.47 )
-points = PoolVector2Array( -90, -150, 90, 30 )
-
-[node name="Line6" parent="Lines/Equiv" instance=ExtResource( 10 )]
-position = Vector2( 10560, -3555.47 )
-points = PoolVector2Array( -60, 75, -60, -45 )
+points = PoolVector2Array( -60, 0, 90, -0.00195313 )
+default_color = Color( 0.682353, 0.0392157, 0.596078, 1 )
 
 [node name="Line7" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 9450, -3780.47 )
 points = PoolVector2Array( -90, 0, 90, 0 )
+default_color = Color( 0.67451, 0.431373, 0.87451, 1 )
 
 [node name="Line8" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 9300, -3660.47 )
 points = PoolVector2Array( -600, 60, 180, 60 )
+default_color = Color( 0.67451, 0.431373, 0.87451, 1 )
 
 [node name="Line9" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 8625, -3705.47 )
 points = PoolVector2Array( -525, 15, 135, 15 )
+default_color = Color( 0.67451, 0.431373, 0.87451, 1 )
 
 [node name="Line10" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 8445, -3780.47 )
 points = PoolVector2Array( 135, 0, 435, 0 )
+default_color = Color( 0.67451, 0.431373, 0.87451, 1 )
 
 [node name="Line11" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 9315, -3870.47 )
 points = PoolVector2Array( -555, 0, -135, 0 )
+default_color = Color( 0.67451, 0.431373, 0.87451, 1 )
 
 [node name="Line12" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 8325, -3990.47 )
-points = PoolVector2Array( 795, 30, 1275, 30 )
+points = PoolVector2Array( 735, 29.998, 1335, 29.998 )
+default_color = Color( 1, 0.764706, 0.4, 1 )
 
 [node name="Line13" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 10020, -3930.47 )
@@ -1037,6 +1041,7 @@ default_color = Color( 1, 0.968627, 0.172549, 1 )
 
 [node name="Line15" parent="Lines/Equiv" instance=ExtResource( 10 )]
 position = Vector2( 9930, -4140.47 )
+points = PoolVector2Array( -45, -0.00195313, 75, -0.00195313 )
 default_color = Color( 1, 0.968627, 0.172549, 1 )
 
 [node name="Line16" parent="Lines/Equiv" instance=ExtResource( 10 )]
@@ -1195,25 +1200,31 @@ move_range = 1
 
 [node name="LargeNumber" parent="Enemies/Infinite1" instance=ExtResource( 12 )]
 position = Vector2( 5400, -2580.47 )
-max_health = 200.0
+max_health = 250.0
+damage = 25.0
 drop_chance = 0.4
 loot_level = 2
 random_upgrade_chance = 0.4
 
 [node name="Infinity" parent="Enemies/Infinite1" instance=ExtResource( 15 )]
 position = Vector2( 6900, -2430.47 )
-max_health = 100.0
+max_health = 150.0
+damage = 30.0
+loot_level = 2
+random_upgrade_chance = 0.5
 
 [node name="LargeNumber2" parent="Enemies/Infinite1" instance=ExtResource( 12 )]
 position = Vector2( 6225, -2655.47 )
-max_health = 200.0
+max_health = 250.0
+damage = 25.0
 drop_chance = 0.4
 loot_level = 2
 random_upgrade_chance = 0.4
 
 [node name="LargeNumber3" parent="Enemies/Infinite1" instance=ExtResource( 12 )]
 position = Vector2( 6840, -2970.47 )
-max_health = 200.0
+max_health = 250.0
+damage = 25.0
 drop_chance = 0.4
 loot_level = 2
 random_upgrade_chance = 0.4
@@ -1221,6 +1232,7 @@ random_upgrade_chance = 0.4
 [node name="Fraction" parent="Enemies/Infinite1" instance=ExtResource( 7 )]
 position = Vector2( 6540, -2895.47 )
 max_health = 120.0
+damage = 12.0
 drop_chance = 0.3
 loot_level = 2
 move_range = 2
@@ -1228,6 +1240,7 @@ move_range = 2
 [node name="Fraction2" parent="Enemies/Infinite1" instance=ExtResource( 7 )]
 position = Vector2( 6840, -2415.47 )
 max_health = 120.0
+damage = 12.0
 drop_chance = 0.3
 loot_level = 2
 move_range = 2
@@ -1235,6 +1248,7 @@ move_range = 2
 [node name="Fraction3" parent="Enemies/Infinite1" instance=ExtResource( 7 )]
 position = Vector2( 7080, -2415.47 )
 max_health = 120.0
+damage = 12.0
 drop_chance = 0.3
 loot_level = 2
 move_range = 1
@@ -1242,6 +1256,7 @@ move_range = 1
 [node name="Fraction4" parent="Enemies/Infinite1" instance=ExtResource( 7 )]
 position = Vector2( 7365, -2310.47 )
 max_health = 120.0
+damage = 12.0
 drop_chance = 0.3
 loot_level = 2
 move_range = 2
@@ -1249,6 +1264,7 @@ move_range = 2
 [node name="Fraction5" parent="Enemies/Infinite1" instance=ExtResource( 7 )]
 position = Vector2( 7605, -2385.47 )
 max_health = 120.0
+damage = 12.0
 drop_chance = 0.3
 loot_level = 2
 move_range = 2
@@ -1256,16 +1272,22 @@ move_range = 2
 [node name="Fraction6" parent="Enemies/Infinite1" instance=ExtResource( 7 )]
 position = Vector2( 7845, -2490.47 )
 max_health = 120.0
+damage = 12.0
 drop_chance = 0.3
 loot_level = 2
 move_range = 1
 
 [node name="Infinity2" parent="Enemies/Infinite1" instance=ExtResource( 15 )]
 position = Vector2( 6169.56, -2543.86 )
+max_health = 150.0
+damage = 30.0
+loot_level = 2
+random_upgrade_chance = 0.5
 
 [node name="LargeNumber4" parent="Enemies/Infinite1" instance=ExtResource( 12 )]
 position = Vector2( 7410, -2385.47 )
-max_health = 200.0
+max_health = 250.0
+damage = 25.0
 drop_chance = 0.4
 loot_level = 2
 random_upgrade_chance = 0.4
@@ -1274,23 +1296,99 @@ random_upgrade_chance = 0.4
 
 [node name="LargeNumber4" parent="Enemies/Infinite2" instance=ExtResource( 12 )]
 position = Vector2( 5925, -3180.47 )
-max_health = 200.0
+max_health = 300.0
+damage = 30.0
+subtraction = 3
 drop_chance = 0.75
 loot_level = 3
 
 [node name="Infinity" parent="Enemies/Infinite2" instance=ExtResource( 15 )]
 position = Vector2( 7170, -2730.47 )
+max_health = 200.0
+damage = 40.0
+loot_level = 2
+random_upgrade_chance = 0.6
 
 [node name="Infinity2" parent="Enemies/Infinite2" instance=ExtResource( 15 )]
 position = Vector2( 5850, -3075.47 )
+max_health = 200.0
+damage = 40.0
+loot_level = 2
+random_upgrade_chance = 0.6
 
 [node name="Fraction" parent="Enemies/Infinite2" instance=ExtResource( 7 )]
 position = Vector2( 5700, -3075.47 )
+max_health = 150.0
+damage = 15.0
+loot_level = 2
+random_upgrade_chance = 0.4
 move_range = 1
 
 [node name="Fraction2" parent="Enemies/Infinite2" instance=ExtResource( 7 )]
 position = Vector2( 6060, -3060.47 )
+max_health = 150.0
+damage = 15.0
+loot_level = 2
+random_upgrade_chance = 0.4
 move_range = 1
+
+[node name="Equiv1" type="Node2D" parent="Enemies"]
+
+[node name="Infinity2" parent="Enemies/Equiv1" instance=ExtResource( 15 )]
+position = Vector2( 9930, -3420.47 )
+
+[node name="Infinity" parent="Enemies/Equiv1" instance=ExtResource( 15 )]
+position = Vector2( 9930, -3600.47 )
+
+[node name="LargeNumber" parent="Enemies/Equiv1" instance=ExtResource( 12 )]
+position = Vector2( 10155, -3855.47 )
+
+[node name="LargeNumber2" parent="Enemies/Equiv1" instance=ExtResource( 12 )]
+position = Vector2( 10590, -3720.47 )
+
+[node name="PiMult" parent="Enemies/Equiv1" instance=ExtResource( 21 )]
+position = Vector2( 10425, -3450.47 )
+
+[node name="Fraction" parent="Enemies/Equiv1" instance=ExtResource( 7 )]
+position = Vector2( 9750, -3765.47 )
+
+[node name="Fraction2" parent="Enemies/Equiv1" instance=ExtResource( 7 )]
+position = Vector2( 10110, -3585.47 )
+
+[node name="Equiv2" type="Node2D" parent="Enemies"]
+
+[node name="PiMult" parent="Enemies/Equiv2" instance=ExtResource( 21 )]
+position = Vector2( 9450, -3780.47 )
+
+[node name="PiMult2" parent="Enemies/Equiv2" instance=ExtResource( 21 )]
+position = Vector2( 8280, -3690.47 )
+
+[node name="Infinity" parent="Enemies/Equiv2" instance=ExtResource( 15 )]
+position = Vector2( 9360, -4020.47 )
+
+[node name="PiMult3" parent="Enemies/Equiv2" instance=ExtResource( 21 )]
+position = Vector2( 9840, -4050.47 )
+
+[node name="Fraction" parent="Enemies/Equiv2" instance=ExtResource( 7 )]
+position = Vector2( 9270, -3645.47 )
+
+[node name="LargeNumber" parent="Enemies/Equiv2" instance=ExtResource( 12 )]
+position = Vector2( 8925, -3705.47 )
+
+[node name="LargeNumber2" parent="Enemies/Equiv2" instance=ExtResource( 12 )]
+position = Vector2( 8565, -3945.47 )
+
+[node name="Infinity2" parent="Enemies/Equiv2" instance=ExtResource( 15 )]
+position = Vector2( 8430, -3735.47 )
+
+[node name="Fraction2" parent="Enemies/Equiv2" instance=ExtResource( 7 )]
+position = Vector2( 9060, -3915.47 )
+
+[node name="Fraction3" parent="Enemies/Equiv2" instance=ExtResource( 7 )]
+position = Vector2( 8880, -3915.47 )
+
+[node name="Fraction4" parent="Enemies/Equiv2" instance=ExtResource( 7 )]
+position = Vector2( 8730, -3825.47 )
 
 [node name="Bosses" type="Node2D" parent="."]
 
@@ -1337,12 +1435,14 @@ curve = SubResource( 4 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Bosses/GrahamsNumber/Path2D"]
 position = Vector2( 0, 284.998 )
+rotation = -7.79483e-06
 
 [node name="Seven" type="Position2D" parent="Bosses"]
 position = Vector2( 10020, -4560.47 )
 script = ExtResource( 11 )
 boss_scene = ExtResource( 20 )
 spawn_point = NodePath("BossSpawnPoint")
+death_zone = NodePath("DropDeath/CollisionPolygon2D")
 
 [node name="StartZone" type="Area2D" parent="Bosses/Seven"]
 position = Vector2( 0, -195 )
@@ -1355,6 +1455,31 @@ shape = SubResource( 3 )
 
 [node name="BossSpawnPoint" type="Position2D" parent="Bosses/Seven"]
 position = Vector2( 0, -0.000488281 )
+
+[node name="HeartPath" type="Path2D" parent="Bosses/Seven"]
+position = Vector2( 0, -0.00195313 )
+curve = SubResource( 5 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Bosses/Seven/HeartPath"]
+position = Vector2( 0, -0.00195313 )
+rotation = -1.54214
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Bosses/Seven/HeartPath/PathFollow2D"]
+update_rotation = false
+update_scale = false
+
+[node name="DropDeath" type="Area2D" parent="Bosses/Seven"]
+position = Vector2( 210, 464.998 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 6 )
+change_background = false
+death = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bosses/Seven/DropDeath"]
+position = Vector2( -585, 450 )
+polygon = PoolVector2Array( 1035, -855, 1035, -1290, 795, -1290, 795, -855, 615, -615, 135, -615, -45, -855, -45, -1275, -285, -1275, -285, -855, 15, -435, 735, -435 )
+disabled = true
 
 [node name="Loot" type="Node2D" parent="."]
 

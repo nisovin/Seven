@@ -29,6 +29,8 @@ func _ready():
 	bottom = bottom.replace("7", "[color=red]7[/color]")
 	$Top/Top2.bbcode_text = "[center]" + top + "[/center]"
 	$Bottom/Bottom2.bbcode_text = "[center]" + bottom + "[/center]"
+	set_physics_process(false)
+	hide()
 
 func move_left():
 	stepping = -1
@@ -134,9 +136,13 @@ func _on_VisibilityNotifier2D_screen_entered():
 	$MoveTimer.start()
 	$ShootZone/CollisionShape2D.disabled = false
 	$DefensiveZone/CollisionShape2D.disabled = false
+	set_physics_process(true)
+	show()
 
 func _on_VisibilityNotifier2D_screen_exited():
 	$MoveTimer.stop()
 	$ShootZone/CollisionShape2D.disabled = true
 	$DefensiveZone/CollisionShape2D.disabled = true
+	set_physics_process(false)
+	hide()
 

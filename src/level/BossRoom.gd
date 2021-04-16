@@ -5,6 +5,7 @@ export(NodePath) var entrance_door = null
 export(NodePath) var exit_door = null
 export(NodePath) var spawn_parent = null
 export(NodePath) var spawn_point = null
+export(NodePath) var death_zone = null
 
 var fight_active = false
 var boss_dead = false
@@ -35,6 +36,8 @@ func start_fight(p):
 		boss.global_position = get_node(spawn_point).global_position
 	boss.spawn(player)
 	boss.connect("died", self, "_on_boss_died", [], CONNECT_ONESHOT)
+	if death_zone != null:
+		get_node(death_zone).set_deferred("disabled", false)
 	R.play_music("boss")
 
 func end_fight(win):
@@ -52,6 +55,8 @@ func end_fight(win):
 		if boss != null:
 			boss.queue_free()
 			boss = null
+		if death_zone != null:
+			get_node(death_zone).set_deferred("disabled", true)
 		R.play_music("game")
 
 func _on_startzone_entered(body):

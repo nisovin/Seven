@@ -30,6 +30,9 @@ func _ready():
 		path.add_child(new)
 		new.unit_offset = (i + 1) / float(NUMBER_COUNT)
 	call_deferred("setup")
+	set_process(false)
+	set_physics_process(false)
+	hide()
 		
 func setup():
 	var pos = $ChargeArea.global_position
@@ -115,3 +118,17 @@ func _on_DamageArea_body_entered(body):
 	body.apply_damage(damage)
 	var v = Vector2(sign(body.global_position.x - global_position.x), -0.5).normalized()
 	body.knockback(v * 300, 0.2)
+
+func _on_VisibilityNotifier2D_screen_entered():
+	$ChargeArea/CollisionShape2D.disabled = false
+	$DamageArea/CollisionShape2D2.disabled = false
+	set_process(true)
+	set_physics_process(true)
+	show()
+
+func _on_VisibilityNotifier2D_screen_exited():
+	$ChargeArea/CollisionShape2D.disabled = true
+	$DamageArea/CollisionShape2D2.disabled = true
+	set_process(false)
+	set_physics_process(false)
+	hide()

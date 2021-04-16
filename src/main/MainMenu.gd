@@ -9,6 +9,7 @@ onready var tween = $Tween
 onready var timer = $Intro/Timer
 
 var regex = RegEx.new()
+var menu_closed = false
 var doing_story = false
 var next_para = 0
 
@@ -29,7 +30,9 @@ func _on_Number_text_changed(new_text):
 	$Menu/VBoxContainer/PlayButton.disabled = new_text.length() != 3
 
 func play(t = ""):
+	if menu_closed: return
 	Game.number = number_box.text
+	menu_closed = true
 	show_story()
 
 func show_story():
@@ -42,8 +45,8 @@ func show_story():
 	tween.start()
 	intro.show()
 	yield(get_tree().create_timer(1.3), "timeout")
-	doing_story = true
 	show_next_para()
+	doing_story = true
 
 func show_next_para():
 	if next_para > 0:

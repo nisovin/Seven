@@ -20,7 +20,7 @@ var charged_arrow = null
 # SPAWNING
 
 func _init():
-	max_health = 1000
+	max_health = 2000
 	drop_chance = 1
 	loot_level = 4
 
@@ -92,7 +92,7 @@ func attack_charged_shot():
 	charged_arrow.look_at(player.global_position)
 	yield(get_tree().create_timer(1, false), "timeout")
 	if dead: return
-	charged_arrow.init(50, charged_arrow.global_position, charged_arrow.global_transform.x * 800)
+	charged_arrow.init(100, charged_arrow.global_position, charged_arrow.global_transform.x * 800)
 	charged_arrow = null
 	R.play_sound("graham_shoot1", "Enemies")
 	
@@ -129,7 +129,7 @@ func attack_seeking(i):
 	add_child(arrow)
 	var spawn = arrow_spawns[i]
 	var v = -spawn.global_transform.y * 250
-	arrow.init(30, spawn.global_position, v)
+	arrow.init(50, spawn.global_position, v)
 	arrow.set_seeking(player, 3)
 	arrow.set_max_time(7)
 	R.play_sound("graham_shoot3", "Enemies")

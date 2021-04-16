@@ -273,8 +273,8 @@ margin_bottom = 24.0
 custom_fonts/normal_font = SubResource( 11 )
 custom_colors/default_color = Color( 1, 0.913725, 0.705882, 1 )
 bbcode_enabled = true
-bbcode_text = "Come in, Agent [color=aqua]NUMBER[/color]. Do you read me?"
-text = "Come in, Agent NUMBER. Do you read me?"
+bbcode_text = "Agent [color=aqua]NUMBER[/color]? Come in, Agent [color=aqua]NUMBER[/color]. Do you read me?"
+text = "Agent NUMBER? Come in, Agent NUMBER. Do you read me?"
 fit_content_height = true
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="Intro/VBoxContainer2/StoryText"]

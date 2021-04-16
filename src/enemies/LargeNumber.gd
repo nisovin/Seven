@@ -33,6 +33,8 @@ func _ready():
 	$Body/Left/Wing.bbcode_text = "[right]" + first + "+[/right]"
 	$Body/Right/Wing.bbcode_text = "+" + second
 	$AnimationPlayer.play("fly")
+	set_physics_process(false)
+	hide()
 
 # WANDER
 
@@ -55,20 +57,21 @@ func _physics_process(delta):
 
 func _on_CooldownTimer_timeout():
 	if dead: return
-	var bodies = $ShootZone.get_overlapping_bodies()
-	if bodies.size() > 0:
-		target_dir = global_position.direction_to(bodies[0].global_position)
-		shooting = true
-		bullets_shot = 0
-		$RepeatFireTimer.start()
-		return
-	bodies = $DropZone.get_overlapping_bodies()
+	var bodies = $DropZone.get_overlapping_bodies()
 	if bodies.size() > 0:
 		target_dir = global_position.direction_to(bodies[0].global_position)
 		diving = true
 		dive_distance = 0
 		$AnimationPlayer.play("dive")
 		R.play_sound("largenum_dive", "Enemies")
+		return
+	bodies = $ShootZone.get_overlapping_bodies()
+	if bodies.size() > 0:
+		target_dir = global_position.direction_to(bodies[0].global_position)
+		shooting = true
+		bullets_shot = 0
+		$RepeatFireTimer.start()
+		return
 	
 func _on_RepeatFireTimer_timeout():
 	if dead: return
@@ -117,15 +120,14 @@ func _on_die():
 	yield(get_tree().create_timer(1.1, false), "timeout")
 	queue_free()
 
-
-
-
 func _on_VisibilityNotifier2D_screen_entered():
 	$CooldownTimer.start()
 	$WanderTimer.start()
 	$ShootZone/CollisionShape2D.disabled = false
 	$ShootZone/CollisionShape2D2.disabled = false
 	$DropZone/CollisionShape2D.disabled = false
+	set_physics_process(true)
+	show()
 
 func _on_VisibilityNotifier2D_screen_exited():
 	$CooldownTimer.stop()
@@ -133,5 +135,7 @@ func _on_VisibilityNotifier2D_screen_exited():
 	$ShootZone/CollisionShape2D.disabled = true
 	$ShootZone/CollisionShape2D2.disabled = true
 	$DropZone/CollisionShape2D.disabled = true
+	set_physics_process(false)
+	hide()
 
 
