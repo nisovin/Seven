@@ -1,6 +1,7 @@
 extends Node2D
 
 var gun_name = "Uninitialized Gun"
+var short_name = "????"
 var flavor_text = "This is some flavor text"
 var level = 0
 var base_damage = 10
@@ -22,7 +23,7 @@ func generate(lvl):
 		stats.division = 1
 	else:
 		base_damage = 10 + 5 * level + N.randi_range(0, 5)
-		var alloc = lvl * 5
+		var alloc = lvl * 5 + N.randi_range(-1, 1)
 		var stat_options = stats.keys()
 		while alloc > 0:
 			var s = N.rand_array(stat_options)

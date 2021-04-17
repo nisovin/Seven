@@ -9,6 +9,7 @@ var damage = 0
 
 func _init():
 	gun_name = "Finite Ray"
+	short_name = "Ray>"
 
 func fire():
 	extending = true

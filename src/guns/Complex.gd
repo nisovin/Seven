@@ -11,6 +11,7 @@ var shooting = false
 
 func _init():
 	gun_name = "Complexity"
+	short_name = "a+bi"
 
 func fire():
 	if not on_cooldown:

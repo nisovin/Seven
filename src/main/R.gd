@@ -18,10 +18,10 @@ const DivideZeroRocket = preload("res://guns/DivideZeroRocket.tscn")
 # level
 const LootDrop = preload("res://level/LootDrop.tscn")
 
-# enemies
+# enemy bullets
 const FractionBullet = preload("res://enemies/FractionBullet.tscn")
 const FractionLance = preload("res://enemies/FractionLance.tscn")
-const PrimeDenominator = preload("res://enemies/PrimeDenominator.tscn")
+const PrimeLance = preload("res://enemies/PrimeLance.tscn")
 const LargeNumberBullet = preload("res://enemies/LargeNumberBullet.tscn")
 const UpArrowBullet = preload("res://enemies/UpArrowBullet.tscn")
 const PiBullet = preload("res://enemies/PiBullet.tscn")

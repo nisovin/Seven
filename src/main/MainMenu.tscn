@@ -101,11 +101,10 @@ outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=14]
-size = 32
+size = 24
 font_data = ExtResource( 7 )
 
 [sub_resource type="DynamicFont" id=13]
-size = 24
 use_filter = true
 font_data = ExtResource( 6 )
 
@@ -360,7 +359,6 @@ wait_time = 1.3
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Credits" type="PopupPanel" parent="."]
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 60.0
@@ -380,14 +378,14 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="Credits/VBoxContainer"]
 margin_right = 840.0
-margin_bottom = 39.0
+margin_bottom = 30.0
 custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0, 1, 1, 1 )
 text = "CREDITS"
 align = 1
 
 [node name="CreditsBox" type="RichTextLabel" parent="Credits/VBoxContainer"]
-margin_top = 43.0
+margin_top = 34.0
 margin_right = 840.0
 margin_bottom = 396.0
 size_flags_vertical = 3
@@ -400,11 +398,11 @@ bbcode_text = "[center]
 Music by Eric Matyas
 [url=https://www.soundimage.org]www.soundimage.org[/url]
 
+\"Pixel Quirk\"
+
 \"Arcade Drama\"
 
 \"Caffeine Crazed Coin-Op Kids\"
-
-\"Pixel Quirk\"
 
 [b]SOUND EFFECTS[/b]
 
@@ -418,6 +416,15 @@ Sound effects obtained from the following sources:
 [url=https://opengameart.org/content/fantasy-sound-effects-library]Little Robot[/url]
 [url=https://opengameart.org/content/thwack-sounds]AntumDeluge[/url]
 [url=https://opengameart.org/content/swishes-sound-pack]artisticdude[/url]
+
+[b]FONTS[/b]
+
+[url=https://opengameart.org/content/pixel-fonts-by-pix3m]Alagard and Romulus[/url]
+[url=https://kenney.nl/assets/kenney-fonts]Kenney Fonts[/url]
+[url=https://opengameart.org/content/minimalist-pixel-fonts]Minimal 5x7[/url]
+[url=https://www.1001freefonts.com/jupiter-crash.font]Jupiter Crash[/url]
+[url=https://www.1001freefonts.com/alpha-beta.font]Alpha Beta[/url]
+[url=https://fonts.google.com/specimen/Lato]Lato[/url]
 [/center]"
 text = "
 MUSIC
@@ -425,11 +432,11 @@ MUSIC
 Music by Eric Matyas
 www.soundimage.org
 
+\"Pixel Quirk\"
+
 \"Arcade Drama\"
 
 \"Caffeine Crazed Coin-Op Kids\"
-
-\"Pixel Quirk\"
 
 SOUND EFFECTS
 
@@ -443,6 +450,15 @@ Q009
 Little Robot
 AntumDeluge
 artisticdude
+
+FONTS
+
+Alagard and Romulus
+Kenney Fonts
+Minimal 5x7
+Jupiter Crash
+Alpha Beta
+Lato
 "
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Credits/VBoxContainer"]

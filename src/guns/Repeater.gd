@@ -10,6 +10,7 @@ var heat = 0
 
 func _init():
 	gun_name = "Third Repeater"
+	short_name = ".333"
 
 func fire():
 	shooting = true

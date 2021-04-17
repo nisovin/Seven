@@ -12,6 +12,7 @@ var shooting = false
 
 func _init():
 	gun_name = "Divide / Zero"
+	short_name = "Dv/0"
 
 func fire():
 	if not on_cooldown:

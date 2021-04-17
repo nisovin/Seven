@@ -11,6 +11,7 @@ var on_cooldown = false
 
 func _init():
 	gun_name = "Quadratic Expression"
+	short_name = "Quad"
 
 func generate(lvl):
 	.generate(lvl)

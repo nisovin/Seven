@@ -88,7 +88,7 @@ func shoot_fountain_bullets():
 	
 func shoot_aimed_bullet():
 	var dir = global_position.direction_to(player.target_position)
-	var bullet = R.FractionLance.instance()
+	var bullet = R.PrimeLance.instance()
 	add_child(bullet)
 	bullet.init(15, global_position + dir * 20, dir * 500)
 	bullet.set_max_time(5)
@@ -97,10 +97,10 @@ func shoot_aimed_bullet():
 func shoot_lances(dam):
 	var bullet
 	for i in 5:
-		bullet = R.FractionLance.instance()
+		bullet = R.PrimeLance.instance()
 		add_child(bullet)
 		bullet.init(dam, global_position + Vector2(60, -40 + 20 * i), Vector2.RIGHT * 500)
-		bullet = R.FractionLance.instance()
+		bullet = R.PrimeLance.instance()
 		add_child(bullet)
 		bullet.init(dam, global_position + Vector2(-60, -40 + 20 * i), Vector2.LEFT * 500)
 	R.play_sound("prime_shoot3", "Enemies")

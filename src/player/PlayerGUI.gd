@@ -4,8 +4,36 @@ onready var pause_menu = $PauseMenu
 onready var loot_screen = $LootScreen
 onready var char_screen = $CharacterSheet
 
+onready var health_bar = $HealthBar
+onready var gun_displays = [$GunBar/Gun1,$GunBar/Gun2,$GunBar/Gun3]
+
 var player = null
 var pending_new_gun = null
+
+func _ready():
+	var s = gun_displays[0].get("custom_styles/normal")
+	for g in gun_displays:
+		g.set("custom_styles/normal", s.duplicate())
+
+func update_health(health):
+	health_bar.value = health
+
+func update_guns(guns, current):
+	for i in guns.size():
+		var gun = guns[i]
+		var disp = gun_displays[i]
+		var curr = gun == current
+		var t = "[center][color="
+		if curr:
+			t += "lime"
+		else:
+			t += "aqua"
+		t += "][ " + str(i+1) + " ]\n"
+		if gun != null:
+			t += "[color=yellow]" + gun.short_name + "[/color] L" + str(gun.level)
+		disp.bbcode_text = t
+		disp.get("custom_styles/normal").border_color = Color.lime if curr else Color.darkcyan
+
 
 func open_pause_menu():
 	pause_menu.popup_centered()

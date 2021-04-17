@@ -53,6 +53,7 @@ var current_gun = null
 
 onready var camera = $Camera2D
 onready var ground_finders = $GroundFinder.get_children()
+onready var gui = $GUI/PlayerGUI
 
 func _ready():
 	number = Game.number
@@ -67,9 +68,10 @@ func _ready():
 	prep_ui()
 
 func prep_ui():
-	$GUI/PlayerGUI.player = self
 	$Body/Number.bbcode_text = "[center]" + number + "[/center]"
-	$GUI/PlayerGUI/HealthBar.value = 100
+	gui.player = self
+	gui.update_health(health)
+	gui.update_guns(get_guns(), current_gun)
 
 # ATTACK
 
@@ -197,6 +199,7 @@ func equip_gun(gun, slot):
 	if switch:
 		switch_weapon(slot)
 	update_stats()
+	gui.update_guns(get_guns(), current_gun)
 	
 func switch_weapon(slot):
 	var slot_node = $GunAttach.get_child(slot)
@@ -210,6 +213,7 @@ func switch_weapon(slot):
 		slot_node.show()
 		current_gun = slot_node.get_child(0)
 		current_gun.active = true
+	gui.update_guns(get_guns(), current_gun)
 	
 func update_stats():
 	for stat in stats:
@@ -285,7 +289,7 @@ func _physics_process(delta):
 			time_falling += delta
 			if jumps > 0 and time_falling > 0.1:
 				jumps = 0
-			if time_falling > 5 and not dead:
+			if time_falling > 3 and not dead:
 				die()
 	
 	if not freeze_aiming:

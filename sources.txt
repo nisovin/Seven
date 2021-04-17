@@ -15,11 +15,11 @@ swishes
 Music by Eric Matyas
 [url=https://www.soundimage.org]www.soundimage.org[/url]
 
+"Pixel Quirk"
+
 "Arcade Drama"
 
 "Caffeine Crazed Coin-Op Kids"
-
-"Pixel Quirk"
 
 [b]SOUND EFFECTS[/b]
 
@@ -33,3 +33,22 @@ Sound effects obtained from the following sources:
 [url=https://opengameart.org/content/fantasy-sound-effects-library]Little Robot[/url]
 [url=https://opengameart.org/content/thwack-sounds]AntumDeluge[/url]
 [url=https://opengameart.org/content/swishes-sound-pack]artisticdude[/url]
+
+[b]FONTS[/b]
+
+[url=https://opengameart.org/content/pixel-fonts-by-pix3m]Alagard and Romulus[/url]
+[url=https://kenney.nl/assets/kenney-fonts]Kenney Fonts[/url]
+[url=https://opengameart.org/content/minimalist-pixel-fonts]Minimal 5x7[/url]
+[url=https://www.1001freefonts.com/jupiter-crash.font]Jupiter Crash[/url]
+[url=https://www.1001freefonts.com/alpha-beta.font]Alpha Beta[/url]
+[url=https://fonts.google.com/specimen/Lato]Lato[/url]
+
+
+
+left right down jump fire interact weapon_1 weapon_2, weapon_3 open_char_sheet pause
+
+[Dec.]
+[Dv/0]
+[Quad]
+[Ray>]
+[.333]

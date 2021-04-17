@@ -11,6 +11,7 @@ var reload_progress = 0
 
 func _init():
 	gun_name = "Leading Decimal"
+	short_name = "Dec."
 
 func generate(lvl):
 	.generate(lvl)
