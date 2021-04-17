@@ -1,10 +1,12 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://level/graphpaper_transparent.png" type="Texture" id=1]
 [ext_resource path="res://font/alphbeta.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://font/alagard.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://font/Lato-Bold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://main/MainMenu.gd" type="Script" id=5]
+[ext_resource path="res://font/Lato-Regular.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://font/Lato-Black.ttf" type="DynamicFontData" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 80
@@ -97,6 +99,15 @@ size = 36
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 32
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 24
+use_filter = true
+font_data = ExtResource( 6 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -348,6 +359,104 @@ wait_time = 1.3
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="Credits" type="PopupPanel" parent="."]
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 60.0
+margin_top = 60.0
+margin_right = -60.0
+margin_bottom = -60.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Credits/VBoxContainer"]
+margin_right = 840.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 14 )
+custom_colors/font_color = Color( 0, 1, 1, 1 )
+text = "CREDITS"
+align = 1
+
+[node name="CreditsBox" type="RichTextLabel" parent="Credits/VBoxContainer"]
+margin_top = 43.0
+margin_right = 840.0
+margin_bottom = 396.0
+size_flags_vertical = 3
+custom_fonts/bold_font = SubResource( 14 )
+custom_fonts/normal_font = SubResource( 13 )
+bbcode_enabled = true
+bbcode_text = "[center]
+[b]MUSIC[/b]
+
+Music by Eric Matyas
+[url=https://www.soundimage.org]www.soundimage.org[/url]
+
+\"Arcade Drama\"
+
+\"Caffeine Crazed Coin-Op Kids\"
+
+\"Pixel Quirk\"
+
+[b]SOUND EFFECTS[/b]
+
+Sound effects obtained from the following sources:
+
+[url=https://soundimage.org/]Eric Matyas[/url]
+[url=https://www.kenney.nl/assets?q=audio]Kenney[/url]
+[url=https://opengameart.org/content/4-projectile-launches]Michel Baradari[/url]
+[url=https://opengameart.org/content/50-cc0-sci-fi-sfx]rubberduck[/url]
+[url=https://opengameart.org/content/q009s-weapon-sounds]Q009[/url]
+[url=https://opengameart.org/content/fantasy-sound-effects-library]Little Robot[/url]
+[url=https://opengameart.org/content/thwack-sounds]AntumDeluge[/url]
+[url=https://opengameart.org/content/swishes-sound-pack]artisticdude[/url]
+[/center]"
+text = "
+MUSIC
+
+Music by Eric Matyas
+www.soundimage.org
+
+\"Arcade Drama\"
+
+\"Caffeine Crazed Coin-Op Kids\"
+
+\"Pixel Quirk\"
+
+SOUND EFFECTS
+
+Sound effects obtained from the following sources:
+
+Eric Matyas
+Kenney
+Michel Baradari
+rubberduck
+Q009
+Little Robot
+AntumDeluge
+artisticdude
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Credits/VBoxContainer"]
+margin_top = 400.0
+margin_right = 840.0
+margin_bottom = 420.0
+alignment = 1
+
+[node name="CloseCreditsButton" type="Button" parent="Credits/VBoxContainer/HBoxContainer"]
+margin_left = 396.0
+margin_right = 443.0
+margin_bottom = 20.0
+text = "Close"
+
 [connection signal="text_changed" from="Menu/VBoxContainer/Number" to="." method="_on_Number_text_changed"]
 [connection signal="text_entered" from="Menu/VBoxContainer/Number" to="." method="play"]
 [connection signal="pressed" from="Menu/VBoxContainer/PlayButton" to="." method="play"]
@@ -355,3 +464,5 @@ wait_time = 1.3
 [connection signal="pressed" from="Menu/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="timeout" from="Intro/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="meta_clicked" from="Credits/VBoxContainer/CreditsBox" to="." method="_on_CreditsBox_meta_clicked"]
+[connection signal="pressed" from="Credits/VBoxContainer/HBoxContainer/CloseCreditsButton" to="." method="_on_CloseCreditsButton_pressed"]

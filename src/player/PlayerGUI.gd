@@ -1,10 +1,32 @@
 extends Control
 
+onready var pause_menu = $PauseMenu
 onready var loot_screen = $LootScreen
 onready var char_screen = $CharacterSheet
 
 var player = null
 var pending_new_gun = null
+
+func open_pause_menu():
+	pause_menu.popup_centered()
+	player.in_menu = true
+	get_tree().paused = true
+
+func _on_PauseMenu_popup_hide():
+	get_tree().paused = false
+	player.in_menu = false
+
+func _on_PauseResume_pressed():
+	pause_menu.hide()
+
+func _on_PauseSettings_pressed():
+	Settings.show_menu()
+
+func _on_PauseMenu_pressed():
+	get_tree().change_scene("res://main/MainMenu.tscn")
+
+func _on_PauseQuit_pressed():
+	get_tree().quit()
 
 func open_character_sheet():
 	var guns = player.get_guns()
@@ -30,6 +52,8 @@ func _on_CharacterSheet_popup_hide():
 	player.in_menu = false
 
 func _unhandled_input(event):
+	if event.is_action_pressed("pause"):
+		open_pause_menu()
 	if event.is_action_pressed("open_char_sheet") and char_screen.visible:
 		char_screen.call_deferred("hide")
 

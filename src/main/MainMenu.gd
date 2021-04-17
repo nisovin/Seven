@@ -75,10 +75,20 @@ func _input(event):
 				show_next_para()
 
 func _on_SettingsButton_pressed():
-	pass # Replace with function body.
+	Settings.show_menu()
 
 func _on_CreditsButton_pressed():
-	pass # Replace with function body.
+	$Credits.popup_centered()
 
+func _on_CreditsBox_meta_clicked(meta):
+	OS.shell_open(meta)
+	
+func _on_CloseCreditsButton_pressed():
+	$Credits.hide()
+	
 func _on_QuitButton_pressed():
 	get_tree().quit()
+
+
+
+

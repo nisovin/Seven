@@ -9,3 +9,27 @@ Q009 weapons
 soundimage
 Thwack sounds
 swishes
+
+[b]MUSIC[/b]
+
+Music by Eric Matyas
+[url=https://www.soundimage.org]www.soundimage.org[/url]
+
+"Arcade Drama"
+
+"Caffeine Crazed Coin-Op Kids"
+
+"Pixel Quirk"
+
+[b]SOUND EFFECTS[/b]
+
+Sound effects obtained from the following sources:
+
+[url=https://soundimage.org/]Eric Matyas[/url]
+[url=https://www.kenney.nl/assets?q=audio]Kenney[/url]
+[url=https://opengameart.org/content/4-projectile-launches]Michel Baradari[/url]
+[url=https://opengameart.org/content/50-cc0-sci-fi-sfx]rubberduck[/url]
+[url=https://opengameart.org/content/q009s-weapon-sounds]Q009[/url]
+[url=https://opengameart.org/content/fantasy-sound-effects-library]Little Robot[/url]
+[url=https://opengameart.org/content/thwack-sounds]AntumDeluge[/url]
+[url=https://opengameart.org/content/swishes-sound-pack]artisticdude[/url]
