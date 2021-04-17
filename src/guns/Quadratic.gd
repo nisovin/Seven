@@ -12,6 +12,7 @@ var on_cooldown = false
 func _init():
 	gun_name = "Quadratic Expression"
 	short_name = "Quad"
+	flavor_text = "Shoots parabolas, which can go through lines but lose damage if they do. Limited ammo."
 
 func generate(lvl):
 	.generate(lvl)

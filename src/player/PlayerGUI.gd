@@ -15,6 +15,12 @@ func _ready():
 	for g in gun_displays:
 		g.set("custom_styles/normal", s.duplicate())
 
+func init(p):
+	player = p
+	$CharacterSheet/MarginContainer/VBoxContainer/Number.text = str(player.number)
+	update_health(player.health)
+	update_guns(player.get_guns(), player.current_gun)
+
 func update_health(health):
 	health_bar.value = health
 
@@ -47,6 +53,11 @@ func _on_PauseMenu_popup_hide():
 func _on_PauseResume_pressed():
 	pause_menu.hide()
 
+func _on_PauseDie_pressed():
+	pause_menu.hide()
+	yield(get_tree().create_timer(0.2), "timeout")
+	player.apply_damage(1000)
+
 func _on_PauseFullscreen_pressed():
 	OS.window_fullscreen = not OS.window_fullscreen
 	
@@ -69,8 +80,7 @@ func open_character_sheet():
 	player.update_stats()
 	for stat in player.stats:
 		char_screen.find_node("Stat" + stat.capitalize()).text = str(player.stats[stat])
-		char_screen.find_node("Stat" + stat.capitalize()).hint_tooltip = call("tooltip_stat_" + stat, player.stats[stat])
-		char_screen.find_node("Label" + stat.capitalize()).hint_tooltip = call("tooltip_stat_" + stat, player.stats[stat])
+		char_screen.find_node("Tooltip" + stat.capitalize()).text = call("tooltip_stat_" + stat, player.stats[stat])
 	char_screen.popup_centered()
 	player.in_menu = true
 	get_tree().paused = true
@@ -83,7 +93,8 @@ func _on_CharacterSheet_popup_hide():
 	player.in_menu = false
 
 func _unhandled_input(event):
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause") or event.is_action_pressed("ui_cancel"):
+		player.current_gun.stop()
 		open_pause_menu()
 	if event.is_action_pressed("open_char_sheet") and char_screen.visible:
 		char_screen.call_deferred("hide")
@@ -132,8 +143,15 @@ func tooltip_stat_multiplication(s):
 func tooltip_stat_subtraction(s):
 	return "Reduces incoming damage by %s" % s
 func tooltip_stat_division(s):
-	return "Gives %s%% percent chance to cut incoming damage by half" % (s * 2)
+	return "%s%% chance to halve incoming damage" % (s * 2)
 
 
 
+
+
+
+func _on_stat_mouse_entered(stat):
+	print("hi")
+func _on_stat_mouse_exited(stat):
+	print("hi")
 

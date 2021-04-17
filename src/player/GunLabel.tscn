@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://font/Lato-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://font/Lato-Bold.ttf" type="DynamicFontData" id=2]
@@ -9,9 +9,13 @@ size = 24
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
-font_data = ExtResource( 2 )
+size = 12
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 1 )
 
 [node name="NewGun" type="RichTextLabel"]
@@ -19,8 +23,9 @@ margin_right = 473.0
 margin_bottom = 71.0
 size_flags_horizontal = 3
 custom_fonts/mono_font = SubResource( 1 )
-custom_fonts/bold_font = SubResource( 2 )
-custom_fonts/normal_font = SubResource( 3 )
+custom_fonts/italics_font = SubResource( 2 )
+custom_fonts/bold_font = SubResource( 3 )
+custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[code][color=yellow]Divide / Zero[/color]
 Lvl 1[/code]

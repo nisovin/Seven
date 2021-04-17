@@ -22,6 +22,8 @@ const REBINDABLE_ACTIONS = [
 	{ "action": "weapon_2", "name": "Weapon 2" },
 	{ "action": "weapon_3", "name": "Weapon 3" },
 	{ "action": "open_char_sheet", "name": "Character Sheet" },
+	{ "action": "respawn", "name": "Die (Stuck)" },
+	{ "action": "pause", "name": "Pause" },
 ]
 
 const ADJUSTABLE_VOLUMES = [

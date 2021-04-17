@@ -17,6 +17,7 @@ const DivideZeroRocket = preload("res://guns/DivideZeroRocket.tscn")
 
 # level
 const LootDrop = preload("res://level/LootDrop.tscn")
+const FCT = preload("res://main/FCT.tscn")
 
 # enemy bullets
 const FractionBullet = preload("res://enemies/FractionBullet.tscn")
@@ -31,68 +32,70 @@ const SevenNine = preload("res://enemies/SevenNine.tscn")
 # sounds
 const Sounds = {
 	
-	"gun_switch": preload("res://sounds/weapswitch.ogg"),
-	"out_of_ammo": preload("res://sounds/outofammo.ogg"),
-	"decimal_fire": preload("res://sounds/shot_01.ogg"),
-	"repeater_fire": preload("res://sounds/switch8.ogg"),
-	"quadratic_fire": preload("res://sounds/dropLeather.ogg"),
-	"quadratic_return": preload("res://sounds/footstep05.ogg"),
-	"complex_fire": preload("res://sounds/minigun.ogg"),
-	"dividezero_launch": preload("res://sounds/rlaunch.wav"),
-	"dividezero_explosion": preload("res://sounds/explosion.ogg"),
-	"dividezero_fizzle": preload("res://sounds/thwack-01.wav"),
+	"gun_switch": "res://sounds/weapswitch.ogg",
+	"out_of_ammo": "res://sounds/outofammo.ogg",
+	"decimal_fire": "res://sounds/shot_01.ogg",
+	"repeater_fire": "res://sounds/switch8.ogg",
+	"quadratic_fire": "res://sounds/dropLeather.ogg",
+	"quadratic_return": "res://sounds/footstep05.ogg",
+	"complex_fire": "res://sounds/minigun.ogg",
+	"dividezero_launch": "res://sounds/rlaunch.wav",
+	"dividezero_explosion": "res://sounds/explosion.ogg",
+	"dividezero_fizzle": "res://sounds/thwack-01.wav",
+	"ray_loop": "res://sounds/ray_loop.ogg",
 	
-	"player_hit": preload("res://sounds/wood_03.ogg"),
-	"player_die": preload("res://sounds/PowerRez1.mp3"),
-	"enemy_hit": preload("res://sounds/hit.ogg"),
-	"loot_drop": preload("res://sounds/chain_03.ogg"),
+	"player_hit": "res://sounds/wood_03.ogg",
+	"player_die": "res://sounds/PowerRez1.mp3",
+	"enemy_hit": "res://sounds/hit.ogg",
+	"loot_drop": "res://sounds/chain_03.ogg",
 	
-	"fraction_shoot": preload("res://sounds/switch31.ogg"),
-	"fraction_shoot2": preload("res://sounds/synth_laser_07.ogg"),
-	"fraction_death": preload("res://sounds/Spell_01.wav"),
+	"fraction_shoot": "res://sounds/switch31.ogg",
+	"fraction_shoot2": "res://sounds/synth_laser_07.ogg",
+	"fraction_death": "res://sounds/Spell_01.wav",
 	
-	"largenum_shoot": preload("res://sounds/click5.ogg"),
-	"largenum_dive": preload("res://sounds/swish-9.wav"),
-	"largenum_death": preload("res://sounds/Spell_01.wav"),
+	"largenum_shoot": "res://sounds/click5.ogg",
+	"largenum_dive": "res://sounds/swish-9.wav",
+	"largenum_death": "res://sounds/Spell_01.wav",
 	
-	"infinity_charge": preload("res://sounds/RezAlert1.mp3"),
-	"infinity_death": preload("res://sounds/Spell_01.wav"),
+	"infinity_charge": "res://sounds/RezAlert1.mp3",
+	"infinity_death": "res://sounds/Spell_01.wav",
 	
-	"pi_shoot": preload("res://sounds/switch30.ogg"),
-	"pi_death": preload("res://sounds/Spell_01.wav"),
+	"pi_shoot": "res://sounds/switch30.ogg",
+	"pi_death": "res://sounds/Spell_01.wav",
 	
-	"prime_spawn": preload("res://sounds/PowerUp26.ogg"),
-	"prime_choose": preload("res://sounds/prime_choose.ogg"),
-	"prime_shoot1": preload("res://sounds/click5.ogg"),
-	"prime_shoot2": preload("res://sounds/synth_laser_03.ogg"),
-	"prime_shoot3": preload("res://sounds/synth_misc_09.ogg"),
-	"prime_die": preload("res://sounds/PowerDown1.mp3"),
+	"prime_spawn": "res://sounds/PowerUp26.ogg",
+	"prime_choose": "res://sounds/prime_choose.ogg",
+	"prime_shoot1": "res://sounds/click5.ogg",
+	"prime_shoot2": "res://sounds/synth_laser_03.ogg",
+	"prime_shoot3": "res://sounds/synth_misc_09.ogg",
+	"prime_die": "res://sounds/PowerDown1.mp3",
 	
-	"graham_spawn": preload("res://sounds/Cyber-Chime2.mp3"),
-	"graham_choose": preload("res://sounds/PowerUp30.mp3"),
-	"graham_shoot1": preload("res://sounds/slimeball.wav"),
-	"graham_shoot2": preload("res://sounds/synth_misc_09.ogg"),
-	"graham_shoot3": preload("res://sounds/synth_misc_15.ogg"),
-	"graham_die": preload("res://sounds/synth_misc_16.ogg"),
+	"graham_spawn": "res://sounds/Cyber-Chime2.mp3",
+	"graham_choose": "res://sounds/PowerUp30.mp3",
+	"graham_shoot1": "res://sounds/slimeball.wav",
+	"graham_shoot2": "res://sounds/synth_misc_09.ogg",
+	"graham_shoot3": "res://sounds/synth_misc_15.ogg",
+	"graham_die": "res://sounds/synth_misc_16.ogg",
 	
-	"seven_spawn": preload("res://sounds/seven_spawn.ogg"),
-	"seven_lance": preload("res://sounds/slimeball.wav"),
-	"seven_spin": preload("res://sounds/PsychoCopter.ogg"),
-	"seven_strafe": preload("res://sounds/seven_strafe.ogg"),
-	"seven_nine": preload("res://sounds/Robot-Footstep_6.mp3"),
-	"seven_die": preload("res://sounds/PowerDown3.mp3"),
+	"seven_spawn": "res://sounds/seven_spawn.ogg",
+	"seven_lance": "res://sounds/slimeball.wav",
+	"seven_spin": "res://sounds/PsychoCopter.ogg",
+	"seven_strafe": "res://sounds/seven_strafe.ogg",
+	"seven_nine": "res://sounds/Robot-Footstep_6.mp3",
+	"seven_die": "res://sounds/PowerDown3.mp3",
 }
 
 const Music = {
 	"menu": preload("res://music/Pixel-Quirk.mp3"),
-	"game": preload("res://music/Arcade-Drama.mp3"),
-	"boss": preload("res://music/Caffeine-Crazed-Coin-Op-Kids.mp3")
+	"game": "res://music/Arcade-Drama.mp3",
+	"boss": "res://music/Caffeine-Crazed-Coin-Op-Kids.mp3"
 }
 
 var _sfx = []
 var _music = []
 var _music_current = -1
 var _tween = Tween.new()
+var _loops = {}
 
 func _ready():
 	pause_mode = Node.PAUSE_MODE_PROCESS
@@ -106,18 +109,40 @@ func _ready():
 		a.bus = "Music"
 		add_child(a)
 		_music.append(a)
-		
+
+func load_audio():
+	for s in Sounds:
+		if typeof(Sounds[s]) == TYPE_STRING:
+			Sounds[s] = load(Sounds[s])
+	for s in Music:
+		if typeof(Music[s]) == TYPE_STRING:
+			Music[s] = load(Music[s])
 
 func play_sound(sound, bus = "SFX", volume = 1.0):
+	if typeof(Sounds[sound]) == TYPE_STRING:
+		Sounds[sound] = load(Sounds[sound])
 	for a in _sfx:
 		if not a.playing:
 			a.volume_db = linear2db(volume)
 			a.bus = bus
 			a.stream = Sounds[sound]
 			a.play()
-			return
+			return a
+	return false
+
+func play_loop(sound, bus = "SFX", volume = 1.0):
+	var a = play_sound(sound, bus, volume)
+	if a:
+		_loops[sound] = a
+		
+func stop_loop(sound):
+	if sound in _loops:
+		_loops[sound].stop()
+		_loops.erase(sound)
 
 func play_music(song, volume = 0.75, no_fade = false):
+	if typeof(Music[song]) == TYPE_STRING:
+		Music[song] = load(Music[song])
 	var current = null if _music_current < 0 else _music[_music_current]
 	var avail = _music[0 if _music_current != 0 else 1]
 	var _music_new = 0 if _music_current != 0 else 1

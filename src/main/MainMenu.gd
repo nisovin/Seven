@@ -72,6 +72,7 @@ func _input(event):
 				tween.interpolate_property(intro, "modulate", Color.white, Color.transparent, 1)
 				tween.start()
 				yield(get_tree().create_timer(1), "timeout")
+				R.load_audio()
 				get_tree().change_scene("res://level/Level.tscn")
 			else:
 				show_next_para()

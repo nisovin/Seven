@@ -6,7 +6,7 @@ const JUMP_POWER = 750
 const GRAVITY = 1800
 const SPEED = 250
 const MAX_FALL_SPEED = 900
-const MAX_GUN_ROT = PI * 0.35
+const MAX_GUN_ROT = PI * 0.4
 const HEAL_COOLDOWN = 3
 
 var target_position setget , get_target_position
@@ -69,9 +69,7 @@ func _ready():
 
 func prep_ui():
 	$Body/Number.bbcode_text = "[center]" + number + "[/center]"
-	gui.player = self
-	gui.update_health(health)
-	gui.update_guns(get_guns(), current_gun)
+	gui.init(self)
 
 # ATTACK
 
@@ -233,8 +231,9 @@ func knockback(vec, dur):
 
 func reset_down():
 	if is_on_floor() and abs(global_rotation) > 0.01:
-		global_position += up * 30
+		global_position += up * 20
 	global_rotation = 0
+	velocity = Vector2.ZERO
 	up = Vector2.UP
 	
 func _process(delta):
@@ -286,8 +285,9 @@ func _physics_process(delta):
 		v = move_and_slide_with_snap(v, -up * 3 if velocity.y >= 0 else Vector2.ZERO, up)
 		velocity.y = v.rotated(-global_rotation).y
 		if not is_on_floor():
+			var t = time_falling
 			time_falling += delta
-			if jumps > 0 and time_falling > 0.1:
+			if jumps > 0 and t <= 0.1 and time_falling > 0.1:
 				jumps = 0
 			if time_falling > 3 and not dead:
 				die()
@@ -339,7 +339,11 @@ func _unhandled_input(event):
 		switch_weapon(2)
 		
 	elif event.is_action_pressed("open_char_sheet"):
+		current_gun.stop()
 		$GUI/PlayerGUI.open_character_sheet()
+		
+	elif event.is_action_pressed("respawn"):
+		apply_damage(1000)
 		
 
 

@@ -2,7 +2,7 @@ extends "Gun.gd"
 
 const DEFAULT_LENGTH = 80
 const MAX_LENGTH = 700
-const EXTEND_SPEED = 450
+const EXTEND_SPEED = 600
 
 var extending = false
 var damage = 0
@@ -10,18 +10,21 @@ var damage = 0
 func _init():
 	gun_name = "Infinite Ray"
 	short_name = "Ray>"
+	flavor_text = "Extends a ray. Can pass through lines. Hitting an enemy in mid-air allows double jump."
 
 func fire():
 	extending = true
 	damage = owner.modify_damage(base_damage)
 	owner.freeze_aiming = true
 	owner.speed_multiplier = 0
+	R.play_loop("ray_loop", "Player")
 
 func stop():
 	extending = false
 	owner.freeze_aiming = false
 	owner.speed_multiplier = 1
 	$Ray.rect_size.x = DEFAULT_LENGTH
+	R.stop_loop("ray_loop")
 
 func _physics_process(delta):
 	if extending:
@@ -40,4 +43,4 @@ func _on_HitBox_body_entered(body):
 			if not owner.is_on_floor() and owner.jumps == 0:
 				owner.jumps = 1
 		if body is StaticBody2D:
-			damage *= 0.75
+			damage *= 0.8

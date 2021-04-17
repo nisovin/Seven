@@ -40,9 +40,9 @@ func _on_Parabola_body_entered(body):
 	if body.is_in_group("damageable"):
 		if damage > 0:
 			body.apply_damage(damage * damage_pct)
-		damage_pct *= 0.75
+		damage_pct *= 0.8
 	else:
-		damage_pct *= 0.4
+		damage_pct *= 0.5
 		
 	$Sprite.modulate = Color(0, damage_pct * 0.6 + 0.4, 1)
 	emit_signal("hit", body)

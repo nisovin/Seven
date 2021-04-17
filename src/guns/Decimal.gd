@@ -12,6 +12,7 @@ var reload_progress = 0
 func _init():
 	gun_name = "Leading Decimal"
 	short_name = "Dec."
+	flavor_text = "Fires decimal points. Very accurate, but has a high reload time."
 
 func generate(lvl):
 	.generate(lvl)

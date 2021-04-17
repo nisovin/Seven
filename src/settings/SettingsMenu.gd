@@ -9,6 +9,7 @@ onready var settings_container = $MarginContainer/VBoxContainer/ScrollContainer/
 onready var bindings_container = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Bindings
 onready var volumes_container = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Volumes
 onready var subtitle_example = $MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/LabelVolume
+onready var rebinding_message = $RebindingMessage
 
 var current_settings = {}
 var current_bindings = {}
@@ -64,6 +65,7 @@ func _input(event):
 	if changing_binding:
 		if event.is_action_pressed("ui_cancel"):
 			changing_binding = false
+			rebinding_message.hide()
 			get_tree().set_input_as_handled()
 		elif event.is_pressed() and (event is InputEventKey or event is InputEventJoypadButton or event is InputEventMouseButton):
 			var s = event_string(event)
@@ -76,6 +78,7 @@ func _input(event):
 					else:
 						bindings[changing_binding_index] = event
 					changing_binding = false
+					rebinding_message.hide()
 					update_binding_strings()
 					
 
@@ -101,10 +104,10 @@ func _on_binding_clicked(action, index):
 	changing_binding = true
 	changing_binding_action = action
 	changing_binding_index = index
+	rebinding_message.show()
 
 func _on_setting_changed(value, setting):
 	current_settings[setting] = value
-	print(setting, " ", value)
 
 func _on_apply():
 	commit()

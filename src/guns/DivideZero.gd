@@ -13,6 +13,7 @@ var shooting = false
 func _init():
 	gun_name = "Divide / Zero"
 	short_name = "Dv/0"
+	flavor_text = "Dividing by zero is devastating. Deals area damage, but upside-down it is not effective."
 
 func fire():
 	if not on_cooldown:
@@ -35,7 +36,7 @@ func launch():
 	var damage = base_damage
 	if global_transform.x.x < 0:
 		rocket.fizzle()
-		damage = 0
+		damage *= 0.1
 	damage = owner.modify_damage(damage)
 	rocket.init(damage, muzzle.global_position, v)
 	rocket.set_accel(a, ROCKET_MAX_SPEED)

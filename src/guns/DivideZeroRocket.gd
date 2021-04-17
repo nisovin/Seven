@@ -15,7 +15,7 @@ func _on_hit(body_direct_hit):
 			var dist = $DamageArea.global_position.distance_to(body.global_position)
 			var mult = 1.0
 			if body == body_direct_hit:
-				mult += 0.65
+				mult += 1
 			elif dist > $DamageArea/CollisionShape2D.shape.radius / 2.0:
 				mult -= 0.35
 			body.apply_damage(damage * mult)

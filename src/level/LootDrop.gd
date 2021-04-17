@@ -10,16 +10,10 @@ func _ready():
 		Game.first_loot_dropped = true
 
 func generate(lvl, options = []):
-	var drop_table = {}
-	if not "devices_only" in options:
-		if not "no_decimal" in options:
-			drop_table[R.Decimal] = 10
-		drop_table[R.Repeater] = 10
-		drop_table[R.Quadratic] = 10
-		#drop_table[R.Complex] = 10
-		drop_table[R.RayGun] = 10
-		drop_table[R.DivideZero] = 8
-	var choice = N.rand_weighted(drop_table)
+	var drop_table = [R.Decimal, R.Repeater, R.Quadratic, R.RayGun, R.DivideZero]
+	drop_table.erase(Game.last_gun_drop)
+	var choice = N.rand_array(drop_table)
+	Game.last_gun_drop = choice
 	var item = choice.instance()
 	item.generate(lvl)
 	$Item.add_child(item)
@@ -36,6 +30,7 @@ func _on_PickupArea_body_exited(body):
 
 func _unhandled_key_input(event):
 	if player != null and not player.in_menu and event.is_action_pressed("interact"):
+		player.current_gun.stop()
 		var item = $Item.get_child(0)
 		$Item.remove_child(item)
 		player.loot(item)

@@ -34,6 +34,7 @@ func apply_damage(dam, imag = 0, pct = 1.0):
 	if dead or invulnerable: return
 	var d = _modify_damage(max(dam - subtraction * pct, 0) * (1 - (division / 100.0)), imag)
 	health -= d
+	owner.fct(global_position, d, Color.cyan)
 	if health < 0: health = 0
 	R.play_sound("enemy_hit", "Enemies")
 	_on_hit()

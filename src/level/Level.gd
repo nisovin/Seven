@@ -12,6 +12,13 @@ var new_bg = default_bg
 func _ready():
 	R.play_music("game")
 
+func fct(pos, dam, color):
+	print(pos, dam, color)
+	var fct = R.FCT.instance()
+	$Loot.add_child(fct)
+	fct.global_position = pos
+	fct.init(str(ceil(dam)), color)
+
 func spawn_loot(pos, level, options = []):
 	var loot = R.LootDrop.instance()
 	loot.generate(level)

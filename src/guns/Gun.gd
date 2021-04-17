@@ -36,14 +36,14 @@ func generate(lvl):
 			stats[s] = v
 			alloc -= v
 
-func get_rich_text(flavor = false):
+func get_rich_text(flavor = true):
 	var text = "[code][color=yellow]" + gun_name + "[/color]\nLevel " + str(level) + "[/code]\n"
 	text += "[b][color=aqua]" + str(base_damage) + "[/color][/b] Damage"
 	for stat in stats:
 		if stats[stat] > 0:
 			text += "\n[color=lime][b]+" + str(stats[stat]) + "[/b][/color] " + stat.capitalize()
 	if flavor and flavor_text != "":
-		text += "\n[color=gray]" + flavor_text + "[/color]"
+		text += "\n[color=#a0a0a0][i]" + flavor_text + "[/i][/color]"
 	return text
 
 func fire():

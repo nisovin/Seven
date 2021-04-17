@@ -11,6 +11,7 @@ var heat = 0
 func _init():
 	gun_name = "Third Repeater"
 	short_name = ".333"
+	flavor_text = "Fires in bursts of thirds. Less accurate, but has no down time."
 
 func fire():
 	shooting = true
@@ -46,7 +47,7 @@ func launch_bullet(dam):
 	var bullet = R.RepeaterBullet.instance()
 	add_child(bullet)
 	var v = global_transform.x * BULLET_SPEED
-	v = v.rotated(N.randf_range(-0.1, 0.1))
+	v = v.rotated(N.randf_range(-0.08, 0.08))
 	bullet.init(dam, muzzle.global_position, v)
 	R.play_sound("repeater_fire", "Player")
 

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ray_loop.ogg-b21472d29b3f74d1ec7c4e2cf9ab1785.oggstr"
+
+[deps]
+
+source_file="res://sounds/ray_loop.ogg"
+dest_files=[ "res://.import/ray_loop.ogg-b21472d29b3f74d1ec7c4e2cf9ab1785.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
