@@ -35,3 +35,8 @@ func _set_background_color(progress):
 			lerp(old_bg.v, new_bg.v, progress))
 	VisualServer.set_default_clear_color(current_bg)
 	
+func show_win():
+	$Text/WinMessage.modulate = Color.transparent
+	$Text/WinMessage.show()
+	$Tween.interpolate_property($Text/WinMessage, "modulate", Color.transparent, Color.white, 2)
+	$Tween.start()

@@ -1,5 +1,12 @@
 extends "Enemy.gd"
 
+const STRAFE_DAMAGE = 100
+const LANCE_DAMAGE = 70
+const LANCE_SPEED = 800
+const SPIN_DAMAGE = 40
+const NINE_DAMAGE = 15
+const NINE_DAM_PCT = 0.25
+
 enum Mode { SPAWNING, COOLDOWN, ATTACKING, RESET }
 enum Attack { SPINNING_AROUND, STRAFE, LANCES, NINES }
 
@@ -13,7 +20,7 @@ var returning_upright = false
 var next_lance = null
 
 func _init():
-	max_health = 5000
+	max_health = 60
 	loot_level = 6
 	drop_chance = 1.0
 
@@ -23,6 +30,7 @@ func spawn(p):
 	player = p
 	heart_path_follow = get_parent().get_node("HeartPath/PathFollow2D")
 	heart_path_remote = heart_path_follow.get_node("RemoteTransform2D")
+	R.play_sound("seven_spawn", "Enemies")
 	yield(get_tree().create_timer(2), "timeout")
 	$AnimationPlayer.play("spawn")
 
@@ -80,14 +88,17 @@ func attack_spin_around():
 	returning_upright = false
 	rotation = 0
 	$AnimationPlayer.play("spin_heart")
+	R.play_sound("seven_spin", "Enemies")
 	yield(get_tree().create_timer(1.5, false), "timeout")
 	if dead: return
 	invulnerable = true
 	$SpinningBox/CollisionShape2D.disabled = false
 	heart_path_remote.remote_path = heart_path_remote.get_path_to(self)
+	$SpinTimer.start()
 	$Tween.interpolate_property(heart_path_follow, "unit_offset", 0, 1 if N.randf() < 0.5 else -1, 6)
 	$Tween.start()
 	yield(get_tree().create_timer(7, false), "timeout")
+	$SpinTimer.stop()
 	if dead: return
 	heart_path_remote.remote_path = ""
 	$AnimationPlayer.stop()
@@ -96,12 +107,17 @@ func attack_spin_around():
 	invulnerable = false
 	$ModeTimer.start(1)
 	
+func _on_SpinTimer_timeout():
+	for p in $SpinningBox.get_overlapping_bodies():
+		p.apply_damage(SPIN_DAMAGE)
+
 func attack_strafe():
 	$AnimationPlayer.play("spikes")
 	$ModeTimer.start(4)
+	R.play_sound("seven_strafe", "Enemies")
 
-func strafe_teleport():
-	$Body.position.x = -1000
+func _on_SpikedBox_body_entered(body):
+	body.apply_damage(50)
 
 func attack_lances():
 	following_player = true
@@ -118,7 +134,8 @@ func spawn_lance():
 	
 func fire_lance():
 	if next_lance != null:
-		next_lance.init(100, $Body/LanceSpawn.global_position, next_lance.global_transform.x * 800)
+		next_lance.init(LANCE_DAMAGE, $Body/LanceSpawn.global_position, next_lance.global_transform.x * LANCE_SPEED)
+		R.play_sound("seven_lance", "Enemies")
 		next_lance = null
 
 func _on_LanceTimer_timeout():
@@ -139,8 +156,10 @@ func _on_NineTimer_timeout():
 	if mode == Mode.ATTACKING:
 		var bullet = R.SevenNine.instance()
 		add_child(bullet)
-		bullet.init(40, $Body/NineSpawn.global_position, $Body/NineSpawn.global_transform.x * 300)
+		bullet.init(NINE_DAMAGE, $Body/NineSpawn.global_position, $Body/NineSpawn.global_transform.x * 300)
 		bullet.set_rotation(0)
+		bullet.set_damage(NINE_DAMAGE, 0, NINE_DAM_PCT)
+		R.play_sound("seven_nine", "Enemies")
 	else:
 		$NineTimer.stop()
 		$AnimationPlayer.stop()
@@ -155,5 +174,8 @@ func _on_die():
 	$LanceTimer.stop()
 	$NineTimer.stop()
 	$AnimationPlayer.play("die")
-	yield(get_tree().create_timer(10, false), "timeout")
-	queue_free()
+	R.play_sound("seven_die", "Enemies")
+	yield(get_tree().create_timer(2), "timeout")
+	owner.show_win()
+
+

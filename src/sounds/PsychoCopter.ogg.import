@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/PsychoCopter.ogg-c6902feeead8eac44a9e515b647d4472.oggstr"
+
+[deps]
+
+source_file="res://sounds/PsychoCopter.ogg"
+dest_files=[ "res://.import/PsychoCopter.ogg-c6902feeead8eac44a9e515b647d4472.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

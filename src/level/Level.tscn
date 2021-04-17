@@ -364,6 +364,7 @@ margin_left = 8220.0
 margin_top = -3675.47
 margin_right = 8722.0
 margin_bottom = -3604.47
+mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0.933333, 0.654902, 0, 1 )
 bbcode_enabled = true
@@ -380,6 +381,7 @@ margin_left = 9480.0
 margin_top = -4215.47
 margin_right = 9982.0
 margin_bottom = -4144.47
+mouse_filter = 2
 custom_fonts/normal_font = SubResource( 1 )
 custom_colors/default_color = Color( 0.933333, 0.654902, 0, 1 )
 bbcode_enabled = true
@@ -387,6 +389,30 @@ bbcode_text = "[center]Tread carefully,
 [color=red]7[/color] lurks nearby[/center]"
 text = "Tread carefully,
 7 lurks nearby"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WinMessage" type="RichTextLabel" parent="Text"]
+visible = false
+margin_left = 9780.0
+margin_top = -4530.47
+margin_right = 10282.0
+margin_bottom = -4335.47
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0.933333, 0.654902, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]Thanks to you,
+[color=red]7[/color] is defeated, and the
+coordinate plane is 
+at peace
+once again[/center]"
+text = "Thanks to you,
+7 is defeated, and the
+coordinate plane is 
+at peace
+once again"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1498,3 +1524,5 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1200, 1200 )
 
 [node name="BackgroundTween" type="Tween" parent="."]
+
+[node name="Tween" type="Tween" parent="."]

@@ -498,6 +498,7 @@ shape = SubResource( 2 )
 position = Vector2( 60, -60 )
 
 [node name="TopLine" type="Line2D" parent="Body/TopBar"]
+position = Vector2( -500, 0 )
 points = PoolVector2Array( -120, 0, 0, 0 )
 width = 12.0
 default_color = Color( 0.447059, 0, 0, 1 )
@@ -507,11 +508,13 @@ position = Vector2( 60, -60 )
 rotation = -1.10764
 
 [node name="BottomLine" type="Line2D" parent="Body/BottomBar"]
+position = Vector2( 500, 0 )
 points = PoolVector2Array( -201.246, 0, 0, 0 )
 width = 12.0
 default_color = Color( 0.447059, 0, 0, 1 )
 
 [node name="BackLine" type="Line2D" parent="Body"]
+modulate = Color( 1, 1, 1, 0 )
 points = PoolVector2Array( -60, -60, 60, -60, -30, 120 )
 width = 18.0
 default_color = Color( 0.345098, 0, 0, 1 )
@@ -519,15 +522,18 @@ begin_cap_mode = 1
 end_cap_mode = 1
 
 [node name="MainLine" type="Line2D" parent="Body"]
+visible = false
 points = PoolVector2Array( -60, -60, 60, -60, -30, 120 )
 width = 12.0
 default_color = Color( 0.447059, 0, 0, 1 )
 
 [node name="HealthBar" type="Node2D" parent="Body"]
+visible = false
 position = Vector2( 60, -60 )
 rotation = -1.10764
 
 [node name="HealthLine" type="Line2D" parent="Body/HealthBar"]
+scale = Vector2( 0.1, 1 )
 points = PoolVector2Array( -201.246, 0, 0, 0 )
 width = 8.0
 default_color = Color( 0.847059, 0, 0.458824, 1 )
@@ -536,9 +542,7 @@ default_color = Color( 0.847059, 0, 0.458824, 1 )
 curve = SubResource( 3 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Body/Path2D"]
-position = Vector2( -30, 120 )
-rotation = 2.03444
-offset = 316.706
+position = Vector2( -60, -60 )
 
 [node name="Particles2D" type="Particles2D" parent="Body/Path2D/PathFollow2D"]
 emitting = false
@@ -548,18 +552,14 @@ local_coords = false
 process_material = SubResource( 4 )
 
 [node name="TopSpike" type="Node2D" parent="Body"]
-visible = false
 position = Vector2( 0, -75 )
-scale = Vector2( 1, 0.01 )
 
 [node name="Line2D" type="Line2D" parent="Body/TopSpike"]
 points = PoolVector2Array( 0, 0, 0, -75 )
 default_color = Color( 1, 0, 0, 1 )
 
 [node name="BottomSpike" type="Node2D" parent="Body"]
-visible = false
 position = Vector2( 0, 105 )
-scale = Vector2( 1, 0.01 )
 
 [node name="Line2D" type="Line2D" parent="Body/BottomSpike"]
 points = PoolVector2Array( 0, 0, 0, 75 )
@@ -613,11 +613,16 @@ anims/spin_nine = SubResource( 12 )
 [node name="ModeTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="SpinTimer" type="Timer" parent="."]
+wait_time = 0.2
+
 [node name="LanceTimer" type="Timer" parent="."]
 
 [node name="NineTimer" type="Timer" parent="."]
 wait_time = 0.2
 
+[connection signal="body_entered" from="Body/SpikedBox" to="." method="_on_SpikedBox_body_entered"]
 [connection signal="timeout" from="ModeTimer" to="." method="_on_ModeTimer_timeout"]
+[connection signal="timeout" from="SpinTimer" to="." method="_on_SpinTimer_timeout"]
 [connection signal="timeout" from="LanceTimer" to="." method="_on_LanceTimer_timeout"]
 [connection signal="timeout" from="NineTimer" to="." method="_on_NineTimer_timeout"]

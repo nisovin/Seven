@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Robot-Footstep_6.mp3-9375f61fb5bce08af5910399ebc71838.mp3str"
+
+[deps]
+
+source_file="res://sounds/Robot-Footstep_6.mp3"
+dest_files=[ "res://.import/Robot-Footstep_6.mp3-9375f61fb5bce08af5910399ebc71838.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

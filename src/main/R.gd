@@ -69,7 +69,14 @@ const Sounds = {
 	"graham_shoot1": preload("res://sounds/slimeball.wav"),
 	"graham_shoot2": preload("res://sounds/synth_misc_09.ogg"),
 	"graham_shoot3": preload("res://sounds/synth_misc_15.ogg"),
-	"graham_die": preload("res://sounds/synth_misc_16.ogg")
+	"graham_die": preload("res://sounds/synth_misc_16.ogg"),
+	
+	"seven_spawn": preload("res://sounds/seven_spawn.ogg"),
+	"seven_lance": preload("res://sounds/slimeball.wav"),
+	"seven_spin": preload("res://sounds/PsychoCopter.ogg"),
+	"seven_strafe": preload("res://sounds/seven_strafe.ogg"),
+	"seven_nine": preload("res://sounds/Robot-Footstep_6.mp3"),
+	"seven_die": preload("res://sounds/PowerDown3.mp3"),
 }
 
 const Music = {

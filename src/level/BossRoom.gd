@@ -24,8 +24,6 @@ func start_fight(p):
 	player.freeze_camera_target = true
 	player.camera_target = global_position
 	player.connect("died", self, "_on_player_died", [], CONNECT_ONESHOT)
-	if boss != null:
-		boss.queue_free()
 	boss = boss_scene.instance()
 	if spawn_parent != null:
 		get_node(spawn_parent).add_child(boss)
@@ -51,13 +49,14 @@ func end_fight(win):
 			boss_dead = true
 			if exit_door != null:
 				get_node(exit_door).hide()
-		yield(get_tree().create_timer(2), "timeout")
-		if boss != null:
-			boss.queue_free()
-			boss = null
 		if death_zone != null:
 			get_node(death_zone).set_deferred("disabled", true)
+		var old_boss = boss
+		yield(get_tree().create_timer(3), "timeout")
 		R.play_music("game")
+		if win:
+			yield(get_tree().create_timer(7), "timeout")
+		old_boss.queue_free()
 
 func _on_startzone_entered(body):
 	if not fight_active and not boss_dead and not body.dead:

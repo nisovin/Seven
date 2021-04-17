@@ -61,6 +61,8 @@ func _ready():
 	camera.global_position = global_position
 	switch_weapon(0)
 	current_gun.generate(0)
+	for i in range(1, 4):
+		get_node("GunAttach/Gun" + str(i)).get_child(0).generate(3)
 	update_stats()
 	prep_ui()
 
