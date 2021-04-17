@@ -50,7 +50,6 @@ position = Vector2( 0, 0.471954 )
 script = ExtResource( 5 )
 
 [node name="Regions" type="Node2D" parent="."]
-visible = false
 
 [node name="GraphForest" type="Area2D" parent="Regions"]
 collision_layer = 524288
@@ -178,6 +177,18 @@ checkpoint = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/CPPostGrahams"]
 position = Vector2( -240, 135 )
 polygon = PoolVector2Array( 165, 15, 15, -120, -120, -15, 60, 165 )
+
+[node name="CPEquivMid" type="Area2D" parent="Regions"]
+position = Vector2( 9360, -3675.47 )
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 6 )
+change_background = false
+checkpoint = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Regions/CPEquivMid"]
+position = Vector2( -240, 135 )
+polygon = PoolVector2Array( 360, -210, -90, -210, -90, -75, 360, -75 )
 
 [node name="CPFinalBoss" type="Area2D" parent="Regions"]
 position = Vector2( 9480, -4080.47 )
@@ -354,6 +365,20 @@ custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.933333, 0.654902, 0, 1 )
 text = "Be careful of Graham's Number
 The up-arrows are devastating"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Graham3" type="Label" parent="Text"]
+margin_left = 8940.0
+margin_top = -3375.47
+margin_right = 9540.0
+margin_bottom = -3240.47
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.933333, 0.654902, 0, 1 )
+text = "Now entering the
+Plains of Equivalence"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -637,7 +662,7 @@ text_offset = Vector2( 480, 0 )
 
 [node name="Line6" parent="Lines/StartingArea" instance=ExtResource( 10 )]
 position = Vector2( 165, -105.472 )
-points = PoolVector2Array( -165, 105, -165, -495 )
+points = PoolVector2Array( -165, 105, -165, -315 )
 default_color = Color( 0.121569, 0, 0.231373, 1 )
 
 [node name="ForestOfGraphs" type="Node2D" parent="Lines"]
@@ -1362,24 +1387,48 @@ move_range = 1
 
 [node name="Infinity2" parent="Enemies/Equiv1" instance=ExtResource( 15 )]
 position = Vector2( 9930, -3420.47 )
+max_health = 300.0
+damage = 60.0
+loot_level = 3
+random_upgrade_chance = 0.1
 
 [node name="Infinity" parent="Enemies/Equiv1" instance=ExtResource( 15 )]
 position = Vector2( 9930, -3600.47 )
+max_health = 300.0
+damage = 60.0
+loot_level = 3
+random_upgrade_chance = 0.1
 
 [node name="LargeNumber" parent="Enemies/Equiv1" instance=ExtResource( 12 )]
 position = Vector2( 10155, -3855.47 )
+max_health = 300.0
+damage = 30.0
+loot_level = 3
+random_upgrade_chance = 0.1
 
 [node name="LargeNumber2" parent="Enemies/Equiv1" instance=ExtResource( 12 )]
 position = Vector2( 10590, -3720.47 )
+max_health = 300.0
+damage = 30.0
+loot_level = 3
+random_upgrade_chance = 0.1
 
 [node name="PiMult" parent="Enemies/Equiv1" instance=ExtResource( 21 )]
 position = Vector2( 10425, -3450.47 )
 
 [node name="Fraction" parent="Enemies/Equiv1" instance=ExtResource( 7 )]
 position = Vector2( 9750, -3765.47 )
+max_health = 200.0
+damage = 20.0
+loot_level = 3
+move_range = 2
 
 [node name="Fraction2" parent="Enemies/Equiv1" instance=ExtResource( 7 )]
 position = Vector2( 10110, -3585.47 )
+max_health = 200.0
+damage = 20.0
+loot_level = 3
+move_range = 2
 
 [node name="Equiv2" type="Node2D" parent="Enemies"]
 
@@ -1391,30 +1440,66 @@ position = Vector2( 8280, -3690.47 )
 
 [node name="Infinity" parent="Enemies/Equiv2" instance=ExtResource( 15 )]
 position = Vector2( 9360, -4020.47 )
+max_health = 300.0
+damage = 70.0
+loot_level = 3
+random_upgrade_chance = 0.5
 
 [node name="PiMult3" parent="Enemies/Equiv2" instance=ExtResource( 21 )]
 position = Vector2( 9840, -4050.47 )
 
 [node name="Fraction" parent="Enemies/Equiv2" instance=ExtResource( 7 )]
 position = Vector2( 9270, -3645.47 )
+max_health = 200.0
+damage = 20.0
+loot_level = 3
+random_upgrade_chance = 0.3
+move_range = 3
 
 [node name="LargeNumber" parent="Enemies/Equiv2" instance=ExtResource( 12 )]
 position = Vector2( 8925, -3705.47 )
+max_health = 300.0
+damage = 30.0
+loot_level = 3
+random_upgrade_chance = 0.3
 
 [node name="LargeNumber2" parent="Enemies/Equiv2" instance=ExtResource( 12 )]
 position = Vector2( 8565, -3945.47 )
+max_health = 400.0
+damage = 30.0
+loot_level = 3
+random_upgrade_chance = 0.5
 
 [node name="Infinity2" parent="Enemies/Equiv2" instance=ExtResource( 15 )]
 position = Vector2( 8430, -3735.47 )
+max_health = 300.0
+damage = 70.0
+loot_level = 3
+random_upgrade_chance = 0.5
 
 [node name="Fraction2" parent="Enemies/Equiv2" instance=ExtResource( 7 )]
 position = Vector2( 9060, -3915.47 )
+max_health = 200.0
+damage = 30.0
+loot_level = 3
+random_upgrade_chance = 0.3
+move_range = 1
 
 [node name="Fraction3" parent="Enemies/Equiv2" instance=ExtResource( 7 )]
 position = Vector2( 8880, -3915.47 )
+max_health = 200.0
+damage = 30.0
+loot_level = 3
+random_upgrade_chance = 0.3
+move_range = 1
 
 [node name="Fraction4" parent="Enemies/Equiv2" instance=ExtResource( 7 )]
-position = Vector2( 8730, -3825.47 )
+position = Vector2( 8880, -3645.47 )
+max_health = 200.0
+damage = 20.0
+loot_level = 3
+random_upgrade_chance = 0.3
+move_range = 2
 
 [node name="Bosses" type="Node2D" parent="."]
 
@@ -1510,7 +1595,7 @@ disabled = true
 [node name="Loot" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource( 8 )]
-position = Vector2( 10290, -4605.47 )
+position = Vector2( 120, -60.472 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

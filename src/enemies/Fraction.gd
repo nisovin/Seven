@@ -105,7 +105,7 @@ func shoot_long(dir):
 	
 func shoot_short(dir):
 	var bullet
-	dir = dir.rotated(-deg2rad(30))
+	dir = dir.rotated(-deg2rad(20))
 	for i in 3:
 		bullet = R.FractionLance.instance()
 		add_child(bullet)
@@ -115,7 +115,7 @@ func shoot_short(dir):
 		add_child(bullet)
 		bullet.init(damage * LANCE_MULTIPLIER, global_position - dir * 10, -dir * LANCE_SPEED)
 		bullet.set_max_time(LANCE_DISTANCE / LANCE_SPEED)
-		dir = dir.rotated(deg2rad(30))
+		dir = dir.rotated(deg2rad(20))
 	R.play_sound("fraction_shoot2", "Enemies")
 
 func _on_DetectionZone_body_entered(body):

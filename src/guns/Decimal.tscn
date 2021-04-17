@@ -32,7 +32,7 @@ __meta__ = {
 position = Vector2( 46.6365, 3.32278 )
 
 [node name="CooldownTimer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.3
 one_shot = true
 
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_CooldownTimer_timeout"]

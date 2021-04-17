@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://font/alagard.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://enemies/Infinity.gd" type="Script" id=2]
@@ -19,6 +19,9 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 300, 45 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 30.0
 
 [node name="Infinity" type="KinematicBody2D" groups=[
 "damageable",
@@ -65,13 +68,24 @@ collision_mask = 2
 shape = SubResource( 4 )
 disabled = true
 
-[node name="DamageArea" type="Area2D" parent="."]
+[node name="DamageAreaRight" type="Area2D" parent="."]
+position = Vector2( 24, 0 )
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageArea"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageAreaRight"]
 rotation = 1.5708
-shape = SubResource( 1 )
+shape = SubResource( 5 )
+disabled = true
+
+[node name="DamageAreaLeft" type="Area2D" parent="."]
+position = Vector2( -24, 0 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DamageAreaLeft"]
+rotation = 1.5708
+shape = SubResource( 5 )
 disabled = true
 
 [node name="ChargeTimer" type="Timer" parent="."]
@@ -82,7 +96,8 @@ one_shot = true
 
 [connection signal="body_entered" from="ChargeArea" to="." method="_on_ChargeArea_body_entered"]
 [connection signal="body_exited" from="ChargeArea" to="." method="_on_ChargeArea_body_exited"]
-[connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="body_entered" from="DamageAreaRight" to="." method="_on_DamageArea_body_entered"]
+[connection signal="body_entered" from="DamageAreaLeft" to="." method="_on_DamageArea_body_entered"]
 [connection signal="timeout" from="ChargeTimer" to="." method="_on_ChargeTimer_timeout"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -20,7 +20,7 @@ var returning_upright = false
 var next_lance = null
 
 func _init():
-	max_health = 60
+	max_health = 7000
 	loot_level = 6
 	drop_chance = 1.0
 

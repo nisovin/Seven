@@ -1,7 +1,7 @@
 extends "Gun.gd"
 
 const BULLET_SPEED = 600
-const RELOAD_TIME = 1.25
+const RELOAD_TIME = 1.5
 
 var max_ammo = 4
 var ammo = max_ammo
@@ -14,8 +14,7 @@ func _init():
 
 func generate(lvl):
 	.generate(lvl)
-	if lvl > 0:
-		max_ammo = 5 + lvl
+	max_ammo = 4 + lvl
 	ammo = max_ammo
 	update_text()
 

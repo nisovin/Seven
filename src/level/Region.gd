@@ -15,8 +15,8 @@ func _ready():
 	connect("body_exited", self, "_on_body_exited")
 	
 func _on_body_entered(body):
-	if change_background:
-		owner.change_background_color(color)
+	#if change_background:
+	#	owner.change_background_color(color)
 	if down_reset:
 		body.call_deferred("reset_down")
 	if checkpoint:

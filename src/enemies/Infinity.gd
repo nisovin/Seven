@@ -62,11 +62,9 @@ func _physics_process(delta):
 	if charging:
 		position.x += CHARGE_SPEED * dir * delta
 		if dir > 0 and (global_position.x > spawn_point.x + CHARGE_RANGE or global_position.x > target.global_position.x + 60):
-			print("stopped1")
-			charging = false
+			stop_charge()
 		elif dir < 0 and (global_position.x < spawn_point.x - CHARGE_RANGE or global_position.x < target.global_position.x - 60):
-			print("stopped2")
-			charging = false
+			stop_charge()
 	elif abs(spawn_point.x - global_position.x) > 60:
 		dir = sign(spawn_point.x - global_position.x)
 		position.x += RETURN_SPEED * dir * delta
@@ -94,7 +92,16 @@ func charge():
 	if target != null:
 		charging = true
 		dir = sign(target.global_position.x - global_position.x)
+		if dir > 0:
+			$DamageAreaRight/CollisionShape2D2.set_deferred("disabled", false)
+		elif dir < 0:
+			$DamageAreaLeft/CollisionShape2D2.set_deferred("disabled", false)
 		R.play_sound("infinity_charge", "Enemies")
+
+func stop_charge():
+	charging = false
+	$DamageAreaRight/CollisionShape2D2.set_deferred("disabled", true)
+	$DamageAreaLeft/CollisionShape2D2.set_deferred("disabled", true)
 
 func _on_ChargeArea_body_entered(body):
 	if dead: return
@@ -121,14 +128,12 @@ func _on_DamageArea_body_entered(body):
 
 func _on_VisibilityNotifier2D_screen_entered():
 	$ChargeArea/CollisionShape2D.disabled = false
-	$DamageArea/CollisionShape2D2.disabled = false
 	set_process(true)
 	set_physics_process(true)
 	show()
 
 func _on_VisibilityNotifier2D_screen_exited():
 	$ChargeArea/CollisionShape2D.disabled = true
-	$DamageArea/CollisionShape2D2.disabled = true
 	set_process(false)
 	set_physics_process(false)
 	hide()

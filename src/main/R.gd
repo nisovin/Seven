@@ -24,6 +24,7 @@ const FractionLance = preload("res://enemies/FractionLance.tscn")
 const PrimeDenominator = preload("res://enemies/PrimeDenominator.tscn")
 const LargeNumberBullet = preload("res://enemies/LargeNumberBullet.tscn")
 const UpArrowBullet = preload("res://enemies/UpArrowBullet.tscn")
+const PiBullet = preload("res://enemies/PiBullet.tscn")
 const SevenLance = preload("res://enemies/SevenLance.tscn")
 const SevenNine = preload("res://enemies/SevenNine.tscn")
 
@@ -56,6 +57,9 @@ const Sounds = {
 	
 	"infinity_charge": preload("res://sounds/RezAlert1.mp3"),
 	"infinity_death": preload("res://sounds/Spell_01.wav"),
+	
+	"pi_shoot": preload("res://sounds/switch30.ogg"),
+	"pi_death": preload("res://sounds/Spell_01.wav"),
 	
 	"prime_spawn": preload("res://sounds/PowerUp26.ogg"),
 	"prime_choose": preload("res://sounds/prime_choose.ogg"),
