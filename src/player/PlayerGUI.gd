@@ -47,6 +47,9 @@ func _on_PauseMenu_popup_hide():
 func _on_PauseResume_pressed():
 	pause_menu.hide()
 
+func _on_PauseFullscreen_pressed():
+	OS.window_fullscreen = not OS.window_fullscreen
+	
 func _on_PauseSettings_pressed():
 	Settings.show_menu()
 
@@ -130,5 +133,7 @@ func tooltip_stat_subtraction(s):
 	return "Reduces incoming damage by %s" % s
 func tooltip_stat_division(s):
 	return "Gives %s%% percent chance to cut incoming damage by half" % (s * 2)
+
+
 
 

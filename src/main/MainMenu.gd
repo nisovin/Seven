@@ -33,6 +33,8 @@ func play(t = ""):
 	if menu_closed: return
 	Game.number = number_box.text
 	menu_closed = true
+	if Settings.video_fullscreen:
+		OS.window_fullscreen = true
 	show_story()
 
 func show_story():

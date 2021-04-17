@@ -1,14 +1,14 @@
 extends "Gun.gd"
 
 const DEFAULT_LENGTH = 80
-const MAX_LENGTH = 500
-const EXTEND_SPEED = 400
+const MAX_LENGTH = 700
+const EXTEND_SPEED = 450
 
 var extending = false
 var damage = 0
 
 func _init():
-	gun_name = "Finite Ray"
+	gun_name = "Infinite Ray"
 	short_name = "Ray>"
 
 func fire():
@@ -40,4 +40,4 @@ func _on_HitBox_body_entered(body):
 			if not owner.is_on_floor() and owner.jumps == 0:
 				owner.jumps = 1
 		if body is StaticBody2D:
-			damage *= 0.5
+			damage *= 0.75

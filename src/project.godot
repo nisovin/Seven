@@ -20,8 +20,8 @@ config/icon="res://icon.png"
 
 N="*res://main/N.gd"
 R="*res://main/R.gd"
-Game="*res://main/Game.gd"
 Settings="*res://settings/Settings.gd"
+Game="*res://main/Game.gd"
 
 [debug]
 

@@ -33,11 +33,13 @@ const ADJUSTABLE_VOLUMES = [
 ]
 
 const AUTO_SETTINGS = [
-	#{ "setting": "category_setting_name", "category": "Category", "name": "Some Setting", "type": "slider", "min": 0.0, "max": 10.0, "step": 0.25 },
+	{ "setting": "video_fullscreen", "category": "Video", "name": "Full Screen", "type": "check" },
 	#{ "setting": "category_another_setting", "category": "Category", "name": "Another Setting", "type": "check" },
 	#{ "setting": "stuff_another", "category": "Stuff", "name": "Another", "type": "slider", "min": 1, "max": 5, "step": 1 },
 	#{ "setting": "stuff_spinner", "category": "Stuff", "name": "Spinner", "type": "spinner", "min": 1, "max": 100, "step": 1 }
 ]
+
+var video_fullscreen = true
 
 func _ready():
 	load_settings()
