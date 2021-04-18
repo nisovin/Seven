@@ -479,9 +479,13 @@ text = "Close"
 
 [connection signal="text_changed" from="Menu/VBoxContainer/Number" to="." method="_on_Number_text_changed"]
 [connection signal="text_entered" from="Menu/VBoxContainer/Number" to="." method="play"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/PlayButton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Menu/VBoxContainer/PlayButton" to="." method="play"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/SettingsButton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Menu/VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/CreditsButton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Menu/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="mouse_entered" from="Menu/VBoxContainer/QuitButton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Menu/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="timeout" from="Intro/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="meta_clicked" from="Credits/VBoxContainer/CreditsBox" to="." method="_on_CreditsBox_meta_clicked"]

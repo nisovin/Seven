@@ -20,6 +20,7 @@ func _ready():
 	number_box.caret_position = 3
 	regex.compile("[^123456890]")
 	R.play_music("menu", 0.25, true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_Number_text_changed(new_text):
 	var t = regex.sub(new_text, "", true)
@@ -35,6 +36,7 @@ func play(t = ""):
 	menu_closed = true
 	if Settings.video_fullscreen:
 		OS.window_fullscreen = true
+	R.play_sound("button_click", "SFX")
 	show_story()
 
 func show_story():
@@ -77,10 +79,15 @@ func _input(event):
 			else:
 				show_next_para()
 
+func _on_button_mouse_entered():
+	R.play_sound("button_rollover", "SFX", 0.2)
+	
 func _on_SettingsButton_pressed():
+	R.play_sound("button_click", "SFX")
 	Settings.show_menu()
 
 func _on_CreditsButton_pressed():
+	R.play_sound("button_click", "SFX")
 	$Credits.popup_centered()
 
 func _on_CreditsBox_meta_clicked(meta):
@@ -91,6 +98,8 @@ func _on_CloseCreditsButton_pressed():
 	
 func _on_QuitButton_pressed():
 	get_tree().quit()
+
+
 
 
 

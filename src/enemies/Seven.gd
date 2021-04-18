@@ -63,7 +63,7 @@ func _on_ModeTimer_timeout():
 	if mode == Mode.RESET:
 		mode = Mode.COOLDOWN
 	if mode == Mode.COOLDOWN:
-		$ModeTimer.start(5)
+		$ModeTimer.start(3.5 if health / max_health > .4 else 2)
 	elif mode == Mode.ATTACKING:
 		choose_attack()
 		
@@ -117,13 +117,13 @@ func attack_strafe():
 	R.play_sound("seven_strafe", "Enemies")
 
 func _on_SpikedBox_body_entered(body):
-	body.apply_damage(50)
+	body.apply_damage(60)
 
 func attack_lances():
 	following_player = true
 	spawn_lance()
 	$LanceTimer.start()
-	$ModeTimer.start(8)
+	$ModeTimer.start(6.5)
 	
 func spawn_lance():
 	next_lance = R.SevenLance.instance()

@@ -129,9 +129,9 @@ func attack_seeking(i):
 	add_child(arrow)
 	var spawn = arrow_spawns[i]
 	var v = -spawn.global_transform.y * 250
-	arrow.init(50, spawn.global_position, v)
-	arrow.set_seeking(player, 3)
-	arrow.set_max_time(7)
+	arrow.init(40, spawn.global_position, v)
+	arrow.set_seeking(player, 2.5)
+	arrow.set_max_time(5)
 	R.play_sound("graham_shoot3", "Enemies")
 	
 

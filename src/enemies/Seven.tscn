@@ -27,13 +27,13 @@ color = Color( 1, 0.494118, 0, 1 )
 hue_variation = 0.08
 hue_variation_random = 1.0
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 30, 165 )
 
-[sub_resource type="CircleShape2D" id=10]
+[sub_resource type="CircleShape2D" id=6]
 radius = 105.0
 
-[sub_resource type="ParticlesMaterial" id=14]
+[sub_resource type="ParticlesMaterial" id=7]
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 120.0
@@ -45,7 +45,7 @@ orbit_velocity_random = 0.0
 scale = 3.0
 color = Color( 1, 0, 0, 1 )
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=8]
 resource_name = "die"
 length = 3.0
 tracks/0/type = "value"
@@ -145,8 +145,7 @@ tracks/7/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "flip"
+[sub_resource type="Animation" id=9]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:scale")
 tracks/0/interp = 1
@@ -160,7 +159,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( -1, 1 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=10]
 length = 1.2
 loop = true
 tracks/0/type = "value"
@@ -176,7 +175,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 20 ), Vector2( 0, -20 ), Vector2( 0, 20 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=11]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body/TopBar/TopLine:position")
@@ -325,8 +324,7 @@ tracks/11/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "spikes"
+[sub_resource type="Animation" id=12]
 length = 4.5
 step = 0.05
 tracks/0/type = "value"
@@ -440,8 +438,7 @@ tracks/7/keys = {
 "values": [ 0.0, 1000.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "spin_heart"
+[sub_resource type="Animation" id=13]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -457,8 +454,7 @@ tracks/0/keys = {
 "values": [ 0.0, 360.0 ]
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "spin_nine"
+[sub_resource type="Animation" id=14]
 length = 3.0
 loop = true
 tracks/0/type = "value"
@@ -578,7 +574,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/SpikedBox"]
 position = Vector2( 0, 15 )
-shape = SubResource( 9 )
+shape = SubResource( 5 )
 disabled = true
 
 [node name="SpinningBox" type="Area2D" parent="."]
@@ -586,7 +582,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinningBox"]
-shape = SubResource( 10 )
+shape = SubResource( 6 )
 disabled = true
 
 [node name="DeathParticles" type="Particles2D" parent="."]
@@ -597,16 +593,16 @@ lifetime = 3.0
 one_shot = true
 explosiveness = 0.95
 local_coords = false
-process_material = SubResource( 14 )
+process_material = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = SubResource( 13 )
-anims/flip = SubResource( 5 )
-anims/float = SubResource( 6 )
-anims/spawn = SubResource( 7 )
-anims/spikes = SubResource( 11 )
-anims/spin_heart = SubResource( 8 )
-anims/spin_nine = SubResource( 12 )
+anims/die = SubResource( 8 )
+anims/flip = SubResource( 9 )
+anims/float = SubResource( 10 )
+anims/spawn = SubResource( 11 )
+anims/spikes = SubResource( 12 )
+anims/spin_heart = SubResource( 13 )
+anims/spin_nine = SubResource( 14 )
 
 [node name="Tween" type="Tween" parent="."]
 

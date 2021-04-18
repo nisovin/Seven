@@ -96,7 +96,7 @@ func charge():
 			$DamageAreaRight/CollisionShape2D2.set_deferred("disabled", false)
 		elif dir < 0:
 			$DamageAreaLeft/CollisionShape2D2.set_deferred("disabled", false)
-		R.play_sound("infinity_charge", "Enemies")
+		R.play_sound("infinity_charge", "Enemies", 0.5)
 
 func stop_charge():
 	charging = false

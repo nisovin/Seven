@@ -23,7 +23,7 @@ func generate(lvl):
 func fire():
 	if projectiles_available > 0 and not on_cooldown:
 		launch_projectile()
-	else:
+	elif projectiles_available == 0:
 		R.play_sound("out_of_ammo", "Player")
 	shooting = true
 	

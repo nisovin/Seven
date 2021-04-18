@@ -20,6 +20,8 @@ func init(p):
 	$CharacterSheet/MarginContainer/VBoxContainer/Number.text = str(player.number)
 	update_health(player.health)
 	update_guns(player.get_guns(), player.current_gun)
+	if Settings.input_confine_mouse:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 func update_health(health):
 	health_bar.value = health
@@ -45,10 +47,13 @@ func open_pause_menu():
 	pause_menu.popup_centered()
 	player.in_menu = true
 	get_tree().paused = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _on_PauseMenu_popup_hide():
 	get_tree().paused = false
 	player.in_menu = false
+	if Settings.input_confine_mouse:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 func _on_PauseResume_pressed():
 	pause_menu.hide()
@@ -151,7 +156,7 @@ func tooltip_stat_division(s):
 
 
 func _on_stat_mouse_entered(stat):
-	print("hi")
+	pass
 func _on_stat_mouse_exited(stat):
-	print("hi")
+	pass
 

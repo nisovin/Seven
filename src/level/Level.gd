@@ -13,7 +13,6 @@ func _ready():
 	R.play_music("game")
 
 func fct(pos, dam, color):
-	print(pos, dam, color)
 	var fct = R.FCT.instance()
 	$Loot.add_child(fct)
 	fct.global_position = pos

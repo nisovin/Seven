@@ -50,6 +50,7 @@ var stats = {
 }
 
 var current_gun = null
+var current_gun_index = 0
 
 onready var camera = $Camera2D
 onready var ground_finders = $GroundFinder.get_children()
@@ -211,6 +212,7 @@ func switch_weapon(slot):
 		slot_node.show()
 		current_gun = slot_node.get_child(0)
 		current_gun.active = true
+		current_gun_index = slot
 	gui.update_guns(get_guns(), current_gun)
 	
 func update_stats():
@@ -267,9 +269,11 @@ func _physics_process(delta):
 			if Input.is_action_pressed("jump") and jumps > 0 and is_on_floor():
 				velocity.y = -JUMP_POWER * speed_multiplier
 				jumps -= 1
+				time_falling = 0
 			elif Input.is_action_just_pressed("jump") and jumps > 0:
 				velocity.y = -JUMP_POWER * speed_multiplier
 				jumps -= 1
+				time_falling = 0
 			
 			var move = Input.get_action_strength("right") - Input.get_action_strength("left")
 			velocity.x = move * SPEED * speed_multiplier
@@ -337,6 +341,10 @@ func _unhandled_input(event):
 		switch_weapon(1)
 	elif event.is_action_pressed("weapon_3"):
 		switch_weapon(2)
+	elif event.is_action_pressed("weapon_next"):
+		switch_weapon_dir(1)
+	elif event.is_action_pressed("weapon_prev"):
+		switch_weapon_dir(-1)
 		
 	elif event.is_action_pressed("open_char_sheet"):
 		current_gun.stop()
@@ -345,6 +353,12 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("respawn"):
 		apply_damage(1000)
 		
-
+func switch_weapon_dir(dir):
+	var x = wrapi(current_gun_index + dir, 0, 3)
+	for i in 2:
+		if $GunAttach.get_child(x).get_child_count() > 0:
+			switch_weapon(x)
+		else:
+			x = wrapi(x + dir, 0, 3)
 
 

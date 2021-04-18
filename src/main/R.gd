@@ -32,6 +32,9 @@ const SevenNine = preload("res://enemies/SevenNine.tscn")
 # sounds
 const Sounds = {
 	
+	"button_rollover": preload("res://sounds/rollover4.ogg"),
+	"button_click": preload("res://sounds/switch31.ogg"),
+	
 	"gun_switch": "res://sounds/weapswitch.ogg",
 	"out_of_ammo": "res://sounds/outofammo.ogg",
 	"decimal_fire": "res://sounds/shot_01.ogg",

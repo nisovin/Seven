@@ -21,6 +21,8 @@ const REBINDABLE_ACTIONS = [
 	{ "action": "weapon_1", "name": "Weapon 1" },
 	{ "action": "weapon_2", "name": "Weapon 2" },
 	{ "action": "weapon_3", "name": "Weapon 3" },
+	{ "action": "weapon_next", "name": "Next Weapon" },
+	{ "action": "weapon_prev", "name": "Previous Weapon" },
 	{ "action": "open_char_sheet", "name": "Character Sheet" },
 	{ "action": "respawn", "name": "Die (Stuck)" },
 	{ "action": "pause", "name": "Pause" },
@@ -35,13 +37,15 @@ const ADJUSTABLE_VOLUMES = [
 ]
 
 const AUTO_SETTINGS = [
-	{ "setting": "video_fullscreen", "category": "Video", "name": "Full Screen", "type": "check" },
+	{ "setting": "video_fullscreen", "category": "Misc", "name": "Full Screen", "type": "check" },
+	{ "setting": "input_confine_mouse", "category": "Misc", "name": "Confine Mouse", "type": "check" },
 	#{ "setting": "category_another_setting", "category": "Category", "name": "Another Setting", "type": "check" },
 	#{ "setting": "stuff_another", "category": "Stuff", "name": "Another", "type": "slider", "min": 1, "max": 5, "step": 1 },
 	#{ "setting": "stuff_spinner", "category": "Stuff", "name": "Spinner", "type": "spinner", "min": 1, "max": 100, "step": 1 }
 ]
 
 var video_fullscreen = true
+var input_confine_mouse = true
 
 func _ready():
 	load_settings()
@@ -110,15 +114,12 @@ func save_settings():
 			
 	for i in REBINDABLE_ACTIONS:
 		var list = InputMap.get_action_list(i.action)
-		print(list)
 		var binds = []
 		for e in list:
 			var d = _event_to_dict(e)
 			if d != null:
 				binds.append(d)
-		print(binds)
 		if binds.size() > 0:
-			print("yay")
 			file.set_value("KEYBINDS", i.action, binds)
 			
 	for i in ADJUSTABLE_VOLUMES:

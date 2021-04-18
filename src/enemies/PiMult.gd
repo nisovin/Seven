@@ -30,11 +30,9 @@ func _on_AttackArea_body_entered(body):
 
 
 func _on_DetectionArea_body_entered(body):
-	print("yes")
 	$ShootTimer.start()
 
 func _on_DetectionArea_body_exited(body):
-	print("no")
 	$ShootTimer.stop()
 
 func _on_ShootTimer_timeout():
